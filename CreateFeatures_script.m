@@ -18,18 +18,18 @@ end
 TimeWindows = [1 2 4 8 16 32 60];
 
 %largest file:
-filename = 'C:\Users\User\Downloads\Matlab\fakedata\inside_5_4_split_2_fdformat_u2r.csv'
+filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_4_split_2_fdformat_u2r.csv'
 
 % File used for original coding:
 % filename = 'inside_5_1_split_11.csv';
 
 % Short files for testing:
-%filename = 'C:\Users\User\Downloads\Matlab\fakedata\inside_5_1_split_16_ls_probe.csv'
-%filename = 'C:\Users\User\Downloads\Matlab\fakedata\inside_5_1_split_7_dosnuke_dos.csv'
-%filename = 'C:\Users\User\Downloads\Matlab\fakedata\test_file.csv'
-%filename = 'C:\Users\User\Downloads\Matlab\fakedata\inside_5_5_split_0_portsweep_probe.csv'
-%filename = 'C:\Users\User\Downloads\Matlab\fakedata\inside_5_1_split_13_syslogd_dos.csv'
-%filename = 'C:\Users\User\Downloads\Matlab\fakedata\inside_5_1_split_0_pod_dos.csv'
+%filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_1_split_16_ls_probe.csv'
+%filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_1_split_7_dosnuke_dos.csv'
+%filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\test_file.csv'
+%filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_5_split_0_portsweep_probe.csv'
+%filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_1_split_13_syslogd_dos.csv'
+%filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_1_split_0_pod_dos.csv'
 %filename = 'inside_5_4_split_9_ls_probe.csv'; %too short (61 < 64 sec)
 %filename = 'inside_5_1_split_15.csv'; %okay
 %filename = 'inside_5_1_split_16.csv'; %too short (62 < 64 sec)
@@ -195,6 +195,7 @@ XCompress.ECHOCount = zeros(NumberOfSeconds,1);
 
 %counters below for verification of correctness of expected and actual flag counts
 http_malformed_packet_counter = 0;
+ftp_dotc_counter = 0;
 syn_flag_counter = 0;
 echo_flag_counter = 0;
 
@@ -284,15 +285,24 @@ for i=1:NumberOfSeconds
     
     % Record FTP in protocol and "*.c" in content flag
     if length(index)>0
-        code_flag_count = 0;
-        for j=index(1):index(length(index));
-            [startStr6] = regexp(X.Protocol(j), 'FTP');
-            [startStr7] = regexp(X.Info(j), '.c');
-            if(length(startStr6{1,1}) > 0 && length(startStr7{1,1}) > 0)
-                code_flag_count = code_flag_count+1;
-            end
-        end
-        XCompress.FTPandCcodeCount(i) = code_flag_count;
+       dotc_regex = '\.*((\.c[^o+]|\.c))';%finds .c strings with 0 or more characters after, and ignores .co
+       dotc_string_indeces = regexp(X.Info(index),'dotc_regex', 'match');
+       
+       for n = 1:length(dotc_string_indeces)
+           %disp(syn_string_indeces{n});
+           if ~isempty(dotc_string_indeces{n})%if it is empty, strfind found no match, and thus returned no index
+               ftp_dotc_counter = ftp_dotc_counter + 1;
+           end
+       end
+       % code_flag_count = 0;
+       % for j=index(1):index(length(index));
+       %     [startStr6] = regexp(X.Protocol(j), 'FTP');
+        %    [startStr7] = regexp(X.Info(j), '.c');
+       %     if(length(startStr6{1,1}) > 0 && length(startStr7{1,1}) > 0)
+      %          code_flag_count = code_flag_count+1;
+       %     end
+      %  end
+       % XCompress.FTPandCcodeCount(i) = code_flag_count;
     end
     
     % Record SYN flag counts
@@ -355,6 +365,7 @@ for i=1:NumberOfSeconds
 end
 
 fprintf('\n\nthe number of HTTP Malformed packets is %i', http_malformed_packet_counter);
+fprintf('\nthe number of FTP .c packets is %i', ftp_dotc_counter);
 fprintf('\nthe number of syn flags is %i', syn_flag_counter);
 fprintf('\nthe number of echo flags is %i', echo_flag_counter);
 
