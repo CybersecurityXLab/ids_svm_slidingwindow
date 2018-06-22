@@ -17,8 +17,11 @@ end
 %Define Time Windows:
 TimeWindows = [1 2 4 8 16 32 60];
 
-%largest file:
-filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_4_split_2_fdformat_u2r.csv'
+%long files:
+%largest file directly below:
+%filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_4_split_2_fdformat_u2r.csv'
+%filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_1_split_6_apache2_dos.csv'
+filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_2_split_2_casesen_u2r.csv'
 
 % File used for original coding:
 % filename = 'inside_5_1_split_11.csv';
@@ -196,6 +199,7 @@ XCompress.ECHOCount = zeros(NumberOfSeconds,1);
 %counters below for verification of correctness of expected and actual flag counts
 http_malformed_packet_counter = 0;
 ftp_dotc_counter = 0;
+httpftp_dotexe_counter = 0;
 syn_flag_counter = 0;
 echo_flag_counter = 0;
 
@@ -283,15 +287,37 @@ for i=1:NumberOfSeconds
        % XCompress.HTTPandMalformedCount(i) = code_flag_count;
     end
     
+    %Record *.exe in payload and HTTP or FTP in protocol
+    if length(index)>0
+       dotexe_regex = '\.*((\.exe[^a-zA-Z+]|\.exe$))';%finds .exe strings with 0 or more characters after, and ignores english letters after .c
+       dotexe_string_indeces = regexp(X.Info(index),dotexe_regex, 'match');
+       httpftp_protocol = regexp(X.Protocol(index),'HTTP|FTP', 'match', 'ignorecase');
+       
+       for n = 1:length(dotexe_string_indeces)
+           %disp(syn_string_indeces{n});
+           if ~isempty(dotexe_string_indeces{n})%if it is empty, regexp found no match, and thus returned no index
+               if ~isempty(httpftp_protocol{n})
+                   %fprintf('\n\n\n.exe match here at index %i\n\n\n', index);
+                   httpftp_dotexe_counter = httpftp_dotexe_counter + 1;
+               end
+           end
+       end
+    end
+    
     % Record FTP in protocol and "*.c" in content flag
     if length(index)>0
-       dotc_regex = '\.*((\.c[^o+]|\.c))';%finds .c strings with 0 or more characters after, and ignores .co
-       dotc_string_indeces = regexp(X.Info(index),'dotc_regex', 'match');
+       %dotc_regex = '.c';
+       dotc_regex = '\.*((\.c[^a-zA-Z+]|\.c$))';%finds .c strings with 0 or more characters after, and ignores english letters after .c
+       dotc_string_indeces = regexp(X.Info(index),dotc_regex, 'match');
+       ftp_protocol = regexp(X.Protocol(index),'FTP', 'match', 'ignorecase');
        
        for n = 1:length(dotc_string_indeces)
            %disp(syn_string_indeces{n});
-           if ~isempty(dotc_string_indeces{n})%if it is empty, strfind found no match, and thus returned no index
-               ftp_dotc_counter = ftp_dotc_counter + 1;
+           if ~isempty(dotc_string_indeces{n})%if it is empty, regexp found no match, and thus returned no index
+               if ~isempty(ftp_protocol{n})
+                   %fprintf('\n\n\n.c match here at index %i\n\n\n', index);
+                   ftp_dotc_counter = ftp_dotc_counter + 1;
+               end
            end
        end
        % code_flag_count = 0;
@@ -348,7 +374,7 @@ for i=1:NumberOfSeconds
        fprintf('\ndisplay echo string below for index %i ', index);
        
        for n = 1:length(echo_string_indeces)
-           disp(echo_string_indeces{n});
+           %disp(echo_string_indeces{n});
            if ~isempty(echo_string_indeces{n})%if it is empty, strfind found no match, and thus returned no index
                if ~isempty(echo_string_protocol{n})%only counts if it is an icmp type
                    echo_flag_counter = echo_flag_counter + 1;
@@ -365,6 +391,7 @@ for i=1:NumberOfSeconds
 end
 
 fprintf('\n\nthe number of HTTP Malformed packets is %i', http_malformed_packet_counter);
+fprintf('\nthe number of HTTP or FTP .exe packets is %i', httpftp_dotexe_counter);
 fprintf('\nthe number of FTP .c packets is %i', ftp_dotc_counter);
 fprintf('\nthe number of syn flags is %i', syn_flag_counter);
 fprintf('\nthe number of echo flags is %i', echo_flag_counter);
