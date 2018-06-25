@@ -19,9 +19,9 @@ TimeWindows = [1 2 4 8 16 32 60];
 
 %long files:
 %largest file directly below:
-%filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_4_split_2_fdformat_u2r.csv'
+filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_4_split_2_fdformat_u2r.csv'
 %filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_1_split_6_apache2_dos.csv'
-filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_2_split_2_casesen_u2r.csv'
+%filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_2_split_2_casesen_u2r.csv'
 
 % File used for original coding:
 % filename = 'inside_5_1_split_11.csv';
@@ -192,6 +192,7 @@ XCompress.HLClass = cell(NumberOfSeconds,1);
 XCompress.LLClass = cell(NumberOfSeconds,1);
 XCompress.CorJavaScriptCount = zeros(NumberOfSeconds,1);
 XCompress.HTTPandMalformedCount = zeros(NumberOfSeconds,1);
+XCompress.HTTPorFTPandExeCodeCount = zeros(NumberOfSeconds,1);
 XCompress.FTPandCcodeCount = zeros(NumberOfSeconds,1);
 XCompress.SYNCount = zeros(NumberOfSeconds,1);
 XCompress.ECHOCount = zeros(NumberOfSeconds,1);
@@ -299,6 +300,8 @@ for i=1:NumberOfSeconds
                if ~isempty(httpftp_protocol{n})
                    %fprintf('\n\n\n.exe match here at index %i\n\n\n', index);
                    httpftp_dotexe_counter = httpftp_dotexe_counter + 1;
+                   
+                   XCompress.HTTPorFTPandExeCodeCount(i) = XCompress.HTTPorFTPandExeCodeCount(i) + 1;
                end
            end
        end
@@ -310,13 +313,18 @@ for i=1:NumberOfSeconds
        dotc_regex = '\.*((\.c[^a-zA-Z+]|\.c$))';%finds .c strings with 0 or more characters after, and ignores english letters after .c
        dotc_string_indeces = regexp(X.Info(index),dotc_regex, 'match');
        ftp_protocol = regexp(X.Protocol(index),'FTP', 'match', 'ignorecase');
+      
        
        for n = 1:length(dotc_string_indeces)
+           
            %disp(syn_string_indeces{n});
            if ~isempty(dotc_string_indeces{n})%if it is empty, regexp found no match, and thus returned no index
                if ~isempty(ftp_protocol{n})
                    %fprintf('\n\n\n.c match here at index %i\n\n\n', index);
                    ftp_dotc_counter = ftp_dotc_counter + 1;
+                   
+                   %records ftp and .c counts per second
+                   XCompress.FTPandCcodeCount(i) = XCompress.FTPandCcodeCount(i) + 1;
                end
            end
        end
@@ -411,6 +419,7 @@ Features.CVPacketSize = zeros(ttotal,T);
 Features.ThirdMomentPacketSize = zeros(ttotal,T);
 Features.CVPacketInterarrival = zeros(ttotal,T);
 Features.ThirdMomentPacketInterarrival = zeros(ttotal,T);
+Features.HTTPorFTPandExeCodeCount = zeros(ttotal,T);
 Features.CorJavaScriptCount = zeros(ttotal,T);
 Features.HTTPandMalformedCount = zeros(ttotal,T);
 Features.FTPandCcodeCount = zeros(ttotal,T);
@@ -425,6 +434,7 @@ for t=tstart:tend %Loop over times
         Labels.HLClass(t-tstart+1) = XCompress.HLClass(t);
         Labels.LLClass(t-tstart+1) = XCompress.LLClass(t);
         Features.SYNCount(t-tstart+1, i) = sum(XCompress.SYNCount(t-TimeWindows(i)+1 : t));
+        Features.HTTPorFTPandExeCodeCount(t-tstart+1,i) = sum(XCompress.HTTPorFTPandExeCodeCount(t-TimeWindows(i)+1 : t));
         Features.CorJavaScriptCount(t-tstart+1, i) = sum(XCompress.CorJavaScriptCount(t-TimeWindows(i)+1 : t));
         Features.HTTPandMalformedCount(t-tstart+1, i) = sum(XCompress.HTTPandMalformedCount(t-TimeWindows(i)+1 : t));
         Features.FTPandCcodeCount(t-tstart+1, i) = sum(XCompress.FTPandCcodeCount(t-TimeWindows(i)+1 : t));
