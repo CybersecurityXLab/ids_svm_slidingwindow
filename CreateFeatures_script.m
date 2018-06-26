@@ -379,7 +379,7 @@ for i=1:NumberOfSeconds
        echo_string_indeces = strfind(X.Info(index),echo_string);%returns the indeces of the matching string if relevant
        echo_string_protocol = strfind(X.Protocol(index),'ICMP');%Determines if the echo type is ICMP
        %fprintf('the value for index &i is %i. ', index, syn_string_indeces(1));
-       fprintf('\ndisplay echo string below for index %i ', index);
+     %  fprintf('\ndisplay echo string below for index %i ', index);
        
        for n = 1:length(echo_string_indeces)
            %disp(echo_string_indeces{n});
@@ -406,59 +406,84 @@ fprintf('\nthe number of echo flags is %i', echo_flag_counter);
 
 %% Define Features In Various Time Windows
 
-T = length(TimeWindows);
+num_of_time_windows = length(TimeWindows);
 % First time that we can compute features for ALL windows
-tstart = max(TimeWindows);
-tend = length(XCompress.NumberOfPackets);
-ttotal = tend - tstart;
+start_time = 1;%max(TimeWindows);
+end_time = length(XCompress.NumberOfPackets);
+total_time = end_time - start_time;
 
 Features = struct;
 Labels = struct;
 
-Features.CVPacketSize = zeros(ttotal,T);
-Features.ThirdMomentPacketSize = zeros(ttotal,T);
-Features.CVPacketInterarrival = zeros(ttotal,T);
-Features.ThirdMomentPacketInterarrival = zeros(ttotal,T);
-Features.HTTPorFTPandExeCodeCount = zeros(ttotal,T);
-Features.CorJavaScriptCount = zeros(ttotal,T);
-Features.HTTPandMalformedCount = zeros(ttotal,T);
-Features.FTPandCcodeCount = zeros(ttotal,T);
-Features.SYNCount = zeros(ttotal,T);
-Features.ECHOCount = zeros(ttotal,T);
+Features.CVPacketSize = zeros(total_time,num_of_time_windows);
+Features.ThirdMomentPacketSize = zeros(total_time,num_of_time_windows);
+Features.CVPacketInterarrival = zeros(total_time,num_of_time_windows);
+Features.ThirdMomentPacketInterarrival = zeros(total_time,num_of_time_windows);
+Features.HTTPorFTPandExeCodeCount = zeros(total_time,num_of_time_windows);
+Features.CorJavaScriptCount = zeros(total_time,num_of_time_windows);
+Features.HTTPandMalformedCount = zeros(total_time,num_of_time_windows);
+Features.FTPandCcodeCount = zeros(total_time,num_of_time_windows);
+Features.SYNCount = zeros(end_time,num_of_time_windows);
+Features.ECHOCount = zeros(total_time,num_of_time_windows);
 
-Labels.HLClass = cell(ttotal,1);
-Labels.LLClass = cell(ttotal,1);
+Labels.HLClass = cell(end_time,1);
+Labels.LLClass = cell(total_time,1);
 
-for t=tstart:tend %Loop over times
-    for i = 1:T %Loop over windows
-        Labels.HLClass(t-tstart+1) = XCompress.HLClass(t);
-        Labels.LLClass(t-tstart+1) = XCompress.LLClass(t);
-        Features.SYNCount(t-tstart+1, i) = sum(XCompress.SYNCount(t-TimeWindows(i)+1 : t));
-        Features.HTTPorFTPandExeCodeCount(t-tstart+1,i) = sum(XCompress.HTTPorFTPandExeCodeCount(t-TimeWindows(i)+1 : t));
-        Features.CorJavaScriptCount(t-tstart+1, i) = sum(XCompress.CorJavaScriptCount(t-TimeWindows(i)+1 : t));
-        Features.HTTPandMalformedCount(t-tstart+1, i) = sum(XCompress.HTTPandMalformedCount(t-TimeWindows(i)+1 : t));
-        Features.FTPandCcodeCount(t-tstart+1, i) = sum(XCompress.FTPandCcodeCount(t-TimeWindows(i)+1 : t));
-        Features.SYNCount(t-tstart+1, i) = sum(XCompress.SYNCount(t-TimeWindows(i)+1 : t));
-        Features.ECHOCount(t-tstart+1, i) = sum(XCompress.ECHOCount(t-TimeWindows(i)+1 : t));
-        % Construct features from sotred information: 
-        number_packets = sum(XCompress.NumberOfPackets(t-TimeWindows(i)+1 : t));
-        if number_packets > 0
-            % Packet Size
-            sum_packetsize = sum(XCompress.PacketSizeSum(t-TimeWindows(i)+1 : t));
-            sumsquares_packetsize = sum(XCompress.PacketSizeSumSquares(t-TimeWindows(i)+1 : t));
-            sumscubes_packetsize = sum(XCompress.PacketSizeSumCubes(t-TimeWindows(i)+1 : t));
-            mean_packetsize = sum_packetsize / number_packets;
-            var_packetsize = (sumsquares_packetsize / number_packets) - mean_packetsize^2;
-            Features.CVPacketSize(t-tstart+1, i) = sqrt(var_packetsize)/mean_packetsize;
-            Features.ThirdMomentPacketSize(t-tstart+1, i) = (sumscubes_packetsize/number_packets) - 3*mean_packetsize*(sumsquares_packetsize/number_packets) + 2*mean_packetsize^3;
-            % Packet Interarrival
-            sum_interarrival = sum(XCompress.InterarrivalSum(t-TimeWindows(i)+1 : t));
-            sumsquares_interarrival = sum(XCompress.InterarrivalSumSquares(t-TimeWindows(i)+1 : t));
-            sumscubes_interarrival = sum(XCompress.InterarrivalSumCubes(t-TimeWindows(i)+1 : t));
-            mean_interarrival = sum_interarrival / number_packets;
-            var_interarrival = (sumsquares_interarrival / number_packets) - mean_interarrival^2;
-            Features.CVPacketInterarrival(t-tstart+1, i) = sqrt(var_interarrival)/mean_interarrival;
-            Features.ThirdMomentPacketInterarrival(t-tstart+1, i) = (sumscubes_interarrival/number_packets) - 3*mean_interarrival*(sumsquares_interarrival/number_packets) + 2*mean_interarrival^3;
+for sec=start_time:end_time %Loop over times
+    for i = 1:num_of_time_windows %Loop over windows
+        
+        Labels.HLClass(sec-start_time+1) = XCompress.HLClass(sec);
+        Labels.LLClass(sec-start_time+1) = XCompress.LLClass(sec);
+        
+        %time window is too large to hold first i seconds
+        %set all irrelevant sliding windows to -1
+        if(TimeWindows(i) > sec)
+            Features.SYNCount(sec-start_time+1, i) = -1;
+            Features.HTTPorFTPandExeCodeCount(sec-start_time+1,i) = -1;
+            Features.CorJavaScriptCount(sec-start_time+1, i) = -1;
+            Features.HTTPandMalformedCount(sec-start_time+1, i) = -1;
+            Features.FTPandCcodeCount(sec-start_time+1, i) = -1;
+            Features.SYNCount(sec-start_time+1, i) = -1;
+            Features.ECHOCount(sec-start_time+1, i) = -1;
+            Features.CVPacketSize(sec-start_time+1, i) = -1;
+            Features.ThirdMomentPacketSize(sec-start_time+1, i) = -1;
+            Features.CVPacketInterarrival(sec-start_time+1, i) = -1;
+            Features.ThirdMomentPacketInterarrival(sec-start_time+1, i) = -1;
+            
+        %current time window is >= the current seconds passed
+        else
+
+            Features.SYNCount(sec-start_time+1, i) = sum(XCompress.SYNCount(sec-TimeWindows(i)+1 : sec));
+            Features.HTTPorFTPandExeCodeCount(sec-start_time+1,i) = sum(XCompress.HTTPorFTPandExeCodeCount(sec-TimeWindows(i)+1 : sec));
+            Features.CorJavaScriptCount(sec-start_time+1, i) = sum(XCompress.CorJavaScriptCount(sec-TimeWindows(i)+1 : sec));
+            Features.HTTPandMalformedCount(sec-start_time+1, i) = sum(XCompress.HTTPandMalformedCount(sec-TimeWindows(i)+1 : sec));
+            Features.FTPandCcodeCount(sec-start_time+1, i) = sum(XCompress.FTPandCcodeCount(sec-TimeWindows(i)+1 : sec));
+            Features.SYNCount(sec-start_time+1, i) = sum(XCompress.SYNCount(sec-TimeWindows(i)+1 : sec));
+            Features.ECHOCount(sec-start_time+1, i) = sum(XCompress.ECHOCount(sec-TimeWindows(i)+1 : sec));
+            
+            % Construct continuous features from stored information: 
+            number_packets = sum(XCompress.NumberOfPackets(sec-TimeWindows(i)+1 : sec));
+            if number_packets > 0
+                % Packet Size
+                sum_packetsize = sum(XCompress.PacketSizeSum(sec-TimeWindows(i)+1 : sec));
+                sumsquares_packetsize = sum(XCompress.PacketSizeSumSquares(sec-TimeWindows(i)+1 : sec));
+                sumscubes_packetsize = sum(XCompress.PacketSizeSumCubes(sec-TimeWindows(i)+1 : sec));
+                mean_packetsize = sum_packetsize / number_packets;
+                var_packetsize = (sumsquares_packetsize / number_packets) - mean_packetsize^2;
+                
+                Features.CVPacketSize(sec-start_time+1, i) = sqrt(var_packetsize)/mean_packetsize;
+                Features.ThirdMomentPacketSize(sec-start_time+1, i) = (sumscubes_packetsize/number_packets) - 3*mean_packetsize*(sumsquares_packetsize/number_packets) + 2*mean_packetsize^3;
+                
+                % Packet Interarrival
+                sum_interarrival = sum(XCompress.InterarrivalSum(sec-TimeWindows(i)+1 : sec));
+                sumsquares_interarrival = sum(XCompress.InterarrivalSumSquares(sec-TimeWindows(i)+1 : sec));
+                sumscubes_interarrival = sum(XCompress.InterarrivalSumCubes(sec-TimeWindows(i)+1 : sec));
+                mean_interarrival = sum_interarrival / number_packets;
+                var_interarrival = (sumsquares_interarrival / number_packets) - mean_interarrival^2;
+                
+                Features.CVPacketInterarrival(sec-start_time+1, i) = sqrt(var_interarrival)/mean_interarrival;
+                Features.ThirdMomentPacketInterarrival(sec-start_time+1, i) = (sumscubes_interarrival/number_packets) - 3*mean_interarrival*(sumsquares_interarrival/number_packets) + 2*mean_interarrival^3;
+            end
         end
     end
 end
