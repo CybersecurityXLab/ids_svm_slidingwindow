@@ -19,7 +19,7 @@ TimeWindows = [1 2 4 8 16 32 60];
 
 %long files:
 %largest file directly below:
-filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_4_split_2_fdformat_u2r.csv'
+%filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_4_split_2_fdformat_u2r.csv'
 %filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_1_split_6_apache2_dos.csv'
 %filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_2_split_2_casesen_u2r.csv'
 
@@ -30,7 +30,7 @@ filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside
 %filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_1_split_16_ls_probe.csv'
 %filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_1_split_7_dosnuke_dos.csv'
 %filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\test_file.csv'
-%filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_5_split_0_portsweep_probe.csv'
+filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_5_split_0_portsweep_probe.csv'
 %filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_1_split_13_syslogd_dos.csv'
 %filename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\fakedata\inside_5_1_split_0_pod_dos.csv'
 %filename = 'inside_5_4_split_9_ls_probe.csv'; %too short (61 < 64 sec)

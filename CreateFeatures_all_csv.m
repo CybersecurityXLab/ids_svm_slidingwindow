@@ -3,7 +3,7 @@
 
 %CSVFiles = dir('*.csv');
 %CSVFiles = dir(fullfile('C:','Users','User','Downloads', 'Matlab', 'fakedata', '*.csv'));
-CSVFiles = dir(fullfile('C:','Users','User','Downloads', 'Matlab', 'fakedata', '*.csv'));
+CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slidingwindow', 'fakedata', '*.csv'));
 TimeWindows = [1 2 4 8 16 32 60];
 
 % Structure to Store All Features for All Clean Attacks:
@@ -80,7 +80,7 @@ u2rLabels.LLClass = [];
 
 disp("before iteration");
 fprintf('the length of the set of CSVFiles is %i\n', length(CSVFiles));
-for i = 1:length(CSVFiles)% - 50
+for i = 1:length(CSVFiles)
     disp("iterate through file ");disp(i);disp(CSVFiles(i).name);
     [Features, Labels] = CreateFeatures_function( CSVFiles(i, 1).name, TimeWindows );
     AllLabels.HLClass = [AllLabels.HLClass; Labels.HLClass];
