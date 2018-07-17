@@ -1,8 +1,8 @@
 load fisheriris
-dosfeaturesfilename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\dosFeatures.mat';
-doslabelsfilename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\dosLabels.mat';
-u2rfeaturesfilename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\u2rFeatures.mat';
-u2rlabelsfilename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\u2rLabels.mat';
+dosfeaturesfilename = '.\matfiles\dosFeatures.mat';
+doslabelsfilename = '.\matfiles\dosLabels.mat';
+u2rfeaturesfilename = '.\matfiles\u2rFeatures.mat';
+u2rlabelsfilename = '.\matfiles\u2rLabels.mat';
 u2rFeatures = load(u2rfeaturesfilename)
 u2rLabels = load(u2rlabelsfilename)
 dosFeatures = load(dosfeaturesfilename)

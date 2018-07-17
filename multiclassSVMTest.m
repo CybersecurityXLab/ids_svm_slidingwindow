@@ -1,8 +1,9 @@
 load fisheriris
-dosfeaturesfilename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\dosFeatures.mat';
-doslabelsfilename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\dosLabels.mat';
-u2rfeaturesfilename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\u2rFeatures.mat';
-u2rlabelsfilename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\u2rLabels.mat';
+dosfeaturesfilename = '.\matfiles\dosFeatures.mat';
+%dosfeaturesfilename = (fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slidingwindow', 'dos'))
+doslabelsfilename = '.\matfiles\dosLabels.mat';
+u2rfeaturesfilename = '.\matfiles\u2rFeatures.mat';
+u2rlabelsfilename = '.\matfiles\u2rLabels.mat';
 u2rFeatures = load(u2rfeaturesfilename)
 u2rLabels = load(u2rlabelsfilename)
 dosFeatures = load(dosfeaturesfilename)
@@ -19,7 +20,7 @@ remove_probes = ~strcmp(u2rLabels.u2rLabels.HLClass, ' probe');
 remove_r2l = ~strcmp(u2rLabels.u2rLabels.HLClass, ' r2l');
 u2rinds = remove_probes & remove_r2l;
 
-Model = fitcecoc(X,Y,'Learners',t'Classnames',{' R', ' u2r', ' dos'});
+%Model = fitcecoc(X,Y,'Learners',t'Classnames',{' R', ' u2r', ' dos'});
 
 
 

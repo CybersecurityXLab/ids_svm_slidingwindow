@@ -1,5 +1,5 @@
 load fisheriris
-dosfeaturesfilename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\dosFeatures.mat';
+%dosfeaturesfilename = '.\matfiles\dosFeatures.mat';
 doslabelsfilename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\dosLabels.mat';
 u2rfeaturesfilename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\u2rFeatures.mat';
 u2rlabelsfilename = 'C:\Users\User\Documents\GitHub\ids_svm_slidingwindow\u2rLabels.mat';
@@ -9,10 +9,17 @@ dosFeatures = load(dosfeaturesfilename)
 dosLabels = load(doslabelsfilename)
 
 rng(1);
-
 t = templateSVM('Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
 
-Model = fitcecoc(X,Y,'Learners',t'Classnames',{' 
+dosinds = ~strcmp(dosLabels.dosLabels.HLClass, ' r2l');%be careful here. This requires spaces. This may need to be changed later.
+dosX = dosFeatures.dosFeatures.SYNCount(dosinds, 4:7);
+dosy = dosLabels.dosLabels.HLClass(dosinds);
+
+remove_probes = ~strcmp(u2rLabels.u2rLabels.HLClass, ' probe');
+remove_r2l = ~strcmp(u2rLabels.u2rLabels.HLClass, ' r2l');
+u2rinds = remove_probes & remove_r2l;
+
+Model = fitcecoc(X,Y,'Learners',t'Classnames',{' R', ' u2r', ' dos'});
 
 
 
