@@ -84,8 +84,8 @@ u2rLabels.HLClass = [];
 u2rLabels.LLClass = [];
 
 disp("before iteration");
-fprintf('the length of the set of CSVFiles is %i\n', length(CSVFiles)- 50);
-for i = 1:length(CSVFiles)
+
+for i = 1:length(CSVFiles) - 50
     disp("iterate through file ");disp(i);disp(CSVFiles(i).name);
     [Features, Labels] = CreateFeatures_function( CSVFiles(i, 1).name, TimeWindows );
     AllLabels.HLClass = [AllLabels.HLClass; Labels.HLClass];
@@ -161,3 +161,5 @@ save .\baz\probeFeatures.mat probeFeatures
 save .\baz\probeLabels.mat probeLabels
 save .\baz\u2rFeatures.mat u2rFeatures
 save .\baz\u2rLabels.mat u2rLabels
+
+fprintf('the length of the set of CSVFiles is %i\n', length(CSVFiles));

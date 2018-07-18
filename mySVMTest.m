@@ -18,7 +18,7 @@ u2rclassOrder = u2rSVMModel.ClassNames
 
 u2rindsneg = strcmp(u2rLabels.u2rLabels.HLClass, ' R');
 newu2rX = u2rFeatures.u2rFeatures.HTTPorFTPandExeCodeCount(u2rinds, 1:7);%using u2rinds means that the indexes will not match up with the labels file. Find solution
-wow = predict(u2rSVMModel, newu2rX);
+u2routcome = predict(u2rSVMModel, newu2rX);
 
 %to do this correctly the below line needs to contain all lines from the file.
 %this contains r2l label. look at cause of this and find problem.
