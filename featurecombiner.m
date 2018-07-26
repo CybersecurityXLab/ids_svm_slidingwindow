@@ -5,15 +5,61 @@ allLabels = load(alllabelsfilename);
 
 allinds = ~strcmp(allLabels.AllLabels.HLClass, 'asdfasdf');%converts from cell so that it can be used. String value is just one that will not appear in the file
 
-completeSynFeature = allFeatures.AllFeatures.SYNCount(allinds, 1:7);
-completeTMPIFeature = allFeatures.AllFeatures.ThirdMomentPacketInterarrival(allinds, 1:7);
-completeTMPSFeature = allFeatures.AllFeatures.ThirdMomentPacketSize(allinds, 1:7);
+numWindows = 7;
+numFeatures = 3;
+
+completeSynFeature = allFeatures.AllFeatures.SYNCount(allinds, 1:numWindows);
+completeTMPIFeature = allFeatures.AllFeatures.ThirdMomentPacketInterarrival(allinds, 1:numWindows);
+completeTMPSFeature = allFeatures.AllFeatures.ThirdMomentPacketSize(allinds, 1:numWindows);
 
 combinedFeatures = [completeSynFeature, completeTMPIFeature,completeTMPSFeature];
-
 [row,col] = size(combinedFeatures);
 
-for i = 1:col
-    data = combinedFeatures(1:col,i{1});%[0:i];
+
+data = [];%reinitialize this to empty so the variable is cleared in a previously used workspace
+currentCol = 1;%says what column to work on on the temporary data table created
+for i = 1:numFeatures
+    tempTimeWindowList = getRandTimeWindows(numWindows,numFeatures);
+    disp(tempTimeWindowList);
+    [tempRowNum, tempColNum] = size(tempTimeWindowList);
+    disp(tempColNum);
+    for j = 1:tempColNum
+        data(:,currentCol) = combinedFeatures(:,((i*7)-7)+tempTimeWindowList(j));%gets the particular time window from current feature
+        currentCol = currentCol + 1;
+    end
 end
 
+save randFeatureWindowcombo.mat data
+
+function returnList = getRandTimeWindows(numWindows,numFeatures)
+    %randStart = randi(numWindows);%random number of features to start with for gradient descent
+    randWindowCountNum = randi(numWindows);%decides the total number of random time windows per feature
+    randWindowIndex = randi(numWindows);%decides the actual specific time numbers to use. If randWindowNumb is 7, this variable is irrelevant.
+
+    %list to show whether or not the randWindowNum has already been used
+    indecesUsedList = false(7,1);
+    if randWindowCountNum == 7
+        indecesUsedList = true(7,1);
+    else
+        for i = 1:randWindowCountNum
+            indecesUsedList(randWindowIndex) = true;
+
+            %logic to check if the newly generated random number index for the time windows has already been used
+            breakLoop = false;
+            while(~breakLoop)
+                randWindowIndex = randi(numWindows);
+                if(indecesUsedList(randWindowIndex) == false)
+                    breakLoop = true;
+                end
+
+            end
+        end
+    end
+    %return a list of only the indeces with a value of true
+    returnList = [];
+    for i = 1:7
+        if(indecesUsedList(i) == true)
+            returnList(end+1)=i;
+        end
+    end
+end

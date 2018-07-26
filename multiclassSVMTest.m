@@ -12,8 +12,10 @@ dosLabels = load(doslabelsfilename);
 allFeatures = load(allfeaturesfilename);
 allLabels = load(alllabelsfilename);
 
+data = load('.\randFeatureWindowCombo');
+
 %Model = load('.\MULTICLASSMODEL');
-Model = load('.\MULTICLASSMODEL3mpi');
+%Model = load('.\MULTICLASSMODEL3mpi');
 %Model = load('.\MULTICLASSMODEL3mpacksizecval');
 
 rng(1);
@@ -26,13 +28,14 @@ allinds = ~strcmp(allLabels.AllLabels.HLClass, 'asdfasdf');%converts allinds to 
 allX = allFeatures.AllFeatures.ThirdMomentPacketSize(allinds,1:7);
 ally = allLabels.AllLabels.HLClass(allinds);
 
+Model = fitcecoc(data.data,ally,'Learners',t,'Classnames',{' R', ' u2r', ' dos', ' probe', ' r2l'}, 'CrossVal', 'on');
 %Model = fitcecoc(allX,ally,'Learners',t,'Classnames',{' R', ' u2r', ' dos', ' probe', ' r2l'}, 'CrossVal', 'on');
 
 %save the model so that it doesn't have to be rerun every time
-%save MULTICLASSMODEL3mpacksizecval.mat Model
+save MULTICLASSMODELfeaturecombinertest1.mat Model
 
-%predicted = kfoldPredict(Model.Model);%, allX);
-predicted = predict(Model.Model, allX);
+predicted = kfoldPredict(Model);%, allX);
+%predicted = predict(Model.Model, allX);
 
 %dosinds = ~strcmp(dosLabels.dosLabels.HLClass, ' r2l');%be careful here. This requires spaces. This may need to be changed later.
 %dosX = dosFeatures.dosFeatures.SYNCount(dosinds, 4:7);
