@@ -1,4 +1,4 @@
-load fisheriris
+%load fisheriris
 allfeaturesfilename = '.\matfiles\allFeatures.mat';
 alllabelsfilename = '.\matfiles\allLabels.mat';
 dosfeaturesfilename = '.\matfiles\dosFeatures.mat';
@@ -17,6 +17,7 @@ data = load('.\randFeatureWindowCombo');
 %Model = load('.\MULTICLASSMODEL');
 %Model = load('.\MULTICLASSMODEL3mpi');
 %Model = load('.\MULTICLASSMODEL3mpacksizecval');
+Model = load('..\filestoolarge\MULTICLASSMODELfeaturecombinertest1All.mat');
 
 rng(1);
 t = templateSVM('Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
@@ -28,14 +29,16 @@ allinds = ~strcmp(allLabels.AllLabels.HLClass, 'asdfasdf');%converts allinds to 
 allX = allFeatures.AllFeatures.ThirdMomentPacketSize(allinds,1:7);
 ally = allLabels.AllLabels.HLClass(allinds);
 
-Model = fitcecoc(data.data,ally,'Learners',t,'Classnames',{' R', ' u2r', ' dos', ' probe', ' r2l'}, 'CrossVal', 'on');
+%Model = fitcecoc(data.data,ally,'Learners',t,'Classnames',{' R', ' u2r', ' dos', ' probe', ' r2l'}, 'CrossVal', 'on');
 %Model = fitcecoc(allX,ally,'Learners',t,'Classnames',{' R', ' u2r', ' dos', ' probe', ' r2l'}, 'CrossVal', 'on');
 
 %save the model so that it doesn't have to be rerun every time
-save MULTICLASSMODELfeaturecombinertest1.mat Model
+%save MULTICLASSMODELfeaturecombinertest1.mat Model
 
-predicted = kfoldPredict(Model);%, allX);
+%predicted = kfoldPredict(Model.Model);%, allX);
 %predicted = predict(Model.Model, allX);
+
+%cv_svm_performance_all_features = classperf(ally, predicted);
 
 %dosinds = ~strcmp(dosLabels.dosLabels.HLClass, ' r2l');%be careful here. This requires spaces. This may need to be changed later.
 %dosX = dosFeatures.dosFeatures.SYNCount(dosinds, 4:7);

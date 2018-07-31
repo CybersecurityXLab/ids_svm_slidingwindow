@@ -6,13 +6,20 @@ allLabels = load(alllabelsfilename);
 allinds = ~strcmp(allLabels.AllLabels.HLClass, 'asdfasdf');%converts from cell so that it can be used. String value is just one that will not appear in the file
 
 numWindows = 7;
-numFeatures = 3;
+numFeatures = 10;
 
-completeSynFeature = allFeatures.AllFeatures.SYNCount(allinds, 1:numWindows);
-completeTMPIFeature = allFeatures.AllFeatures.ThirdMomentPacketInterarrival(allinds, 1:numWindows);
-completeTMPSFeature = allFeatures.AllFeatures.ThirdMomentPacketSize(allinds, 1:numWindows);
+CVPSFeature = allFeatures.AllFeatures.CVPacketSize(allinds, 1:numWindows);
+TMPSFeature = allFeatures.AllFeatures.ThirdMomentPacketSize(allinds, 1:numWindows);
+CVPIFeature =allFeatures.AllFeatures.ThirdMomentPacketInterarrival(allinds, 1:numWindows);
+TMPIFeature = allFeatures.AllFeatures.ThirdMomentPacketInterarrival(allinds, 1:numWindows);
+CorJSFeature = allFeatures.AllFeatures.CorJavaScriptCount(allinds, 1:numWindows);
+ExeFeature = allFeatures.AllFeatures.HTTPorFTPandExeCodeCount(allinds, 1:numWindows);
+HTTPMalformedFeature = allFeatures.AllFeatures.HTTPandMalformedCount(allinds, 1:numWindows);
+FTPandCFeature = allFeatures.AllFeatures.FTPandCcodeCount(allinds, 1:numWindows);
+SynFeature = allFeatures.AllFeatures.SYNCount(allinds, 1:numWindows);
+ECHOFeature = allFeatures.AllFeatures.ECHOCount(allinds, 1:numWindows);
 
-combinedFeatures = [completeSynFeature, completeTMPIFeature,completeTMPSFeature];
+combinedFeatures = [CVPSFeature,TMPSFeature,CVPIFeature,TMPIFeature,CorJSFeature,ExeFeature,HTTPMalformedFeature,FTPandCFeature,SynFeature,ECHOFeature];
 [row,col] = size(combinedFeatures);
 
 
@@ -29,7 +36,7 @@ for i = 1:numFeatures
     end
 end
 
-save randFeatureWindowcombo.mat data
+%save randFeatureWindowcombo.mat data
 
 function returnList = getRandTimeWindows(numWindows,numFeatures)
     %randStart = randi(numWindows);%random number of features to start with for gradient descent
