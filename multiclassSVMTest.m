@@ -12,14 +12,14 @@ dosLabels = load(doslabelsfilename);
 allFeatures = load(allfeaturesfilename);
 allLabels = load(alllabelsfilename);
 
-data = load('.\randFeatureWindowCombo');
+%data = load('.\randFeatureWindowCombo');
 
 %Model = load('.\MULTICLASSMODEL');
 %Model = load('.\MULTICLASSMODEL3mpi');
 %Model = load('.\MULTICLASSMODEL3mpacksizecval');
-Model = load('..\filestoolarge\MULTICLASSMODELfeaturecombinertest1All.mat');
+%Model = load('..\filestoolarge\MULTICLASSMODELfeaturecombinertest1All.mat');
 
-rng(1);
+%rng(1);
 t = templateSVM('Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
 
 allinds = ~strcmp(allLabels.AllLabels.HLClass, 'asdfasdf');%converts allinds to ones
@@ -28,6 +28,8 @@ allinds = ~strcmp(allLabels.AllLabels.HLClass, 'asdfasdf');%converts allinds to 
 %allX = allFeatures.AllFeatures.HTTPorFTPandExeCodeCount(allinds,1:7);
 allX = allFeatures.AllFeatures.ThirdMomentPacketSize(allinds,1:7);
 ally = allLabels.AllLabels.HLClass(allinds);
+
+currentTestFeatureSet = featurecombiner_function();
 
 %Model = fitcecoc(data.data,ally,'Learners',t,'Classnames',{' R', ' u2r', ' dos', ' probe', ' r2l'}, 'CrossVal', 'on');
 %Model = fitcecoc(allX,ally,'Learners',t,'Classnames',{' R', ' u2r', ' dos', ' probe', ' r2l'}, 'CrossVal', 'on');
