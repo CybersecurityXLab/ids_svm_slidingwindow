@@ -1,14 +1,14 @@
 %load fisheriris
 allfeaturesfilename = '.\matfiles\allFeatures.mat';
 alllabelsfilename = '.\matfiles\allLabels.mat';
-dosfeaturesfilename = '.\matfiles\dosFeatures.mat';
-doslabelsfilename = '.\matfiles\dosLabels.mat';
-u2rfeaturesfilename = '.\matfiles\u2rFeatures.mat';
-u2rlabelsfilename = '.\matfiles\u2rLabels.mat';
-u2rFeatures = load(u2rfeaturesfilename);
-u2rLabels = load(u2rlabelsfilename);
-dosFeatures = load(dosfeaturesfilename);
-dosLabels = load(doslabelsfilename);
+%dosfeaturesfilename = '.\matfiles\dosFeatures.mat';
+%doslabelsfilename = '.\matfiles\dosLabels.mat';
+%u2rfeaturesfilename = '.\matfiles\u2rFeatures.mat';
+%u2rlabelsfilename = '.\matfiles\u2rLabels.mat';
+%u2rFeatures = load(u2rfeaturesfilename);
+%u2rLabels = load(u2rlabelsfilename);
+%dosFeatures = load(dosfeaturesfilename);
+%dosLabels = load(doslabelsfilename);
 allFeatures = load(allfeaturesfilename);
 allLabels = load(alllabelsfilename);
 
@@ -17,7 +17,7 @@ allLabels = load(alllabelsfilename);
 %Model = load('.\MULTICLASSMODEL');
 %Model = load('.\MULTICLASSMODEL3mpi');
 %Model = load('.\MULTICLASSMODEL3mpacksizecval');
-%Model = load('..\filestoolarge\MULTICLASSMODELfeaturecombinertest1All.mat');
+Model = load('..\filestoolarge\MULTICLASSMODELfeaturecombinertest1All.mat');
 
 %rng(1);
 t = templateSVM('Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
@@ -30,6 +30,7 @@ allX = allFeatures.AllFeatures.ThirdMomentPacketSize(allinds,1:7);
 ally = allLabels.AllLabels.HLClass(allinds);
 
 currentTestFeatureSet = featurecombiner_function();
+[indexedAttackList,attackList] = correctness_analyzer_function();
 
 %Model = fitcecoc(data.data,ally,'Learners',t,'Classnames',{' R', ' u2r', ' dos', ' probe', ' r2l'}, 'CrossVal', 'on');
 %Model = fitcecoc(allX,ally,'Learners',t,'Classnames',{' R', ' u2r', ' dos', ' probe', ' r2l'}, 'CrossVal', 'on');
@@ -37,10 +38,19 @@ currentTestFeatureSet = featurecombiner_function();
 %save the model so that it doesn't have to be rerun every time
 %save MULTICLASSMODELfeaturecombinertest1.mat Model
 
-%predicted = kfoldPredict(Model.Model);%, allX);
+predicted = kfoldPredict(Model.Model);%, allX);
 %predicted = predict(Model.Model, allX);
 
 %cv_svm_performance_all_features = classperf(ally, predicted);
+
+for val = 1:size(indexedAttackList)
+    if strcmp(predicted(str2double(indexedAttackList(val,2))), indexedAttackList(val,1))
+        disp(val);
+    end
+end
+%calculate correctly predicted scores here
+
+
 
 %dosinds = ~strcmp(dosLabels.dosLabels.HLClass, ' r2l');%be careful here. This requires spaces. This may need to be changed later.
 %dosX = dosFeatures.dosFeatures.SYNCount(dosinds, 4:7);

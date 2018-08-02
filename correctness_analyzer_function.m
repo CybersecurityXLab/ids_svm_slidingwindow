@@ -1,3 +1,5 @@
+function [indexedListOfAttacks,attackList] = correctness_analyzer_function();
+
 allfeaturesfilename = '.\matfiles\allFeatures.mat';
 alllabelsfilename = '.\matfiles\allLabels.mat';
 allFeatures = load(allfeaturesfilename);
@@ -47,14 +49,5 @@ end
 arrayLenMat = size(indexedListOfAttacks);
 arrayLen = arrayLenMat(1);
 attackList(counter,1) = indexedListOfAttacks(arrayLen,1);
-%algorithm
 
-%if traffic is not 'R'
-%record its value and index
-%serialize this
-
-%after SVM is run and predicted, look at each value in each index range of
-%traffic.
-%if even one of the values is a correct match, in a new list of traffic,
-%set the correctly predicted variable to 'True'. The list will be the
-%length of the number of individual attacks
+end

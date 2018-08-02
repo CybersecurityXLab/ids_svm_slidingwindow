@@ -29,17 +29,17 @@ function data = featurecombiner_function();
     currentCol = 1;%says what column to work on on the temporary data table created
     for x = 1:numFeatures
         tempTimeWindowList = getRandTimeWindows(numWindows,numFeatures);
-        disp(tempTimeWindowList);
+        %disp(tempTimeWindowList);
         [tempRowNum, tempColNum] = size(tempTimeWindowList);
-        disp(tempColNum);
+        %disp(tempColNum);
         for j = 1:tempColNum
             data(:,currentCol) = combinedFeatures(:,((x*7)-7)+tempTimeWindowList(j));%gets the particular time window from current feature
             currentCol = currentCol + 1;
         end
     end
     
-    disp('-----------------------------------------------------------------------------');
-    disp(data(3,:));
+    %disp('-----------------------------------------------------------------------------');
+    %disp(data(3,:));
     %save randFeatureWindowcombo.mat data
 
     function returnList = getRandTimeWindows(numWindows,numFeatures)
