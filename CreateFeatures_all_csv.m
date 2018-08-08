@@ -102,8 +102,8 @@ for i = 1:length(CSVFiles) - 50
     AllFeatures.ECHOCount = [AllFeatures.ECHOCount; Features.ECHOCount];
     
     %disp(Labels.HLClass);
-    if any(strcmp(Labels.HLClass,' probe'))==1
-        disp("I am at HLClass probe");
+    if any(strcmp(Labels.HLClass,'probe'))==1
+        disp("I am at HLClass probe----------------------------------------");
         probeLabels.HLClass = [probeLabels.HLClass; Labels.HLClass];
         probeLabels.LLClass = [probeLabels.LLClass; Labels.LLClass];
         probeFeatures.CVPacketSize = [probeFeatures.CVPacketSize; Features.CVPacketSize];
@@ -118,8 +118,8 @@ for i = 1:length(CSVFiles) - 50
         probeFeatures.ECHOCount = [probeFeatures.ECHOCount; Features.ECHOCount];
     end
     
-    if any(strcmp(Labels.HLClass,' dos'))==1
-        disp("I am at the HLCLass dos");
+    if any(strcmp(Labels.HLClass,'dos'))==1
+        disp("I am at the HLCLass dos------------------------------------");
         dosLabels.HLClass = [dosLabels.HLClass; Labels.HLClass];
         dosLabels.LLClass = [dosLabels.LLClass; Labels.LLClass];
         dosFeatures.CVPacketSize = [dosFeatures.CVPacketSize; Features.CVPacketSize];
@@ -134,8 +134,8 @@ for i = 1:length(CSVFiles) - 50
         dosFeatures.ECHOCount = [dosFeatures.ECHOCount; Features.ECHOCount];
     end
     
-    if any(strcmp(Labels.HLClass,' u2r'))==1
-        disp("u2r");
+    if any(strcmp(Labels.HLClass,'u2r'))==1
+        disp("u2r-----------------------------------------");
         u2rLabels.HLClass = [u2rLabels.HLClass; Labels.HLClass];
         u2rLabels.LLClass = [u2rLabels.LLClass; Labels.LLClass];
         u2rFeatures.CVPacketSize = [u2rFeatures.CVPacketSize; Features.CVPacketSize];

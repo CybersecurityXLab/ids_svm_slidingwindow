@@ -128,7 +128,8 @@ rawCellColumns = raw(:, [1,2,5,6,7,9]);
 % Create output variable
 X = table;
 X.LLClass = rawCellColumns(:, 1);
-X.HLClass = rawCellColumns(:, 2);
+X.HLClass = strip(rawCellColumns(:, 2), ' ');
+
 % %X.No = no;
 X.Time = dates{:, 1};
 X_Time_old = X.Time;
@@ -211,7 +212,24 @@ for i=1:NumberOfSeconds
     % Note: if there are no packets in the interval, the label is taken
     % from the previous interval
     if length(index) == 0
-        XCompress.HLClass(i) = XCompress.HLClass(i-1);
+        %XCompress.HLClass(i-1) always has a space at the beginning of the
+        %cell, which causes problems down the line. This line removes it
+        %XCompress.HLClass(i) = erase(strtrim(XCompress.HLClass(i-1)), ' ');
+        %XCompress.HLClass(i) = (~isspace(XCompress.HLClass(i-1)));
+        %tempLength = length(XCompress.HLClass(i-1));
+        %temp = XCompress.HLClass(i-1);
+        %disp(temp);
+       %yo = temp(2 :tempLength);
+       % yo = strip(temp, ' ');
+        %disp (yo);
+        %XCompress.HLClass(i) = temp;
+        %XCompress.HLClass(i) = XCompress.HLClass(i-1);
+        %XCompress.HLClass(i) = yo;
+        %XCompress.HLClass(i) = (2:tempLength)
+        %XCompress.HLClass(i) = strip(XCompress.HLClass(i-1), 1);
+        %XCompress.HLClass(i) = strip(XCompress.HLClass(i-1), ' ');
+        XCompress.HLClass(i) = strtrim(XCompress.HLClass(i-1));
+        disp(XCompress.HLClass(i));
         XCompress.LLClass(i) = XCompress.LLClass(i-1);
     else
         possible_labelsHL = unique(X.HLClass(index));

@@ -74,7 +74,8 @@ rawCellColumns = raw(:, [1,2,5,6,7,9]);
 % Create output variable
 X = table;
 X.LLClass = rawCellColumns(:, 1);
-X.HLClass = rawCellColumns(:, 2);
+%these all have a space for the first char. remove with line below
+X.HLClass = strip(rawCellColumns(:, 2), ' ');
 X.Time = dates{:, 1};
 X_Time_old = X.Time;
 X.Source = rawCellColumns(:, 3);
