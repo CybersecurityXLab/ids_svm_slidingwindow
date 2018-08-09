@@ -1,7 +1,8 @@
 function [indexedListOfAttacks,attackList] = correctness_analyzer_function();
-
-allfeaturesfilename = '.\matfiles\allFeatures.mat';
-alllabelsfilename = '.\matfiles\allLabels.mat';
+allfeaturesfilename = '.\allFeatures.mat';
+alllabelsfilename = 'allLabels.mat';
+%allfeaturesfilename = '.\matfiles\allFeatures.mat';
+%alllabelsfilename = '.\matfiles\allLabels.mat';
 allFeatures = load(allfeaturesfilename);
 allLabels = load(alllabelsfilename);
 
@@ -17,7 +18,7 @@ counter = 1;%counter to keep track of current index for new data structure
 %creates a data structure that has the attack type in the first column and
 %its index in the second. This is for comparison to predicted values.
 for val = 1:size(allLabels.AllLabels.HLClass())
-    if ~strcmp(allLabels.AllLabels.HLClass(val),' R')
+    if ~strcmp(allLabels.AllLabels.HLClass(val),'R')
         indexedListOfAttacks(counter,1) = allLabels.AllLabels.HLClass(val);
         indexedListOfAttacks(counter,2) = val;
         counter = counter + 1;
