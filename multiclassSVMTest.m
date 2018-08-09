@@ -1,6 +1,8 @@
 %load fisheriris
-allfeaturesfilename = '.\matfiles\allFeatures.mat';
-alllabelsfilename = '.\matfiles\allLabels.mat';
+allfeaturesfilename = 'allFeatures.mat';
+alllabelsfilename = 'allLabels.mat';
+%allfeaturesfilename = '.\matfiles\allFeatures.mat';
+%alllabelsfilename = '.\matfiles\allLabels.mat';
 %dosfeaturesfilename = '.\matfiles\dosFeatures.mat';
 %doslabelsfilename = '.\matfiles\dosLabels.mat';
 %u2rfeaturesfilename = '.\matfiles\u2rFeatures.mat';
@@ -12,12 +14,13 @@ alllabelsfilename = '.\matfiles\allLabels.mat';
 allFeatures = load(allfeaturesfilename);
 allLabels = load(alllabelsfilename);
 
-%data = load('.\randFeatureWindowCombo');
+data = load('.\randFeatureWindowCombo');
 
 %Model = load('.\MULTICLASSMODEL');
 %Model = load('.\MULTICLASSMODEL3mpi');
 %Model = load('.\MULTICLASSMODEL3mpacksizecval');
-Model = load('..\filestoolarge\MULTICLASSMODELfeaturecombinertest1All.mat');
+%Model = load('..\filestoolarge\MULTICLASSMODELfeaturecombinertest1All.mat');
+Model = load('MULTICLASSMODELfeaturecombinertest2.mat');
 
 %rng(1);
 t = templateSVM('Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
@@ -29,25 +32,25 @@ allinds = ~strcmp(allLabels.AllLabels.HLClass, 'asdfasdf');%converts allinds to 
 allX = allFeatures.AllFeatures.ThirdMomentPacketSize(allinds,1:7);
 ally = allLabels.AllLabels.HLClass(allinds);
 
-currentTestFeatureSet = featurecombiner_function();
-[indexedAttackList,attackList] = correctness_analyzer_function();
+%currentTestFeatureSet = featurecombiner_function();
+%[indexedAttackList,attackList] = correctness_analyzer_function();
 
 %Model = fitcecoc(data.data,ally,'Learners',t,'Classnames',{' R', ' u2r', ' dos', ' probe', ' r2l'}, 'CrossVal', 'on');
 %Model = fitcecoc(allX,ally,'Learners',t,'Classnames',{' R', ' u2r', ' dos', ' probe', ' r2l'}, 'CrossVal', 'on');
 
 %save the model so that it doesn't have to be rerun every time
-%save MULTICLASSMODELfeaturecombinertest1.mat Model
+%save MULTICLASSMODELfeaturecombinertest2.mat Model
 
 predicted = kfoldPredict(Model.Model);%, allX);
 %predicted = predict(Model.Model, allX);
 
-%cv_svm_performance_all_features = classperf(ally, predicted);
+cv_svm_performance_all_features = classperf(ally, predicted);
 
-for val = 1:size(indexedAttackList)
-    if strcmp(predicted(str2double(indexedAttackList(val,2))), indexedAttackList(val,1))
-        disp(val);
-    end
-end
+%for val = 1:size(indexedAttackList)
+ %   if strcmp(predicted(str2double(indexedAttackList(val,2))), indexedAttackList(val,1))
+ %       disp(val);
+ %   end
+%end
 %calculate correctly predicted scores here
 
 
