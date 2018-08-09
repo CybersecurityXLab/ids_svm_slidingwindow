@@ -70,9 +70,8 @@ for val = 1:size(indexedAttackList)
     if ~((str2double(indexedAttackList(val+1,2)) - str2double(indexedAttackList(val,2)) == 1))%the cells are not contiguous, therefore are a different attack
         attackListCounter = attackListCounter + 1;
     end
-    if attackList(attackListCounter,2)<= currentAttackCounter && strcmp(predicted(str2double(indexedAttackList(val,2))), indexedAttackList(val,1))
-        attackList(attackListCounter,3) = '1';
-    end
+    if
+        attackList(attackListCounter,3) = '1';'
 end
 %for val = 1:size(indexedAttackList)
  %   if attackList(attackListCounter,2)<= currentAttackCounter && strcmp(predicted(str2double(indexedAttackList(val,2))), indexedAttackList(val,1))
