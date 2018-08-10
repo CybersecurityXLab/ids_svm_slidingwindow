@@ -35,6 +35,7 @@ ally = allLabels.AllLabels.HLClass(allinds);
 
 %currentTestFeatureSet = featurecombiner_function();
 [indexedAttackList,attackList] = correctness_analyzer_function();
+attackList(:,3:4) = zeros(size(attackList(1)));
 
 %Model = fitcecoc(data.data,ally,'Learners',t,'Classnames',{'R', 'u2r', 'dos',  probe', 'r2l'}, 'CrossVal', 'on');
 %Model = fitcecoc(allX,ally,'Learners',t,'Classnames',{'R', 'u2r', 'dos', 'probe', 'r2l'}, 'CrossVal', 'on');
@@ -45,7 +46,7 @@ ally = allLabels.AllLabels.HLClass(allinds);
 
 %predicted = kfoldPredict(Model.Model);%, allX);
 %predicted = predict(Model.Model, allX);
-predicted = predict(Model, allX);
+%predicted = predict(Model, allX);
 
 %cv_svm_performance_all_features = classperf(ally, predicted);
 
@@ -59,19 +60,19 @@ predicted = predict(Model, allX);
 
 
 
-
-
 %keeps track of current index for attackList
 attackListCounter = 1;
-%keeps track of current index of indexedListOfAttacks
-%currentAttackCounter = 1;
+%keeps track of true positi
+truePositiveCount = 0;
 
-for val = 1:size(indexedAttackList)
-    if ~((str2double(indexedAttackList(val+1,2)) - str2double(indexedAttackList(val,2)) == 1))%the cells are not contiguous, therefore are a different attack
+for val = (2:size(indexedAttackList))
+    if ~((str2double(indexedAttackList(val,2)) - str2double(indexedAttackList(val-1,2)) == 1))%the cells are not contiguous, therefore are a different attack
         attackListCounter = attackListCounter + 1;
     end
-    if
-        attackList(attackListCounter,3) = '1';'
+
+    if strcmp(predicted(str2double(indexedAttackList(val,2))), indexedAttackList(val,1)) == 1%if there is one match, add to list
+        attackList(attackListCounter,3) = 1;
+    end
 end
 %for val = 1:size(indexedAttackList)
  %   if attackList(attackListCounter,2)<= currentAttackCounter && strcmp(predicted(str2double(indexedAttackList(val,2))), indexedAttackList(val,1))
