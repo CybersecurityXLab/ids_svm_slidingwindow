@@ -94,6 +94,7 @@ totalFalsePositiveCount = 0;
 dosFalsePositiveCount = 0;
 u2rFalsePositiveCount = 0;
 r2lFalsePositiveCount = 0;
+probeFalsePositiveCount = 0;
 for val = (1:size(ally))
     if strcmp(ally(val), 'R') & ~strcmp(predicted(val),'R')
         if (strcmp(predicted(val),falsePositivesByLabel(1,1)))
@@ -104,8 +105,8 @@ for val = (1:size(ally))
                 
         elseif (strcmp(predicted(val),falsePositivesByLabel(3,1)))
             r2lFalsePositiveCount = r2lFalsePositiveCount + 1;
-        elseif
-            disp(predicted(val));
+        elseif (strcmp(predicted(val),falsePositivesByLabel(4,1)))
+            probeFalsePositiveCount = probeFalsePositiveCount + 1;
         end
         totalFalsePositiveCount = totalFalsePositiveCount + 1;
     end
@@ -114,61 +115,5 @@ end
 falsePositivesByLabel(1,2) = dosFalsePositiveCount;
 falsePositivesByLabel(2,2) = u2rFalsePositiveCount;
 falsePositivesByLabel(3,2) = r2lFalsePositiveCount;
-falsePositivesByLabel(4,2) = totalFalsePositiveCount;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%dosinds = ~strcmp(dosLabels.dosLabels.HLClass, ' r2l');%be careful here. This requires spaces. This may need to be changed later.
-%dosX = dosFeatures.dosFeatures.SYNCount(dosinds, 4:7);
-%dosy = dosLabels.dosLabels.HLClass(dosinds);
-
-%remove_probes = ~strcmp(u2rLabels.u2rLabels.HLClass, ' probe');
-%remove_r2l = ~strcmp(u2rLabels.u2rLabels.HLClass, ' r2l');
-%u2rinds = remove_probes & remove_r2l;
-
-%Model = fitcecoc(X,Y,'Learners',t,'Classnames',{' R', ' u2r', ' dos'});
-
-
-
-%X = meas;
-%Y = species;
-%rng(1);%random number generator set seed
-
-
-
-%ex 2
-
-
-%t = templateSVM('Standardize',1);
-%Mdl = fitcecoc(X,Y,'Learners',t,'ClassNames',{'setosa','versicolor','virginica'});
-%CVMdl = crossval(Mdl);
-
-%oosLoss = kfoldLoss(CVMdl)
-
-%label = predict(Mdl, X)
-
-%ex 1
-
-
-%Mdl = fitcecoc(X,Y);
-%Mdl.ClassNames;
-%CodingMat = Mdl.CodingMatrix;
-%Mdl.BinaryLearners{1}
-
-%isLoss = resubLoss(Mdl)
-
+falsePositivesByLabel(4,2) = probeFalsePositiveCount;
+falsePositivesByLabel(5,2) = totalFalsePositiveCount;

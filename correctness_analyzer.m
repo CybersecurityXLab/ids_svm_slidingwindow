@@ -1,8 +1,5 @@
-allfeaturesfilename = 'allFeatures.mat';
-alllabelsfilename = 'allLabels.mat';
-
-%allfeaturesfilename = '.\matfiles\allFeatures.mat';
-%alllabelsfilename = '.\matfiles\allLabels.mat';
+allfeaturesfilename = '.\matfiles\allFeatures.mat';
+alllabelsfilename = '.\matfiles\allLabels.mat';
 allFeatures = load(allfeaturesfilename);
 allLabels = load(alllabelsfilename);
 

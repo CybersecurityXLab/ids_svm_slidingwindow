@@ -1,8 +1,8 @@
 %load fisheriris
-allfeaturesfilename = 'allFeatures.mat';
-alllabelsfilename = 'allLabels.mat';
-%allfeaturesfilename = '.\matfiles\allFeatures.mat';
-%alllabelsfilename = '.\matfiles\allLabels.mat';
+%allfeaturesfilename = 'allFeatures.mat';
+%alllabelsfilename = 'allLabels.mat';
+allfeaturesfilename = '.\matfiles\allFeatures.mat';
+alllabelsfilename = '.\matfiles\allLabels.mat';
 %dosfeaturesfilename = '.\matfiles\dosFeatures.mat';
 %doslabelsfilename = '.\matfiles\dosLabels.mat';
 %u2rfeaturesfilename = '.\matfiles\u2rFeatures.mat';
@@ -26,59 +26,49 @@ Model = load('..\filestoolarge\MULTICLASSMODELfeaturecombinertest2.mat');
 t = templateSVM('Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
 
 allinds = ~strcmp(allLabels.AllLabels.HLClass, 'asdfasdf');%converts allinds to ones
-%allX = allFeatures.AllFeatures.ThirdMomentPacketInterarrival(allinds, 1:7);
-%allX = allFeatures.AllFeatures.SYNCount(allinds, 4:7);
-%allX = allFeatures.AllFeatures.SYNCount(allinds, 7);
-%allX = allFeatures.AllFeatures.HTTPorFTPandExeCodeCount(allinds,1:7);
-%allX = allFeatures.AllFeatures.ThirdMomentPacketSize(allinds,1:7);
-ally = allLabels.AllLabels.HLClass(allinds);
+%features = allFeatures.AllFeatures.ThirdMomentPacketInterarrival(allinds, 1:7);
+%features = allFeatures.AllFeatures.SYNCount(allinds, 4:7);
+%features = allFeatures.AllFeatures.SYNCount(allinds, 7);
+%features = allFeatures.AllFeatures.HTTPorFTPandExeCodeCount(allinds,1:7);
+%features = allFeatures.AllFeatures.ThirdMomentPacketSize(allinds,1:7);
+correctLabels = allLabels.AllLabels.HLClass(allinds);
 
 %currentTestFeatureSet = featurecombiner_function();
-[indexedAttackList,attackList] = correctness_analyzer_function();
-attackList(:,3:5) = zeros(size(attackList(1)));
+[indexedAttackList,attackPercentageList] = correctness_analyzer_function();
+attackPercentageList(:,3:5) = zeros(size(attackPercentageList(1)));
 
-%Model = fitcecoc(data.data,ally,'Learners',t,'Classnames',{'R', 'u2r', 'dos',  probe', 'r2l'}, 'CrossVal', 'on');
-%Model = fitcecoc(allX,ally,'Learners',t,'Classnames',{'R', 'u2r', 'dos', 'probe', 'r2l'}, 'CrossVal', 'on');
+%Model = fitcecoc(data.data,correctLabels,'Learners',t,'Classnames',{'R', 'u2r', 'dos',  probe', 'r2l'}, 'CrossVal', 'on');
+%Model = fitcecoc(features,correctLabels,'Learners',t,'Classnames',{'R', 'u2r', 'dos', 'probe', 'r2l'}, 'CrossVal', 'on');
 
 %save the model so that it doesn't have to be rerun every time
 %save MULTICLASSMODELfeaturecombinertest2.mat Model
-%save singleTimeWindowScore Model
 
-%predicted = kfoldPredict(Model.Model);%, allX);
-%predicted = predict(Model.Model, allX);
-%predicted = predict(Model, allX);
+predicted = kfoldPredict(Model.Model);%, features);
+%predicted = predict(Model.Model, features);
 
-%cv_svm_performance_all_features = classperf(ally, predicted);
-
+%cv_svm_performance_all_features = classperf(correctLabels, predicted);
 %f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
 
 
-
-
-
-
-
-
-
-%keeps track of current index for attackList
-attackListCounter = 1;
+%keeps track of current index for attackPercentageList
+attackPercentageListCounter = 1;
 %keeps track of true positives
 truePositiveCount = 0;
 
 for val = (2:size(indexedAttackList))
     if ~((str2double(indexedAttackList(val,2)) - str2double(indexedAttackList(val-1,2)) == 1))%the cells are not contiguous, therefore are a different attack
-        attackListCounter = attackListCounter + 1;
+        attackPercentageListCounter = attackPercentageListCounter + 1;
         truePositiveCount = 0;
     end
 
     if strcmp(predicted(str2double(indexedAttackList(val,2))), indexedAttackList(val,1)) == 1%if there is one match, add to list
-        attackList(attackListCounter,3) = 1;
+        attackPercentageList(attackPercentageListCounter,3) = 1;
         truePositiveCount = truePositiveCount + 1;
-        attackList(attackListCounter,4) = truePositiveCount;
+        attackPercentageList(attackPercentageListCounter,4) = truePositiveCount;
     end
 end
 
-attackList(:,5) = str2double(attackList(:,4))./str2double(attackList(:,2));%5th col is percentage true pos
+attackPercentageList(:,5) = str2double(attackPercentageList(:,4))./str2double(attackPercentageList(:,2));%5th col is percentage true pos
 
 
 %calculate false positive percentages of regular traffic
@@ -95,8 +85,8 @@ dosFalsePositiveCount = 0;
 u2rFalsePositiveCount = 0;
 r2lFalsePositiveCount = 0;
 probeFalsePositiveCount = 0;
-for val = (1:size(ally))
-    if strcmp(ally(val), 'R') & ~strcmp(predicted(val),'R')
+for val = (1:size(correctLabels))
+    if strcmp(correctLabels(val), 'R') & ~strcmp(predicted(val),'R')
         if (strcmp(predicted(val),falsePositivesByLabel(1,1)))
             dosFalsePositiveCount = dosFalsePositiveCount + 1;
         
@@ -117,60 +107,3 @@ falsePositivesByLabel(2,2) = u2rFalsePositiveCount;
 falsePositivesByLabel(3,2) = r2lFalsePositiveCount;
 falsePositivesByLabel(4,2) = probeFalsePositiveCount;
 falsePositivesByLabel(5,2) = totalFalsePositiveCount;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%dosinds = ~strcmp(dosLabels.dosLabels.HLClass, ' r2l');%be careful here. This requires spaces. This may need to be changed later.
-%dosX = dosFeatures.dosFeatures.SYNCount(dosinds, 4:7);
-%dosy = dosLabels.dosLabels.HLClass(dosinds);
-
-%remove_probes = ~strcmp(u2rLabels.u2rLabels.HLClass, ' probe');
-%remove_r2l = ~strcmp(u2rLabels.u2rLabels.HLClass, ' r2l');
-%u2rinds = remove_probes & remove_r2l;
-
-%Model = fitcecoc(X,Y,'Learners',t,'Classnames',{' R', ' u2r', ' dos'});
-
-
-
-%X = meas;
-%Y = species;
-%rng(1);%random number generator set seed
-
-
-
-%ex 2
-
-
-%t = templateSVM('Standardize',1);
-%Mdl = fitcecoc(X,Y,'Learners',t,'ClassNames',{'setosa','versicolor','virginica'});
-%CVMdl = crossval(Mdl);
-
-%oosLoss = kfoldLoss(CVMdl)
-
-%label = predict(Mdl, X)
-
-%ex 1
-
-
-%Mdl = fitcecoc(X,Y);
-%Mdl.ClassNames;
-%CodingMat = Mdl.CodingMatrix;
-%Mdl.BinaryLearners{1}
-
-%isLoss = resubLoss(Mdl)
-

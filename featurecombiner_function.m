@@ -1,10 +1,11 @@
+%returns anywhere from 1 to 7 randomly selected time windows for each feature
+
 function data = featurecombiner_function();
 
 
-    allfeaturesfilename = 'allFeatures.mat';
-    alllabelsfilename = 'allLabels.mat';
-    %allfeaturesfilename = '.\matfiles\allFeatures.mat';
-    %alllabelsfilename = '.\matfiles\allLabels.mat';
+
+    allfeaturesfilename = '.\matfiles\allFeatures.mat';
+    alllabelsfilename = '.\matfiles\allLabels.mat';
     allFeatures = load(allfeaturesfilename);
     allLabels = load(alllabelsfilename);
 
@@ -42,7 +43,6 @@ function data = featurecombiner_function();
     end
     
     %disp('-----------------------------------------------------------------------------');
-    %disp(data(3,:));
     %save randFeatureWindowcombo.mat data
 
     function returnList = getRandTimeWindows(numWindows,numFeatures)
