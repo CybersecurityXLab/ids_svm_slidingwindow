@@ -79,22 +79,45 @@ for val = (2:size(indexedAttackList))
 end
 
 attackList(:,5) = str2double(attackList(:,4))./str2double(attackList(:,2));%5th col is percentage true pos
-%for val = 1:size(indexedAttackList)
- %   if attackList(attackListCounter,2)<= currentAttackCounter && strcmp(predicted(str2double(indexedAttackList(val,2))), indexedAttackList(val,1))
- %       attackListCounter = attackListCounter + 1;
-    
- %   elseif attackList(attackListCounter,2)> currentAttackCounter
- %       attackListCounter = attackListCounter + 1;
- %   end
-    
-%end
 
-%for val = 1:size(indexedAttackList)
- %   if strcmp(predicted(str2double(indexedAttackList(val,2))), indexedAttackList(val,1))
- %       disp(val);
- %   end
-%end
-%calculate correctly predicted scores here
+
+%calculate false positive percentages of regular traffic
+falsePositivesByLabel = strings;
+falsePositivesByLabel(1,1) = 'dos';
+falsePositivesByLabel(2,1) = 'u2r';
+falsePositivesByLabel(3,1) = 'r2l';
+falsePositivesByLabel(4,1) = 'probe';
+falsePositivesByLabel(5,1) = 'total';
+falsePositivesByLabel(:,2) = zeros;
+
+totalFalsePositiveCount = 0;
+dosFalsePositiveCount = 0;
+u2rFalsePositiveCount = 0;
+r2lFalsePositiveCount = 0;
+probeFalsePositiveCount = 0;
+for val = (1:size(ally))
+    if strcmp(ally(val), 'R') & ~strcmp(predicted(val),'R')
+        if (strcmp(predicted(val),falsePositivesByLabel(1,1)))
+            dosFalsePositiveCount = dosFalsePositiveCount + 1;
+        
+        elseif (strcmp(predicted(val),falsePositivesByLabel(2,1)))
+            u2rFalsePositiveCount = u2rFalsePositiveCount + 1;
+                
+        elseif (strcmp(predicted(val),falsePositivesByLabel(3,1)))
+            r2lFalsePositiveCount = r2lFalsePositiveCount + 1;
+        elseif (strcmp(predicted(val),falsePositivesByLabel(4,1)))
+            probeFalsePositiveCount = probeFalsePositiveCount + 1;
+        end
+        totalFalsePositiveCount = totalFalsePositiveCount + 1;
+    end
+end
+
+falsePositivesByLabel(1,2) = dosFalsePositiveCount;
+falsePositivesByLabel(2,2) = u2rFalsePositiveCount;
+falsePositivesByLabel(3,2) = r2lFalsePositiveCount;
+falsePositivesByLabel(4,2) = probeFalsePositiveCount;
+falsePositivesByLabel(5,2) = totalFalsePositiveCount;
+
 
 
 
