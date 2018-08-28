@@ -15,10 +15,10 @@ probelabelsfilename = '.\matfiles\probeLabels.mat';
 probeFeatures = load(probefeaturesfilename);
 probeLabels = load(probelabelsfilename);
 
-Model = load('testrundeletethisfile.mat');
+%Model = load('testrundeletethisfile.mat');
 
-%dosinds = ~strcmp(dosLabels.dosLabels.HLClass, 'r2l');
-%correctLabels = dosLabels.dosLabels.HLClass(dosinds); 
+dosinds = ~strcmp(dosLabels.dosLabels.HLClass, 'r2l');
+correctLabels = dosLabels.dosLabels.HLClass(dosinds); 
 
 %remove_probes = ~strcmp(u2rLabels.u2rLabels.HLClass, 'probe');
 %remove_r2l = ~strcmp(u2rLabels.u2rLabels.HLClass, 'r2l');
@@ -28,10 +28,10 @@ Model = load('testrundeletethisfile.mat');
 %r2linds = ~strcmp(dosLabels.dosLabels.HLClass, 'dos');
 %correctLabels = r2lLabels.r2lLabels.HLClass(r2linds); 
 
-remove_u2r = ~strcmp(probeLabels.probeLabels.HLClass, 'u2r');
-remove_r2l = ~strcmp(probeLabels.probeLabels.HLClass, 'r2l');
-probeinds = remove_u2r & remove_r2l;
-correctLabels = probeLabels.probeLabels.HLClass(probeinds); 
+%remove_u2r = ~strcmp(probeLabels.probeLabels.HLClass, 'u2r');
+%remove_r2l = ~strcmp(probeLabels.probeLabels.HLClass, 'r2l');
+%probeinds = remove_u2r & remove_r2l;
+%correctLabels = probeLabels.probeLabels.HLClass(probeinds); 
 
 
 
@@ -39,8 +39,8 @@ correctLabels = probeLabels.probeLabels.HLClass(probeinds);
 %for n = 1:7
    % disp(n);
     
-    %currentTestFeature = dosFeatures.dosFeatures.SYNCount(dosinds, n);
-    %Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'dos'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+    currentTestFeature = dosFeatures.dosFeatures.SYNCount(dosinds, 6);
+    Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'dos'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
     
     %currentTestFeature = u2rFeatures.u2rFeatures.SYNCount(u2rinds, n);
     %Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'u2r'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
@@ -60,3 +60,5 @@ correctLabels = probeLabels.probeLabels.HLClass(probeinds);
     f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
     disp('___________________________________________________');
 %end
+
+falsePositivesByLabel = getFalsePositives_function(correctLabels, predicted);
