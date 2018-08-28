@@ -20,7 +20,8 @@ data = load('.\randFeatureWindowCombo');
 %Model = load('.\MULTICLASSMODEL3mpi');
 %Model = load('.\MULTICLASSMODEL3mpacksizecval');
 %Model = load('..\filestoolarge\MULTICLASSMODELfeaturecombinertest1All.mat');
-Model = load('..\filestoolarge\MULTICLASSMODELfeaturecombinertest2.mat');
+%Model = load('..\filestoolarge\MULTICLASSMODELfeaturecombinertest2.mat');
+Model = load('..\filestoolarge\MULTICLASSMODEL1week4n5.mat');
 
 %rng(1);
 t = templateSVM('Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
@@ -46,8 +47,8 @@ attackPercentageList(:,3:5) = zeros(size(attackPercentageList(1)));
 predicted = kfoldPredict(Model.Model);%, features);
 %predicted = predict(Model.Model, features);
 
-%cv_svm_performance_all_features = classperf(correctLabels, predicted);
-%f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
+cv_svm_performance_all_features = classperf(correctLabels, predicted);
+f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
 
 
 %keeps track of current index for attackPercentageList
