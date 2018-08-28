@@ -4,7 +4,7 @@
 %CSVFiles = dir('*.csv');
 %CSVFiles = dir(fullfile('C:','Users','User','Downloads', 'Matlab', 'fakedata', '*.csv'));
 %CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slidingwindow', 'fakedata', '*.csv'));
-CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slidingwindow', '*.csv'));%right now this ignores a few files not labeled as csvs
+%CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slidingwindow', '*.csv'));%right now this ignores a few files not labeled as csvs
 
 TimeWindows = [1 2 4 8 16 32 60];
 
@@ -197,7 +197,6 @@ save .\probeFeatures.mat probeFeatures
 save .\probeLabels.mat probeLabels
 save .\u2rFeatures.mat u2rFeatures
 save .\u2rLabels.mat u2rLabels
-save .\r2lFeatures.mat r2lFeatures
-save .\r2lLabels.mat r2lLabels
+save 
 
 fprintf('the length of the set of CSVFiles is %i\n', length(CSVFiles));

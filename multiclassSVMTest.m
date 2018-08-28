@@ -94,15 +94,16 @@ r2lFalsePositiveCount = 0;
 probeFalsePositiveCount = 0;
 for val = (1:size(correctLabels))
     if strcmp(correctLabels(val), 'R') & ~strcmp(predicted(val),'R')
-        if (strcmp(predicted(val),falsePositivesByLabel(1,1)))
+        if (strcmp(predicted(val),falsePositivesByLabel(1,1)))%incorrectly classified as dos
             dosFalsePositiveCount = dosFalsePositiveCount + 1;
         
-        elseif (strcmp(predicted(val),falsePositivesByLabel(2,1)))
+        elseif (strcmp(predicted(val),falsePositivesByLabel(2,1)))%incorrectly classified as u2r
             u2rFalsePositiveCount = u2rFalsePositiveCount + 1;
                 
-        elseif (strcmp(predicted(val),falsePositivesByLabel(3,1)))
+        elseif (strcmp(predicted(val),falsePositivesByLabel(3,1)))%incorrectly classified as r2l
             r2lFalsePositiveCount = r2lFalsePositiveCount + 1;
-        elseif (strcmp(predicted(val),falsePositivesByLabel(4,1)))
+            
+        elseif (strcmp(predicted(val),falsePositivesByLabel(4,1)))%incorrectly classified as probe
             probeFalsePositiveCount = probeFalsePositiveCount + 1;
         end
         totalFalsePositiveCount = totalFalsePositiveCount + 1;
