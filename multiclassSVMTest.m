@@ -14,7 +14,8 @@ alllabelsfilename = '.\matfiles\allLabels.mat';
 allFeatures = load(allfeaturesfilename);
 allLabels = load(alllabelsfilename);
 
-data = load('.\randFeatureWindowCombo');
+%data = load('.\randFeatureWindowCombo');
+data = load('.\randFeatureWindowCombo2');
 
 %Model = load('.\MULTICLASSMODEL');
 %Model = load('.\MULTICLASSMODEL3mpi');
@@ -34,17 +35,22 @@ allinds = ~strcmp(allLabels.AllLabels.HLClass, 'asdfasdf');%converts allinds to 
 %features = allFeatures.AllFeatures.ThirdMomentPacketSize(allinds,1:7);
 correctLabels = allLabels.AllLabels.HLClass(allinds);
 
-%currentTestFeatureSet = featurecombiner_function();
+%currentTestFeatureSet = featurecombiner_function();%for multiple time windows per feature
+currentTestFeatureSet = singlewindowfeaturecombiner_function();%for single time window per feature
 [indexedAttackList,attackPercentageList] = correctness_analyzer_function();
 attackPercentageList(:,3:5) = zeros(size(attackPercentageList(1)));
 
-%Model = fitcecoc(data.data,correctLabels,'Learners',t,'Classnames',{'R', 'u2r', 'dos',  probe', 'r2l'}, 'CrossVal', 'on');
+%Model = fitcecoc(data.data,correctLabels,'Learners',t,'Classnames',{'R', 'u2r', 'dos',  'probe', 'r2l'}, 'CrossVal', 'on');
 %Model = fitcecoc(features,correctLabels,'Learners',t,'Classnames',{'R', 'u2r', 'dos', 'probe', 'r2l'}, 'CrossVal', 'on');
+%Model = fitcecoc(data.currentTestFeatureSet,correctLabels,'Learners',t,'Classnames',{'R', 'u2r', 'dos',  'probe', 'r2l'}, 'CrossVal', 'on');
+Model = fitcecoc(currentTestFeatureSet,correctLabels,'Learners',t,'Classnames',{'R', 'u2r', 'dos',  'probe', 'r2l'}, 'CrossVal', 'on');
+
 
 %save the model so that it doesn't have to be rerun every time
-%save MULTICLASSMODELfeaturecombinertest2.mat Model
+save MULTICLASSMODEL2week4n5.mat Model
 
-predicted = kfoldPredict(Model.Model);%, features);
+%predicted = kfoldPredict(Model.Model);%, features);
+predicted = kfoldPredict(Model);
 %predicted = predict(Model.Model, features);
 
 cv_svm_performance_all_features = classperf(correctLabels, predicted);
