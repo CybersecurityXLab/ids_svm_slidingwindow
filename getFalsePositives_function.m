@@ -39,5 +39,6 @@ function [falsePositivesByLabel] = getFalsePositives_function(correctLabels, pre
     falsePositivesByLabel(4,2) = probeFalsePositiveCount;
     falsePositivesByLabel(5,2) = totalFalsePositiveCount;
     falsePositivesByLabel(6,2) = size(correctLabels,1);
+    
 
 end

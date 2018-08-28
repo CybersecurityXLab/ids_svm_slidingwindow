@@ -33,13 +33,14 @@ correctLabels = dosLabels.dosLabels.HLClass(dosinds);
 %probeinds = remove_u2r & remove_r2l;
 %correctLabels = probeLabels.probeLabels.HLClass(probeinds); 
 
+featureWindowPerformance = strings;%data structure to keep track of the performance of feature/window combos
+featureCounter = 0;%keeps track of which individual feature you are on
 
+for n = 1:3
+    disp(n);
 
-
-%for n = 1:7
-   % disp(n);
     
-    currentTestFeature = dosFeatures.dosFeatures.SYNCount(dosinds, 6);
+    currentTestFeature = dosFeatures.dosFeatures.SYNCount(dosinds, n);
     Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'dos'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
     
     %currentTestFeature = u2rFeatures.u2rFeatures.SYNCount(u2rinds, n);
@@ -59,6 +60,20 @@ correctLabels = dosLabels.dosLabels.HLClass(dosinds);
     cv_svm_performance_all_features = classperf(correctLabels, predicted);
     f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
     disp('___________________________________________________');
-%end
 
-falsePositivesByLabel = getFalsePositives_function(correctLabels, predicted);
+
+    falsePositivesByLabel = getFalsePositives_function(correctLabels, predicted);
+
+    
+    featureWindowPerformance(((featureCounter * 1)+n) , 1) = 'dos';
+    featureWindowPerformance(((featureCounter * 2)+n),2) = 'SYNCount';
+    featureWindowPerformance(((featureCounter * 3)+n),3) = n;
+    featureWindowPerformance(((featureCounter * 4)+n),4) = f1score;
+    featureWindowPerformance(((featureCounter * 5)+n),5) = falsePositivesByLabel(5,2);
+    featureWindowPerformance(((featureCounter * 6)+n),6) = falsePositivesByLabel(6,2);
+    featureWindowPerformance(((featureCounter * 7)+n),7) = str2double(falsePositivesByLabel(5,2))/str2double(falsePositivesByLabel(6,2));
+    
+    if n == 7
+        featureCounter = featureCounter + 1;
+    end
+end
