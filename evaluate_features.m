@@ -17,63 +17,126 @@ probeLabels = load(probelabelsfilename);
 
 %Model = load('testrundeletethisfile.mat');
 
-dosinds = ~strcmp(dosLabels.dosLabels.HLClass, 'r2l');
-correctLabels = dosLabels.dosLabels.HLClass(dosinds); 
-
-%remove_probes = ~strcmp(u2rLabels.u2rLabels.HLClass, 'probe');
-%remove_r2l = ~strcmp(u2rLabels.u2rLabels.HLClass, 'r2l');
-%u2rinds = remove_probes & remove_r2l;%logical and of the two variables (which have elements of either 1 or 0)
-%correctLabels = u2rLabels.u2rLabels.HLClass(u2rinds);
-
-%r2linds = ~strcmp(dosLabels.dosLabels.HLClass, 'dos');
-%correctLabels = r2lLabels.r2lLabels.HLClass(r2linds); 
-
-%remove_u2r = ~strcmp(probeLabels.probeLabels.HLClass, 'u2r');
-%remove_r2l = ~strcmp(probeLabels.probeLabels.HLClass, 'r2l');
-%probeinds = remove_u2r & remove_r2l;
-%correctLabels = probeLabels.probeLabels.HLClass(probeinds); 
+numWindows = size(dosFeatures.dosFeatures.CVPacketSize,2);%choose one of the features to get the number of time windows for all. Choice is arbitrary.
 
 featureWindowPerformance = strings;%data structure to keep track of the performance of feature/window combos
 featureCounter = 0;%keeps track of which individual feature you are on
 
-for n = 1:3
+loopEnd = 1;%numWindows; This is for testing purposes
+
+%dos
+dosinds = ~strcmp(dosLabels.dosLabels.HLClass, 'r2l');
+correctLabels = dosLabels.dosLabels.HLClass(dosinds); 
+
+%create the beginning of the loop here to go through all features
+fields = fieldnames(dosFeatures.dosFeatures);
+for val = 1:(numel(fields)-9)
+    disp(fields{val});
+    %disp(dosFeatures.dosFeatures.(fields{val}));
+
+
+
+    for n = 1:loopEnd%numWindows
+        disp(n);
+        disp('dos')
+        disp(fields{val});
+
+        currentTestFeature = dosFeatures.dosFeatures.(fields{val})(dosinds,n);
+        %currentTestFeature = dosFeatures.dosFeatures.SYNCount(dosinds, n);
+        Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'dos'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+
+        %save testrundeletethisfile.mat Model
+
+        predicted = kfoldPredict(Model);
+
+        cv_svm_performance_all_features = classperf(correctLabels, predicted);
+        f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
+        [featureCounter,featureWindowPerformance] = recordFeatureScores('dos',fields{val},n,f1score,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
+        disp('___________________________________________________');
+
+
+    end
+
+end
+%{
+%u2r
+remove_probes = ~strcmp(u2rLabels.u2rLabels.HLClass, 'probe');
+remove_r2l = ~strcmp(u2rLabels.u2rLabels.HLClass, 'r2l');
+u2rinds = remove_probes & remove_r2l;%logical and of the two variables (which have elements of either 1 or 0)
+correctLabels = u2rLabels.u2rLabels.HLClass(u2rinds);
+
+for n = 1:loopEnd%numWindows
     disp(n);
-
+    disp('u2r');
     
-    currentTestFeature = dosFeatures.dosFeatures.SYNCount(dosinds, n);
-    Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'dos'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
-    
-    %currentTestFeature = u2rFeatures.u2rFeatures.SYNCount(u2rinds, n);
-    %Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'u2r'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
-
-    %currentTestFeature = r2lFeatures.r2lFeatures.SYNCount(r2linds, n);
-    %Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'r2l'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
-
-    %currentTestFeature = probeFeatures.probeFeatures.SYNCount(probeinds, n);
-    %Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'probe'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
-
-    
-    %save testrundeletethisfile.mat Model
+    currentTestFeature = u2rFeatures.u2rFeatures.SYNCount(u2rinds, n);
+    Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'u2r'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
 
     predicted = kfoldPredict(Model);
 
     cv_svm_performance_all_features = classperf(correctLabels, predicted);
     f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
+    [featureCounter,featureWindowPerformance] = recordFeatureScores('u2r','SYNCount',n,f1score,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
+    disp('___________________________________________________');
+    
+end
+
+%probe
+remove_u2r = ~strcmp(probeLabels.probeLabels.HLClass, 'u2r');
+remove_r2l = ~strcmp(probeLabels.probeLabels.HLClass, 'r2l');
+probeinds = remove_u2r & remove_r2l;
+correctLabels = probeLabels.probeLabels.HLClass(probeinds); 
+
+for n = 1:loopEnd%numWindows
+    disp(n);
+    disp('probe');
+    currentTestFeature = probeFeatures.probeFeatures.SYNCount(probeinds, n);
+    Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'probe'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+
+    predicted = kfoldPredict(Model);
+
+    cv_svm_performance_all_features = classperf(correctLabels, predicted);
+    f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
+    [featureCounter,featureWindowPerformance] = recordFeatureScores('probe','SYNCount',n,f1score,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
     disp('___________________________________________________');
 
+end
+
+%r2l
+%r2linds = ~strcmp(dosLabels.dosLabels.HLClass, 'dos');
+%correctLabels = r2lLabels.r2lLabels.HLClass(r2linds); 
+
+%for n = 1:loopEnd%numWindows
+   % disp(n);
+  %  disp('r2l');
+    
+    %currentTestFeature = r2lFeatures.r2lFeatures.SYNCount(r2linds, n);
+    %Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'r2l'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+
+    %predicted = kfoldPredict(Model);
+
+   % cv_svm_performance_all_features = classperf(correctLabels, predicted);
+   % f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
+   % [featureCounter,featureWindowPerformance] = recordFeatureScores('dos','SYNCount',n,f1score,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
+   % disp('___________________________________________________');
+    
+%end
+
+%}
+function [featureCounter, featureWindowPerformance] = recordFeatureScores(attack,feature,window,f1score,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
 
     falsePositivesByLabel = getFalsePositives_function(correctLabels, predicted);
 
     
-    featureWindowPerformance(((featureCounter * 1)+n) , 1) = 'dos';
-    featureWindowPerformance(((featureCounter * 2)+n),2) = 'SYNCount';
-    featureWindowPerformance(((featureCounter * 3)+n),3) = n;
-    featureWindowPerformance(((featureCounter * 4)+n),4) = f1score;
-    featureWindowPerformance(((featureCounter * 5)+n),5) = falsePositivesByLabel(5,2);
-    featureWindowPerformance(((featureCounter * 6)+n),6) = falsePositivesByLabel(6,2);
-    featureWindowPerformance(((featureCounter * 7)+n),7) = str2double(falsePositivesByLabel(5,2))/str2double(falsePositivesByLabel(6,2));
+    featureWindowPerformance(((featureCounter * loopEnd)+window),1) = attack;
+    featureWindowPerformance(((featureCounter * loopEnd)+window),2) = feature;
+    featureWindowPerformance(((featureCounter * loopEnd)+window),3) = window;
+    featureWindowPerformance(((featureCounter * loopEnd)+window),4) = f1score;
+    featureWindowPerformance(((featureCounter * loopEnd)+window),5) = falsePositivesByLabel(5,2);
+    featureWindowPerformance(((featureCounter * loopEnd)+window),6) = falsePositivesByLabel(6,2);
+    featureWindowPerformance(((featureCounter * loopEnd)+window),7) = str2double(falsePositivesByLabel(5,2))/str2double(falsePositivesByLabel(6,2));
     
-    if n == 7
+    if window == loopEnd
         featureCounter = featureCounter + 1;
     end
 end
