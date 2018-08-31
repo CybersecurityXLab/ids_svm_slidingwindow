@@ -22,7 +22,7 @@ numWindows = size(dosFeatures.dosFeatures.CVPacketSize,2);%choose one of the fea
 featureWindowPerformance = strings;%data structure to keep track of the performance of feature/window combos
 featureCounter = 0;%keeps track of which individual feature you are on
 
-loopEnd = 1;%numWindows; This is for testing purposes
+loopEnd = numWindows;% This is for testing purposes
 
 %dos
 dosinds = ~strcmp(dosLabels.dosLabels.HLClass, 'r2l');
@@ -30,7 +30,7 @@ correctLabels = dosLabels.dosLabels.HLClass(dosinds);
 
 %create the beginning of the loop here to go through all features
 fields = fieldnames(dosFeatures.dosFeatures);
-for val = 1:(numel(fields)-9)
+for val = 1:(numel(fields)-8)
     disp(fields{val});
     %disp(dosFeatures.dosFeatures.(fields{val}));
 
@@ -58,27 +58,36 @@ for val = 1:(numel(fields)-9)
     end
 
 end
-%{
+
 %u2r
 remove_probes = ~strcmp(u2rLabels.u2rLabels.HLClass, 'probe');
 remove_r2l = ~strcmp(u2rLabels.u2rLabels.HLClass, 'r2l');
 u2rinds = remove_probes & remove_r2l;%logical and of the two variables (which have elements of either 1 or 0)
 correctLabels = u2rLabels.u2rLabels.HLClass(u2rinds);
 
-for n = 1:loopEnd%numWindows
-    disp(n);
-    disp('u2r');
-    
-    currentTestFeature = u2rFeatures.u2rFeatures.SYNCount(u2rinds, n);
-    Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'u2r'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+fields = fieldnames(u2rFeatures.u2rFeatures);
+for val = 1:(numel(fields)-8)
+    disp(fields{val});
+    %disp(dosFeatures.dosFeatures.(fields{val}));
 
-    predicted = kfoldPredict(Model);
 
-    cv_svm_performance_all_features = classperf(correctLabels, predicted);
-    f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
-    [featureCounter,featureWindowPerformance] = recordFeatureScores('u2r','SYNCount',n,f1score,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
-    disp('___________________________________________________');
-    
+
+    for n = 1:loopEnd%numWindows
+        disp(n);
+        disp('u2r');
+
+        currentTestFeature = u2rFeatures.u2rFeatures.(fields{val})(u2rinds,n);
+        %currentTestFeature = u2rFeatures.u2rFeatures.SYNCount(u2rinds, n);
+        Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'u2r'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+
+        predicted = kfoldPredict(Model);
+
+        cv_svm_performance_all_features = classperf(correctLabels, predicted);
+        f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
+        [featureCounter,featureWindowPerformance] = recordFeatureScores('u2r',fields{val},n,f1score,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
+        disp('___________________________________________________');
+
+    end
 end
 
 %probe
@@ -87,42 +96,68 @@ remove_r2l = ~strcmp(probeLabels.probeLabels.HLClass, 'r2l');
 probeinds = remove_u2r & remove_r2l;
 correctLabels = probeLabels.probeLabels.HLClass(probeinds); 
 
-for n = 1:loopEnd%numWindows
-    disp(n);
-    disp('probe');
-    currentTestFeature = probeFeatures.probeFeatures.SYNCount(probeinds, n);
-    Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'probe'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+fields = fieldnames(probeFeatures.probeFeatures);
+for val = 1:(numel(fields)-8)
+    disp(fields{val});
+    %disp(dosFeatures.dosFeatures.(fields{val}));
 
-    predicted = kfoldPredict(Model);
 
-    cv_svm_performance_all_features = classperf(correctLabels, predicted);
-    f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
-    [featureCounter,featureWindowPerformance] = recordFeatureScores('probe','SYNCount',n,f1score,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
-    disp('___________________________________________________');
 
+    for n = 1:loopEnd%numWindows
+        disp(n);
+        disp('probe');
+
+        currentTestFeature = probeFeatures.probeFeatures.(fields{val})(probeinds,n);
+        %currentTestFeature = probeFeatures.probeFeatures.SYNCount(probeinds, n);
+        Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'probe'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+
+        predicted = kfoldPredict(Model);
+
+        cv_svm_performance_all_features = classperf(correctLabels, predicted);
+        f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
+        [featureCounter,featureWindowPerformance] = recordFeatureScores('probe',fields{val},n,f1score,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
+        disp('___________________________________________________');
+
+    end
 end
 
 %r2l
 %r2linds = ~strcmp(dosLabels.dosLabels.HLClass, 'dos');
 %correctLabels = r2lLabels.r2lLabels.HLClass(r2linds); 
 
-%for n = 1:loopEnd%numWindows
-   % disp(n);
-  %  disp('r2l');
-    
-    %currentTestFeature = r2lFeatures.r2lFeatures.SYNCount(r2linds, n);
-    %Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'r2l'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
 
-    %predicted = kfoldPredict(Model);
 
-   % cv_svm_performance_all_features = classperf(correctLabels, predicted);
-   % f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
-   % [featureCounter,featureWindowPerformance] = recordFeatureScores('dos','SYNCount',n,f1score,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
-   % disp('___________________________________________________');
-    
+
+%fields = fieldnames(r2lFeatures.r2lFeatures);
+%for val = 1:(numel(fields)-8)
+ %   disp(fields{val});
+    %disp(dosFeatures.dosFeatures.(fields{val}));
+
+
+
+
+    %for n = 1:loopEnd%numWindows
+       % disp(n);
+      %  disp('r2l');
+
+        %currentTestFeature = r2lFeatures.r2lFeatures.(fields{val})(r2linds,n);
+        %currentTestFeature = r2lFeatures.r2lFeatures.SYNCount(r2linds, n);
+        %Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'r2l'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+
+        %predicted = kfoldPredict(Model);
+
+       % cv_svm_performance_all_features = classperf(correctLabels, predicted);
+       % f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
+       % [featureCounter,featureWindowPerformance] = recordFeatureScores('r2l',fields{val},n,f1score,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
+       % disp('___________________________________________________');
+
+    %end
 %end
 
-%}
+
+
+
+
 function [featureCounter, featureWindowPerformance] = recordFeatureScores(attack,feature,window,f1score,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
 
     falsePositivesByLabel = getFalsePositives_function(correctLabels, predicted);
