@@ -50,7 +50,7 @@ for val = 1:(numel(fields)-9)
 
         %save testrundeletethisfile.mat Model
 
-       predicted = kfoldPredict(Model);
+        predicted = kfoldPredict(Model);
 
        cv_svm_performance_all_features = classperf(correctLabels, predicted);
        baselinePerformance = classperf(correctLabels, predictAllRTraffic);%in the case everything is guessed as negative
