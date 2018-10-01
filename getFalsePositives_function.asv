@@ -15,9 +15,14 @@ function [falsePositivesByLabel] = getFalsePositives_function(correctLabels, pre
     u2rFalsePositiveCount = 0;
     r2lFalsePositiveCount = 0;
     probeFalsePositiveCount = 0;
-    
+    for val = (1:size(correctLabels))
+        %if val == 56482
+            fprintf('%i ', val);
+        %end
+    end
     for index = (1:size(correctLabels))
-        if strcmp(correctLabels(index), 'R') & ~strcmp(predicted(index),'R')
+        fprintf('%i ', index);
+        if strcmp(correctLabels(index, 1), 'R') & ~strcmp(predicted(index, 1),'R')
             if (strcmp(predicted(index),falsePositivesByLabel(1,1)))%incorrectly classified as dos
                 dosFalsePositiveCount = dosFalsePositiveCount + 1;
 

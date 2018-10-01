@@ -155,16 +155,11 @@ predictAllRTraffic = repmat({'R'},size(currentTestFeature,1),1);%to get a baseli
         %currentTestFeature = r2lFeatures.r2lFeatures.SYNCount(r2linds, n);
    %     Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'r2l'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
 
-        predictAllRTraffic = repmat({'R'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'R'
-        baselinePerformance = classperf(correctLabels, predictAllRTraffic);%gives the F1 score when everything is guessed as regular traffic
-        baselineF1 = 2 * baselinePerformance.Sensitivity*baselinePerformance.PositivePredictiveValue/(baselinePerformance.Sensitivity+baselinePerformance.PositivePredictiveValue);
-
-        
    %     predicted = kfoldPredict(Model);
 
     %    cv_svm_performance_all_features = classperf(correctLabels, predicted);
      %   f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
-        [featureCounter,featureWindowPerformance] = recordFeatureScores('r2l',fields{val},n,f1score,baselineF1,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
+        [featureCounter,featureWindowPerformance] = recordFeatureScores('r2l',fields{val},n,f1score,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
     %    disp('___________________________________________________');
 
  %   end
