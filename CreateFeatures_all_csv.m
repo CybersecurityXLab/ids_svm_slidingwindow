@@ -6,6 +6,7 @@
 %CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slidingwindow', 'fakedata', '*.csv'));
 CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slidingwindow','*.csv'));
 %CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slidingwindow', 'allsplitfiles','*.csv'));%right now this ignores a few files not labeled as csvs
+%CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slidingwindow','inside_5_3_split_3_queso_probe.csv'));
 
 TimeWindows = [1 2 4 8 16 32 60];
 
@@ -106,7 +107,7 @@ r2lLabels.LLClass = [];
 
 disp("before iteration");
 fprintf('the length of the set of CSVFiles is %i\n', length(CSVFiles));
-for i = 1:length(CSVFiles) - 130
+for i = 1:length(CSVFiles)
     disp("iterate through file ");disp(i);disp(CSVFiles(i).name);
     [Features, Labels] = CreateFeatures_function( CSVFiles(i, 1).name, TimeWindows );
     AllLabels.HLClass = [AllLabels.HLClass; Labels.HLClass];
@@ -188,7 +189,7 @@ for i = 1:length(CSVFiles) - 130
         
     end
 end
-%{
+
 % Save output:
 save .\AllFeatures.mat AllFeatures
 save .\AllLabels.mat AllLabels
@@ -202,4 +203,3 @@ save .\r2lFeatures.mat r2lFeatures
 save .\r2lLabels.mat r2lLabels
 
 fprintf('the length of the set of CSVFiles is %i\n', length(CSVFiles));
-%}
