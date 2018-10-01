@@ -30,7 +30,7 @@ correctLabels = dosLabels.dosLabels.HLClass(dosinds);
 
 %create the beginning of the loop here to go through all features
 fields = fieldnames(dosFeatures.dosFeatures);
-for val = 1:(numel(fields)-9)
+for val = 1:(numel(fields)-9)%iterate through features
     disp(fields{val});
     %disp(dosFeatures.dosFeatures.(fields{val}));
     
@@ -39,13 +39,14 @@ for val = 1:(numel(fields)-9)
 
 
 
-    for n = 1:4%loopEnd%numWindows
+    for n = 1:4%loopEnd%numWindows%iterate through time windows
         disp(n);
         disp('dos')
         disp(fields{val});
 
         currentTestFeature = dosFeatures.dosFeatures.(fields{val})(dosinds,n);
         %currentTestFeature = dosFeatures.dosFeatures.SYNCount(dosinds, n);
+        %binary SVM
         Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'dos'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
 
         %save testrundeletethisfile.mat Model
@@ -53,7 +54,7 @@ for val = 1:(numel(fields)-9)
        predicted = kfoldPredict(Model);
 
        cv_svm_performance_all_features = classperf(correctLabels, predicted);
-       baselinePerformance = classperf(correctLabels, predictAllRTraffic);%in the case everything is guessed as negative
+       baselinePerformance = classperf(correctLabels, predictAllRTraffic);%gives the F1 score when everything is guessed as regular traffic
        f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
        baselineF1 = 2 * baselinePerformance.Sensitivity*baselinePerformance.PositivePredictiveValue/(baselinePerformance.Sensitivity+baselinePerformance.PositivePredictiveValue);
        [featureCounter,featureWindowPerformance] = recordFeatureScores('dos',fields{val},n,f1score,baselineF1,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
