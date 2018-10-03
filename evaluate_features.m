@@ -129,54 +129,60 @@ for val = 1:(numel(fields)-8)
 end
 %}
 %r2l
-
+%{
 remove_probes = ~strcmp(r2lLabels.r2lLabels.HLClass, 'probe');
 remove_u2r = ~strcmp(r2lLabels.r2lLabels.HLClass, 'u2r');
 remove_dos = ~strcmp(r2lLabels.r2lLabels.HLClass, 'dos');
 r2linds = remove_probes & remove_u2r & remove_dos;%logical and of the three variables (which have elements of either 1 or 0)
 correctLabels = r2lLabels.r2lLabels.HLClass(r2linds);
 
-predictAllRTraffic = repmat({'R'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'R'
 
 
-%fields = fieldnames(r2lFeatures.r2lFeatures);
-%for val = 1:(numel(fields)-9)
-%    disp(fields{val});
+fields = fieldnames(r2lFeatures.r2lFeatures);
+for val = 1:(numel(fields)-9)
+    disp(fields{val});
     %disp(r2lFeatures.r2lFeatures.(fields{val}));
 
 
 
 
- %   for n = 1:2%loopEnd%numWindows
- %       disp(n);
- %       disp('r2l');
+    for n = 6:7%loopEnd%numWindows
+        %disp(n);
+        %disp('r2l');
+        fprintf('r2l feature %s time window %i ', fields{val}, n);
 
-   %     currentTestFeature = r2lFeatures.r2lFeatures.(fields{val})(r2linds,n);
-        %currentTestFeature = r2lFeatures.r2lFeatures.SYNCount(r2linds, n);
-   %     Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'r2l'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
-
+        currentTestFeature = r2lFeatures.r2lFeatures.(fields{val})(r2linds,n);
         predictAllRTraffic = repmat({'R'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'R'
+
+        %currentTestFeature = r2lFeatures.r2lFeatures.SYNCount(r2linds, n);
+        Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'R',  'r2l'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+
+        fprintf('Model trained\n');
+        
         baselinePerformance = classperf(correctLabels, predictAllRTraffic);%gives the F1 score when everything is guessed as regular traffic
         baselineF1 = 2 * baselinePerformance.Sensitivity*baselinePerformance.PositivePredictiveValue/(baselinePerformance.Sensitivity+baselinePerformance.PositivePredictiveValue);
 
         
-   %     predicted = kfoldPredict(Model);
+        predicted = kfoldPredict(Model);
 
-    %    cv_svm_performance_all_features = classperf(correctLabels, predicted);
-     %   f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
+        cv_svm_performance_all_features = classperf(correctLabels, predicted);
+        f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
         [featureCounter,featureWindowPerformance] = recordFeatureScores('r2l',fields{val},n,f1score,baselineF1,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
-    %    disp('___________________________________________________');
+        disp('___________________________________________________');
 
- %   end
-%end
+    end
+end
 
+%}
 
-
+%r2l
+%correctLabels = one_v_all_function('r2l', allLabels.AllLabels.HLClass());
 
 
 function [featureCounter, featureWindowPerformance] = recordFeatureScores(attack,feature,window,f1score,baselineF1,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
 
     disp(correctLabels(1));
+    %[c, cm, ind, confMatrix] = confusion(correctLabels, predicted);%returns confusion matrix as 4th element. i1 fnr, i2 fpr, i3 tpr, i4 tnr.
     falsePositivesByLabel = getFalsePositives_function(correctLabels, predicted);
 
     
