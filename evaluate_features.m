@@ -14,6 +14,8 @@ probefeaturesfilename = '.\matfiles\probeFeatures.mat';
 probelabelsfilename = '.\matfiles\probeLabels.mat';
 probeFeatures = load(probefeaturesfilename);
 probeLabels = load(probelabelsfilename);
+allFeatures = load('.\matfiles\allFeatures.mat');
+allLabels = load('.\matfiles\allLabels.mat');
 
 %Model = load('testrundeletethisfile.mat');
 
@@ -175,9 +177,43 @@ end
 
 %}
 
-%r2l
-%correctLabels = one_v_all_function('r2l', allLabels.AllLabels.HLClass());
+%u2r
+fields = fieldnames(allFeatures.AllFeatures);
+correctLabels = one_v_all_function('u2r', allLabels.AllLabels.HLClass());
 
+for val = 1:(numel(fields)-9)
+    disp(fields{val});
+    %for n = 6:7%loopEnd%numWindows
+    n = 6
+        tic = cputime;
+        fprintf('u2r feature %s time window %i...', fields{val}, n);
+        currentTestFeature = allFeatures.AllFeatures.(fields{val})(:,n);
+        predictAllOtherTrafficTypes = repmat({'not'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'not' (i.e. anything but r2l)
+       % predictAllCorrectTrafficType = repmat({'u2r'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'r2l'
+
+        Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'not',  'u2r'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+        
+        fprintf('Model trained\n');
+        
+        baselinePerformanceNotU2R = classperf(correctLabels, predictAllOtherTrafficTypes);%gives the F1 score when everything is guessed as regular traffic
+        baselineF1NotU2R = 2 * baselinePerformanceNotU2R.Sensitivity*baselinePerformanceNotU2R.PositivePredictiveValue/(baselinePerformanceNotU2R.Sensitivity+baselinePerformanceNotU2R.PositivePredictiveValue);
+
+        predicted = kfoldPredict(Model);
+        
+        cv_svm_performance_all_features = classperf(correctLabels, predicted);
+        f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
+
+        %[featureCounter,featureWindowPerformance] = recordFeatureScores('u2r',fields{val},n,f1score,baselineF1NotU2R, baselineF1U2R,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
+
+        [featureCounter,featureWindowPerformance] = recordFeatureScores('u2r',fields{val},n,f1score,baselineF1NotU2R,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
+        toc = cputime;
+        fprintf('this run took %i seconds\n', toc-tic);
+        disp('___________________________________________________');
+
+        n = n + 2;%to exit loop
+        
+    %end
+end
 
 function [featureCounter, featureWindowPerformance] = recordFeatureScores(attack,feature,window,f1score,baselineF1,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
 
@@ -185,7 +221,6 @@ function [featureCounter, featureWindowPerformance] = recordFeatureScores(attack
     %[c, cm, ind, confMatrix] = confusion(correctLabels, predicted);%returns confusion matrix as 4th element. i1 fnr, i2 fpr, i3 tpr, i4 tnr.
     falsePositivesByLabel = getFalsePositives_function(correctLabels, predicted);
 
-    
     featureWindowPerformance(((featureCounter * loopEnd)+window),1) = attack;
     featureWindowPerformance(((featureCounter * loopEnd)+window),2) = feature;
     featureWindowPerformance(((featureCounter * loopEnd)+window),3) = window;
@@ -197,6 +232,6 @@ function [featureCounter, featureWindowPerformance] = recordFeatureScores(attack
     featureWindowPerformance(((featureCounter * loopEnd)+window),9) = str2double(falsePositivesByLabel(5,2))/str2double(falsePositivesByLabel(6,2));
     
     if window == loopEnd
-        featureCounter = featureCounter + 1;
+        featureCounter = featureCounter + 1;%keeps track of which feature we are on to tell the table which row to update
     end
 end
