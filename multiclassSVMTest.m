@@ -63,9 +63,9 @@ attackPercentageListCounter = 1;
 truePositiveCount = 0;
 
 for val = (2:size(indexedAttackList))
-    if ~((str2double(indexedAttackList(val,2)) - str2double(indexedAttackList(val-1,2)) == 1))%the cells are not contiguous, therefore are a different attack
+    if ~((str2double(indexedAttackList(val,2)) - str2double(indexedAttackList(val-1,2)) == 1))%the cells of the second column are not contiguous, therefore are a different attack
         attackPercentageListCounter = attackPercentageListCounter + 1;
-        truePositiveCount = 0;
+        truePositiveCount = 0;%restart count for next attack
     end
 
     if strcmp(predicted(str2double(indexedAttackList(val,2))), indexedAttackList(val,1)) == 1%if there is one match, add to list

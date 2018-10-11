@@ -191,17 +191,17 @@ for val = 1:(numel(fields)-9)
         predictAllOtherTrafficTypes = repmat({'not'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'not' (i.e. anything but r2l)
        % predictAllCorrectTrafficType = repmat({'u2r'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'r2l'
 
-        Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'not',  'u2r'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+        %Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'not',  'u2r'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
         
         fprintf('Model trained\n');
         
-        baselinePerformanceNotU2R = classperf(correctLabels, predictAllOtherTrafficTypes);%gives the F1 score when everything is guessed as regular traffic
-        baselineF1NotU2R = 2 * baselinePerformanceNotU2R.Sensitivity*baselinePerformanceNotU2R.PositivePredictiveValue/(baselinePerformanceNotU2R.Sensitivity+baselinePerformanceNotU2R.PositivePredictiveValue);
+        %baselinePerformanceNotU2R = classperf(correctLabels, predictAllOtherTrafficTypes);%gives the F1 score when everything is guessed as regular traffic
+        %baselineF1NotU2R = 2 * baselinePerformanceNotU2R.Sensitivity*baselinePerformanceNotU2R.PositivePredictiveValue/(baselinePerformanceNotU2R.Sensitivity+baselinePerformanceNotU2R.PositivePredictiveValue);
 
-        predicted = kfoldPredict(Model);
+       % predicted = kfoldPredict(Model);
         
-        cv_svm_performance_all_features = classperf(correctLabels, predicted);
-        f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
+       % cv_svm_performance_all_features = classperf(correctLabels, predicted);
+       % f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
 
         %[featureCounter,featureWindowPerformance] = recordFeatureScores('u2r',fields{val},n,f1score,baselineF1NotU2R, baselineF1U2R,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
 
@@ -231,6 +231,47 @@ function [featureCounter, featureWindowPerformance] = recordFeatureScores(attack
     featureWindowPerformance(((featureCounter * loopEnd)+window),8) = falsePositivesByLabel(6,2);
     featureWindowPerformance(((featureCounter * loopEnd)+window),9) = str2double(falsePositivesByLabel(5,2))/str2double(falsePositivesByLabel(6,2));
     
+    
+    [indexedAttackList,attackPercentageList] = correctness_analyzer_function_single_variable(attack);
+    attackPercentageList(:,3:5) = zeros(size(attackPercentageList(1)));
+    
+    
+    
+    %keeps track of current index for attackPercentageList
+    attackPercentageListCounter = 1;
+    %keeps track of true positives
+    truePositiveCount = 0;
+
+    for val = (2:size(indexedAttackList))
+        if ~((str2double(indexedAttackList(val,2)) - str2double(indexedAttackList(val-1,2)) == 1))%the cells of the second column are not contiguous, therefore are a different attack
+            attackPercentageListCounter = attackPercentageListCounter + 1;%index of the row of attackePercentageList
+            truePositiveCount = 0;%restart count for next attack
+        end
+
+        if strcmp(predicted(str2double(indexedAttackList(val,2))), indexedAttackList(val,1)) == 1%if there is one match, add to list
+            attackPercentageList(attackPercentageListCounter,3) = 1;
+            truePositiveCount = truePositiveCount + 1;
+            attackPercentageList(attackPercentageListCounter,4) = truePositiveCount;
+        end
+    end
+    
+    %attackPercentageList(:,5) = str2double(attackPercentageList(:,4))./str2double(attackPercentageList(:,2));%5th col is percentage true pos
+    
+    %attack feature window
+    
+    %create filename to save correct guess percentage
+    %s = '.\single_var_classifier_percentages\';
+    %s = strcat(attack);
+    %s = strcat(s,feature);
+    %s = strcat(s,int2str(window));
+    %s = strcat(s,'.mat');
+   % disp(s);
+    %save(s);
+
+    %featureWindowPerformance(((featureCounter * loopEnd)+window),10) = struct(attackPercentageList);
+    
+    
+    %
     if window == loopEnd
         featureCounter = featureCounter + 1;%keeps track of which feature we are on to tell the table which row to update
     end
