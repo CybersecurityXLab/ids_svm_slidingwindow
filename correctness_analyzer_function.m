@@ -1,7 +1,7 @@
 function [indexedListOfAttacks,attackList] = correctness_analyzer_function();
 
-allfeaturesfilename = '.\matfiles\allFeatures.mat';
-alllabelsfilename = '.\matfiles\allLabels.mat';
+allfeaturesfilename = '.\feature_sets\allFeatures.mat';
+alllabelsfilename = '.\feature_sets\allLabels.mat';
 allFeatures = load(allfeaturesfilename);
 allLabels = load(alllabelsfilename);
 

@@ -2,10 +2,10 @@
 %finding correct attack percentages when using single variable
 %classifiers.
 
-function [indexedListOfAttacks,attackList] = correctness_analyzer_function(attackType);
+function [indexedListOfAttacks,attackList] = correctness_analyzer_function_single_variable(attackType);
 
-allfeaturesfilename = '.\matfiles\allFeatures.mat';
-alllabelsfilename = '.\matfiles\allLabels.mat';
+allfeaturesfilename = '.\feature_sets\allFeatures.mat';
+alllabelsfilename = '.\feature_sets\allLabels.mat';
 allFeatures = load(allfeaturesfilename);
 allLabels = load(alllabelsfilename);
 
