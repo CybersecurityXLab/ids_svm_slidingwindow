@@ -4,11 +4,11 @@
 %CSVFiles = dir('*.csv');
 %CSVFiles = dir(fullfile('C:','Users','User','Downloads', 'Matlab', 'fakedata', '*.csv'));
 %CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slidingwindow', 'fakedata', '*.csv'));
-CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slidingwindow','*.csv'));
+CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slidingwindow','csv_files', '*.csv'));
 %CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slidingwindow', 'allsplitfiles','*.csv'));%right now this ignores a few files not labeled as csvs
 %CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slidingwindow','inside_5_3_split_3_queso_probe.csv'));
 
-TimeWindows = [1 2 4 8 16 32 60];
+%{TimeWindows = [1 2 4 8 16 32 60];
 
 % Structure to Store All Features for All Clean Attacks:
 AllFeatures = struct;
@@ -191,15 +191,15 @@ for i = 1:length(CSVFiles)
 end
 
 % Save output:
-save .\AllFeatures.mat ../feature_sets/AllFeatures
-save .\AllLabels.mat ../feature_sets/AllLabels
-save .\dosFeatures.mat ../feature_sets/dosFeatures
-save .\dosLabels.mat ../feature_sets/dosLabels
-save .\probeFeatures.mat ../feature_sets/probeFeatures
-save .\probeLabels.mat ../feature_sets/probeLabels
-save .\u2rFeatures.mat ../feature_sets/u2rFeatures
-save .\u2rLabels.mat ../feature_sets/u2rLabels
-save .\r2lFeatures.mat ../feature_sets/r2lFeatures
-save .\r2lLabels.mat ../feature_sets/r2lLabels
+save .\AllFeatures.mat '../feature_sets_20181029/AllFeatures'
+save .\AllLabels.mat '../feature_sets_20181029/AllLabels'
+save .\dosFeatures.mat '../feature_sets_20181029/dosFeatures'
+save .\dosLabels.mat '../feature_sets_20181029/dosLabels'
+save .\probeFeatures.mat '../feature_sets_20181029/probeFeatures'
+save .\probeLabels.mat '../feature_sets_20181029/probeLabels'
+save .\u2rFeatures.mat '../feature_sets_20181029/u2rFeatures'
+save .\u2rLabels.mat '../feature_sets_20181029/u2rLabels'
+save .\r2lFeatures.mat '../feature_sets_20181029/r2lFeatures'
+save .\r2lLabels.mat '../feature_sets_20181029/r2lLabels'
 
 fprintf('the length of the set of CSVFiles is %i\n', length(CSVFiles));
