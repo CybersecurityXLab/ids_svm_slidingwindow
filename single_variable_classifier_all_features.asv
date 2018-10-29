@@ -3,7 +3,7 @@
 
 %scale matlabe data from link
 %https://www.mathworks.com/help/matlab/ref/normalize.html. Min-max
-%normalization (between zero and one) is specified as the parameter 'range'
+%normalization (between zero and one) is specifie
 allFeatures = load('.\feature_sets\allFeatures.mat');
 allLabels = load('.\feature_sets\allLabels.mat');
 memory

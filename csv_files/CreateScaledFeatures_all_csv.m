@@ -1,3 +1,6 @@
+%Same as CreateFeatures_all_csv.m, but saves features scaled using z score so that all
+%values have a stdev of one
+
 % Script that finds all csv files in current folder and creates a large
 % feature table by appending them all together
 
@@ -109,7 +112,7 @@ disp("before iteration");
 fprintf('the length of the set of CSVFiles is %i\n', length(CSVFiles));
 for i = 1:length(CSVFiles)
     disp("iterate through file ");disp(i);disp(CSVFiles(i).name);
-    [Features, Labels] = CreateFeatures_function( CSVFiles(i, 1).name, TimeWindows );
+    [Features, Labels] = CreateScaledFeatures_function( CSVFiles(i, 1).name, TimeWindows );
     AllLabels.HLClass = [AllLabels.HLClass; Labels.HLClass];
     AllLabels.LLClass = [AllLabels.LLClass; Labels.LLClass];
     AllFeatures.CVPacketSize = [AllFeatures.CVPacketSize; Features.CVPacketSize];
