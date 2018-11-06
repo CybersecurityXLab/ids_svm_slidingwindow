@@ -343,19 +343,19 @@ for sec=start_time:end_time %Loop over times
         Labels.LLClass(sec-start_time+1) = XCompress.LLClass(sec);
         
         %time window is too large to hold first i seconds
-        %set all irrelevant sliding windows to NaN
+        %set all irrelevant sliding windows to -1
         if(TimeWindows(i) > sec)
-            Features.SYNCount(sec-start_time+1, i) = NaN;
-            Features.HTTPorFTPandExeCodeCount(sec-start_time+1,i) = NaN;
-            Features.CorJavaScriptCount(sec-start_time+1, i) = NaN;
-            Features.HTTPandMalformedCount(sec-start_time+1, i) = NaN;
-            Features.FTPandCcodeCount(sec-start_time+1, i) = NaN;
-            Features.SYNCount(sec-start_time+1, i) = NaN;
-            Features.ECHOCount(sec-start_time+1, i) = NaN;
-            Features.CVPacketSize(sec-start_time+1, i) = NaN;
-            Features.ThirdMomentPacketSize(sec-start_time+1, i) = NaN;
-            Features.CVPacketInterarrival(sec-start_time+1, i) = NaN;
-            Features.ThirdMomentPacketInterarrival(sec-start_time+1, i) = NaN;
+            Features.SYNCount(sec-start_time+1, i) = -1;
+            Features.HTTPorFTPandExeCodeCount(sec-start_time+1,i) = -1;
+            Features.CorJavaScriptCount(sec-start_time+1, i) = -1;
+            Features.HTTPandMalformedCount(sec-start_time+1, i) = -1;
+            Features.FTPandCcodeCount(sec-start_time+1, i) = -1;
+            Features.SYNCount(sec-start_time+1, i) = -1;
+            Features.ECHOCount(sec-start_time+1, i) = -1;
+            Features.CVPacketSize(sec-start_time+1, i) = -1;
+            Features.ThirdMomentPacketSize(sec-start_time+1, i) = -1;
+            Features.CVPacketInterarrival(sec-start_time+1, i) = -1;
+            Features.ThirdMomentPacketInterarrival(sec-start_time+1, i) = -1;
             
         %current time window is >= the current seconds passed
         else

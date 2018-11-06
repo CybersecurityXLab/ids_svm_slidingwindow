@@ -188,6 +188,8 @@ for val = 1:(numel(fields)-9)
         
         fprintf('Model trained\n');
         
+        toc = cputime;
+        fprintf('this run took %i seconds\n', toc-tic);
         baselinePerformanceNotU2R = classperf(correctLabels, predictAllOtherTrafficTypes);%gives the F1 score when everything is guessed as regular traffic
         baselineF1NotU2R = 2 * baselinePerformanceNotU2R.Sensitivity*baselinePerformanceNotU2R.PositivePredictiveValue/(baselinePerformanceNotU2R.Sensitivity+baselinePerformanceNotU2R.PositivePredictiveValue);
 
@@ -199,8 +201,7 @@ for val = 1:(numel(fields)-9)
         %[featureCounter,featureWindowPerformance] = recordFeatureScores('u2r',fields{val},n,f1score,baselineF1NotU2R, baselineF1U2R,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
 
         [featureCounter,featureWindowPerformance] = recordFeatureScores('u2r',fields{val},n,f1score,baselineF1NotU2R,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
-        toc = cputime;
-        fprintf('this run took %i seconds\n', toc-tic);
+
         disp('___________________________________________________');
 
         n = n + 2;%to exit loop
