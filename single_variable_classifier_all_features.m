@@ -4,8 +4,11 @@
 %scale matlabe data from link
 %https://www.mathworks.com/help/matlab/ref/normalize.html. Min-max
 %normalization (between zero and one) is specified as the parameter 'range'
-allFeatures = load('.\feature_sets\allFeatures.mat');
-allLabels = load('.\feature_sets\allLabels.mat');
+%allFeatures = load('.\feature_sets\allFeatures.mat');
+%allLabels = load('.\feature_sets\allLabels.mat');
+
+allFeatures = load('.\zscore_feature_sets\allFeatures.mat');
+allLabels = load('.\zscore_feature_sets\allLabels.mat');
 memory
 %Model = load('testrundeletethisfile.mat');
 
@@ -180,8 +183,8 @@ for val = 1:(numel(fields)-9)
         currentTestFeature = allFeatures.AllFeatures.(fields{val})(:,n);
         predictAllOtherTrafficTypes = repmat({'not'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'not' (i.e. anything but r2l)
        % predictAllCorrectTrafficType = repmat({'u2r'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'r2l'
-        memory
-        %Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'not',  'u2r'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+       % memory
+        Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'not',  'u2r'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
         
         fprintf('Model trained\n');
         
