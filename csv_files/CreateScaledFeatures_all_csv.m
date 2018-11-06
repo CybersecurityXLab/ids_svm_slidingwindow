@@ -11,7 +11,7 @@ CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slid
 %CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slidingwindow', 'allsplitfiles','*.csv'));%right now this ignores a few files not labeled as csvs
 %CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slidingwindow','inside_5_3_split_3_queso_probe.csv'));
 
-%{TimeWindows = [1 2 4 8 16 32 60];
+TimeWindows = [1 2 4 8 16 32 60];
 
 % Structure to Store All Features for All Clean Attacks:
 AllFeatures = struct;
@@ -126,84 +126,31 @@ for i = 1:length(CSVFiles)
     AllFeatures.SYNCount = [AllFeatures.SYNCount; Features.SYNCount];
     AllFeatures.ECHOCount = [AllFeatures.ECHOCount; Features.ECHOCount];
     
-    %disp(Labels.HLClass);
-    if any(strcmp(Labels.HLClass,'probe'))==1
-        disp("I am at HLClass probe----------------------------------------");
-        probeLabels.HLClass = [probeLabels.HLClass; Labels.HLClass];
-        probeLabels.LLClass = [probeLabels.LLClass; Labels.LLClass];
-        probeFeatures.CVPacketSize = [probeFeatures.CVPacketSize; Features.CVPacketSize];
-        probeFeatures.ThirdMomentPacketSize = [probeFeatures.ThirdMomentPacketSize; Features.ThirdMomentPacketSize];
-        probeFeatures.CVPacketInterarrival = [probeFeatures.CVPacketInterarrival; Features.CVPacketInterarrival];
-        probeFeatures.ThirdMomentPacketInterarrival = [probeFeatures.ThirdMomentPacketInterarrival; Features.ThirdMomentPacketInterarrival];
-        probeFeatures.CorJavaScriptCount = [probeFeatures.CorJavaScriptCount; Features.CorJavaScriptCount];
-        probeFeatures.HTTPorFTPandExeCodeCount = [probeFeatures.HTTPorFTPandExeCodeCount; Features.HTTPorFTPandExeCodeCount];
-        probeFeatures.HTTPandMalformedCount = [probeFeatures.HTTPandMalformedCount; Features.HTTPandMalformedCount];
-        probeFeatures.FTPandCcodeCount = [probeFeatures.FTPandCcodeCount; Features.FTPandCcodeCount];
-        probeFeatures.SYNCount = [probeFeatures.SYNCount; Features.SYNCount];
-        probeFeatures.ECHOCount = [probeFeatures.ECHOCount; Features.ECHOCount];
-    end
-    
-    if any(strcmp(Labels.HLClass,'dos'))==1
-        disp("I am at the HLCLass dos------------------------------------");
-        dosLabels.HLClass = [dosLabels.HLClass; Labels.HLClass];
-        dosLabels.LLClass = [dosLabels.LLClass; Labels.LLClass];
-        dosFeatures.CVPacketSize = [dosFeatures.CVPacketSize; Features.CVPacketSize];
-        dosFeatures.ThirdMomentPacketSize = [dosFeatures.ThirdMomentPacketSize; Features.ThirdMomentPacketSize];
-        dosFeatures.CVPacketInterarrival = [dosFeatures.CVPacketInterarrival; Features.CVPacketInterarrival];
-        dosFeatures.ThirdMomentPacketInterarrival = [dosFeatures.ThirdMomentPacketInterarrival; Features.ThirdMomentPacketInterarrival];
-        dosFeatures.CorJavaScriptCount = [dosFeatures.CorJavaScriptCount; Features.CorJavaScriptCount];
-        dosFeatures.HTTPorFTPandExeCodeCount = [dosFeatures.HTTPorFTPandExeCodeCount; Features.HTTPorFTPandExeCodeCount];
-        dosFeatures.HTTPandMalformedCount = [dosFeatures.HTTPandMalformedCount; Features.HTTPandMalformedCount];
-        dosFeatures.FTPandCcodeCount = [dosFeatures.FTPandCcodeCount; Features.FTPandCcodeCount];
-        dosFeatures.SYNCount = [dosFeatures.SYNCount; Features.SYNCount];
-        dosFeatures.ECHOCount = [dosFeatures.ECHOCount; Features.ECHOCount];
-    end
-    
-    if any(strcmp(Labels.HLClass,'u2r'))==1
-        disp("u2r-----------------------------------------");
-        u2rLabels.HLClass = [u2rLabels.HLClass; Labels.HLClass];
-        u2rLabels.LLClass = [u2rLabels.LLClass; Labels.LLClass];
-        u2rFeatures.CVPacketSize = [u2rFeatures.CVPacketSize; Features.CVPacketSize];
-        u2rFeatures.ThirdMomentPacketSize = [u2rFeatures.ThirdMomentPacketSize; Features.ThirdMomentPacketSize];
-        u2rFeatures.CVPacketInterarrival = [u2rFeatures.CVPacketInterarrival; Features.CVPacketInterarrival];
-        u2rFeatures.ThirdMomentPacketInterarrival = [u2rFeatures.ThirdMomentPacketInterarrival; Features.ThirdMomentPacketInterarrival];
-        u2rFeatures.CorJavaScriptCount = [u2rFeatures.CorJavaScriptCount; Features.CorJavaScriptCount];
-        u2rFeatures.HTTPorFTPandExeCodeCount = [u2rFeatures.HTTPorFTPandExeCodeCount; Features.HTTPorFTPandExeCodeCount];
-        u2rFeatures.HTTPandMalformedCount = [u2rFeatures.HTTPandMalformedCount; Features.HTTPandMalformedCount];
-        u2rFeatures.FTPandCcodeCount = [u2rFeatures.FTPandCcodeCount; Features.FTPandCcodeCount];
-        u2rFeatures.SYNCount = [u2rFeatures.SYNCount; Features.SYNCount];
-        u2rFeatures.ECHOCount = [u2rFeatures.ECHOCount; Features.ECHOCount];
-    end
-    
-    if any(strcmp(Labels.HLClass,'r2l'))==1
-        disp("r2l-----------------------------------------");
-        r2lLabels.HLClass = [r2lLabels.HLClass; Labels.HLClass];
-        r2lLabels.LLClass = [r2lLabels.LLClass; Labels.LLClass];
-        r2lFeatures.CVPacketSize = [r2lFeatures.CVPacketSize; Features.CVPacketSize];
-        r2lFeatures.ThirdMomentPacketSize = [r2lFeatures.ThirdMomentPacketSize; Features.ThirdMomentPacketSize];
-        r2lFeatures.CVPacketInterarrival = [r2lFeatures.CVPacketInterarrival; Features.CVPacketInterarrival];
-        r2lFeatures.ThirdMomentPacketInterarrival = [r2lFeatures.ThirdMomentPacketInterarrival; Features.ThirdMomentPacketInterarrival];
-        r2lFeatures.CorJavaScriptCount = [r2lFeatures.CorJavaScriptCount; Features.CorJavaScriptCount];
-        r2lFeatures.HTTPorFTPandExeCodeCount = [r2lFeatures.HTTPorFTPandExeCodeCount; Features.HTTPorFTPandExeCodeCount];
-        r2lFeatures.HTTPandMalformedCount = [r2lFeatures.HTTPandMalformedCount; Features.HTTPandMalformedCount];
-        r2lFeatures.FTPandCcodeCount = [r2lFeatures.FTPandCcodeCount; Features.FTPandCcodeCount];
-        r2lFeatures.SYNCount = [r2lFeatures.SYNCount; Features.SYNCount];
-        r2lFeatures.ECHOCount = [r2lFeatures.ECHOCount; Features.ECHOCount];
-        
-    end
 end
 
+
+%normalize with z scores
+AllFeatures.CVPacketSize = normalize(AllFeatures.CVPacketSize,'zscore');
+AllFeatures.ThirdMomentPacketSize = normalize(AllFeatures.ThirdMomentPacketSize,'zscore');
+AllFeatures.CVPacketInterarrival = normalize(AllFeatures.CVPacketInterarrival,'zscore');
+AllFeatures.ThirdMomentPacketSize = normalize(AllFeatures.ThirdMomentPacketSize,'zscore');
+AllFeatures.CorJavaScriptCount = normalize(AllFeatures.CorJavaScriptCount,'zscore');
+AllFeatures.HTTPorFTPandExeCodeCount = normalize(AllFeatures.HTTPorFTPandExeCodeCount,'zscore');
+AllFeatures.HTTPandMalformedCount = normalize(AllFeatures.HTTPandMalformedCount,'zscore');
+AllFeatures.FTPandCcodeCount = normalize(AllFeatures.FTPandCcodeCount,'zscore');
+AllFeatures.SYNCount = normalize(AllFeatures.SYNCount,'zscore');
+AllFeatures.ECHOCount = normalize(AllFeatures.ECHOCount,'zscore');
+
+%note- the missing time windows are created as NaN for now. Compare with leaving as -1 and getting a score and see which performs better.
+ %leaving as -1 will cause normalization of -1 and give an value that will
+ %be evaluated, but since SVM only uses support vectors, it may not be a
+ %problem
+
+
+
 % Save output:
-save ..\feature_sets_20181029\AllFeatures.mat AllFeatures
-save ..\feature_sets_20181029\AllLabels.mat AllLabels
-save ..\feature_sets_20181029\dosFeatures.mat dosFeatures
-save ..\feature_sets_20181029\dosLabels.mat dosLabels
-save ..\feature_sets_20181029\probeFeatures.mat probeFeatures
-save ..\feature_sets_20181029\probeLabels.mat probeLabels
-save ..\feature_sets_20181029\u2rFeatures.mat u2rFeatures
-save ..\feature_sets_20181029\u2rLabels.mat u2rLabels
-save ..\feature_sets_20181029\r2lFeatures.mat r2lFeatures
-save ..\feature_sets_20181029\r2lLabels.mat r2lLabels
+save ..\zscore_feature_sets\AllFeatures.mat AllFeatures
+save ..\zscore_feature_sets\AllLabels.mat AllLabels
 
 
 fprintf('the length of the set of CSVFiles is %i\n', length(CSVFiles));

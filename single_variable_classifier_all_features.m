@@ -4,8 +4,11 @@
 %scale matlabe data from link
 %https://www.mathworks.com/help/matlab/ref/normalize.html. Min-max
 %normalization (between zero and one) is specified as the parameter 'range'
-allFeatures = load('.\feature_sets\allFeatures.mat');
-allLabels = load('.\feature_sets\allLabels.mat');
+%allFeatures = load('.\feature_sets\allFeatures.mat');
+%allLabels = load('.\feature_sets\allLabels.mat');
+
+allFeatures = load('.\zscore_feature_sets\allFeatures.mat');
+allLabels = load('.\zscore_feature_sets\allLabels.mat');
 memory
 %Model = load('testrundeletethisfile.mat');
 
@@ -181,16 +184,14 @@ for val = 1:(numel(fields)-9)
         currentTestFeature = allFeatures.AllFeatures.(fields{val})(:,asdf);
         predictAllOtherTrafficTypes = repmat({'not'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'not' (i.e. anything but r2l)
        % predictAllCorrectTrafficType = repmat({'u2r'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'r2l'
-        memory
-        disp('here')
-        disp(fields{val})
-        disp(asdf)
 
         
         Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'not',  'u2r'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
         memory
         fprintf('Model trained\n');
         
+        toc = cputime;
+        fprintf('this run took %i seconds\n', toc-tic);
         baselinePerformanceNotU2R = classperf(correctLabels, predictAllOtherTrafficTypes);%gives the F1 score when everything is guessed as regular traffic
         baselineF1NotU2R = 2 * baselinePerformanceNotU2R.Sensitivity*baselinePerformanceNotU2R.PositivePredictiveValue/(baselinePerformanceNotU2R.Sensitivity+baselinePerformanceNotU2R.PositivePredictiveValue);
 
@@ -199,20 +200,15 @@ for val = 1:(numel(fields)-9)
         cv_svm_performance_all_features = classperf(correctLabels, predicted);
         f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
 
-        disp(fields{val})
-        disp(asdf)
-        disp(f1score)
-        disp(baselineF1NotU2R)
-        
-        %[featureCounter,featureWindowPerformance] = recordFeatureScores('u2r',fields{val},n,f1score,baselineF1NotU2R, baselineF1U2R,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
 
-        [featureCounter,featureWindowPerformance] = recordFeatureScores('u2r',fields{val},asdf,f1score,baselineF1NotU2R,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
-        toc = cputime;
+     toc = cputime;
         memory
         fprintf('this run took %i seconds\n', toc-tic);
+
+        [featureCounter,featureWindowPerformance] = recordFeatureScores('u2r',fields{val},n,f1score,baselineF1NotU2R,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
         disp('___________________________________________________');
 
-       % n = n + 2;%to exit loop
+        n = n + 2;%to exit loop
     
     %end
 end
