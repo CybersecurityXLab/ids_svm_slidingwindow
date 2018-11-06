@@ -1,15 +1,21 @@
 %test file
 
 
+
+
+%test mod
+mod(0,7)
+
+
+
 %test scaling
-a = [1,2,3,4,5;2,2,3,4,5;3,3,4,4,4;4,3,2,5,9;5,9,9,9,9];
-b = [2,2,3,4,5]
-bscaled = normalize(b);
-aScaled = normalize(a);
-aScaledByCol = zeros(1,5);
-for i = 1:size(a,2)
-    aScaledByCol(:,i) = normalize(a(:,i),'scale');
-end
+%a = [1,2,3,4,5;2,2,3,4,5;3,3,4,4,4;4,3,2,5,9;5,9,9,9,9];
+%bscaled = normalize(b);
+%aScaled = normalize(a);
+%aScaledByCol = zeros(1,5);
+%for i = 1:size(a,2)
+ %   aScaledByCol(:,i) = normalize(a(:,i),'scale');
+%end
 %featureWindowPerformance = strings;
 %featureWindowPerformance(1,1) = 'dos';
 %featureWindowPerformance(1,2) = 'SYNCount';

@@ -174,15 +174,21 @@ correctLabels = one_v_all_function('u2r', allLabels.AllLabels.HLClass());
 for val = 1:(numel(fields)-9)
     disp(fields{val});
     %for n = 6:7%loopEnd%numWindows
+    %parfor asdf = 4:6
     n = 6
         tic = cputime;
-        fprintf('u2r feature %s time window %i...', fields{val}, n);
-        currentTestFeature = allFeatures.AllFeatures.(fields{val})(:,n);
+        fprintf('u2r feature %s time window %i...', fields{val}, asdf);
+        currentTestFeature = allFeatures.AllFeatures.(fields{val})(:,asdf);
         predictAllOtherTrafficTypes = repmat({'not'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'not' (i.e. anything but r2l)
        % predictAllCorrectTrafficType = repmat({'u2r'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'r2l'
         memory
-        %Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'not',  'u2r'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+        disp('here')
+        disp(fields{val})
+        disp(asdf)
+
         
+        Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'not',  'u2r'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+        memory
         fprintf('Model trained\n');
         
         baselinePerformanceNotU2R = classperf(correctLabels, predictAllOtherTrafficTypes);%gives the F1 score when everything is guessed as regular traffic
@@ -193,15 +199,21 @@ for val = 1:(numel(fields)-9)
         cv_svm_performance_all_features = classperf(correctLabels, predicted);
         f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
 
+        disp(fields{val})
+        disp(asdf)
+        disp(f1score)
+        disp(baselineF1NotU2R)
+        
         %[featureCounter,featureWindowPerformance] = recordFeatureScores('u2r',fields{val},n,f1score,baselineF1NotU2R, baselineF1U2R,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
 
-        [featureCounter,featureWindowPerformance] = recordFeatureScores('u2r',fields{val},n,f1score,baselineF1NotU2R,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
+        [featureCounter,featureWindowPerformance] = recordFeatureScores('u2r',fields{val},asdf,f1score,baselineF1NotU2R,correctLabels,predicted,loopEnd,featureCounter,featureWindowPerformance);
         toc = cputime;
+        memory
         fprintf('this run took %i seconds\n', toc-tic);
         disp('___________________________________________________');
 
-        n = n + 2;%to exit loop
-        
+       % n = n + 2;%to exit loop
+    
     %end
 end
 
