@@ -180,8 +180,8 @@ for val = 1:(numel(fields)-9)
     %parfor asdf = 4:6
     n = 6
         tic = cputime;
-        fprintf('u2r feature %s time window %i...', fields{val}, asdf);
-        currentTestFeature = allFeatures.AllFeatures.(fields{val})(:,asdf);
+        fprintf('u2r feature %s time window %i...', fields{val}, n);
+        currentTestFeature = allFeatures.AllFeatures.(fields{val})(:,n);
         predictAllOtherTrafficTypes = repmat({'not'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'not' (i.e. anything but r2l)
        % predictAllCorrectTrafficType = repmat({'u2r'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'r2l'
 
