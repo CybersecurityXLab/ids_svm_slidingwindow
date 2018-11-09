@@ -12,7 +12,7 @@ CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slid
 %CSVFiles = dir(fullfile('C:','Users','User','Documents', 'GitHub', 'ids_svm_slidingwindow','inside_5_3_split_3_queso_probe.csv'));
 
 TimeWindows = [1 2 4 8 16 32 60];
-
+%{
 % Structure to Store All Features for All Clean Attacks:
 AllFeatures = struct;
 AllFeatures.CVPacketSize = [];
@@ -146,7 +146,7 @@ AllFeatures.ECHOCount = normalize(AllFeatures.ECHOCount,'range');
  %be evaluated, but since SVM only uses support vectors, it may not be a
  %problem
 
-
+%}
 
 % Save output:
 save ..\minmax_feature_sets\AllFeatures.mat AllFeatures
