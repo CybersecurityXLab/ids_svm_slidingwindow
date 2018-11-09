@@ -43,7 +43,7 @@ parfor i = 1:35
         disp(currentWindow);
    end
    copiedFeatures(:,i) = allFeatures.AllFeatures.(fields{currentField})(:,currentWindow);
- 
+  % runTimeVector(i,2) = cputime;
 end
-toc = cputime
-toc - tic
+toc = cputime;
+save('.\saved_workspaces\node1ws.mat');

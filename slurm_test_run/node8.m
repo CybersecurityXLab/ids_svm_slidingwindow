@@ -39,4 +39,4 @@ parfor i = 1:35
  
 end
 toc = cputime
-toc - tic
+save('.\saved_workspaces\node8ws.mat');
