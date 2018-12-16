@@ -1,0 +1,16 @@
+
+
+timeDay = 86400%seconds in a day
+
+scores = zeros(21*8,3);
+
+incCount = 1;
+
+for purchaseVar = 1:21%num potential purchases per day 0-20
+    for maxOn = 1:8
+        for numPurchases = 21 - purchaseVar%calculate current number of purchases
+            disp((maxOn/(timeDay- (maxOn*numPurchases))));
+            scores(21*(purchaseVar-1)+, 1) = purchaseVar;
+        end
+    end
+end

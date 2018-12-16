@@ -8,21 +8,27 @@ Created on Thu Dec 13 19:30:51 2018
 import pandas as pd
 import numpy as np
 
-featureVals = pd.read_csv('featureVals.csv',
-                        sep=',',
-                        header=None)
-
-labels = pd.read_csv('labels.csv',
-                     sep=',',
-                     header=0)#ignore first col because matlab writes an irrelevant var name to first col
+def getFeatures():
+    featureVals = pd.read_csv('featureVals.csv',
+                            sep=',',
+                            header=None)
     
-featureNames = pd.read_csv('features.csv',
-                     sep=',',
-                     header=0)#same as above
-                     
-featureValnp = np.array(featureVals,dtype="float")
-print(featureValnp)
-print(np.shape(featureValnp))
+    labels = pd.read_csv('labels.csv',
+                         sep=',',
+                         header=0)#ignore first col because matlab writes an irrelevant var name to first col
+        
+    featureNames = pd.read_csv('features.csv',
+                         sep=',',
+                         header=0)#same as above
+                         
+    featureValnp = np.array(featureVals,dtype="float32")
+    labelsnp = np.array(labels)
+    featureNamesnp=np.array(featureNames)
+    
+    return featureValnp, labelsnp, featureNamesnp
+
+#print(featureValnp)
+#print(np.shape(featureValnp))
 
 #print(labels)
-print(featureNames)
+#print(featureNames)
