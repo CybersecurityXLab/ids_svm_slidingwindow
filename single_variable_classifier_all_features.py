@@ -49,6 +49,7 @@ def main():
     
     start = time.time()
     num_cores = multiprocessing.cpu_count()
+    print("the number of cores is", str(num_cores))
     var = Parallel(n_jobs=num_cores)(delayed(parallelSVC)(i,featureVals,labels) for i in range(num_cores))
     end = time.time()
     print(var)
