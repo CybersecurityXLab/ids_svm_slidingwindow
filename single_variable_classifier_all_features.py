@@ -18,6 +18,7 @@ def parallelSVC(i,featureVals,labels):
     #print(cross_val_score(myModel, featureVals[:, 36:69 ], labels, cv=5))
     
     scor = {'acc':'accuracy'}#, 'prec': precision_score()}#average='weighted'} 
+    print('running feature ', str(i))
     
     #old cross val function must be used for multiple scsores
     cvResults = cross_validate(svm.SVC(gamma='auto',kernel='rbf', decision_function_shape='ovo'),featureVals[:,i].reshape(np.size(featureVals[:,i]),-1),labels,scoring=scor,cv=5)
