@@ -8,14 +8,23 @@ Created on Thu Dec 13 19:58:20 2018
 from sklearn import svm, grid_search
 #from sklearn.model_selection import cross_val_score,cross_validate
 #from sklearn.preprocessing import LabelBinarizer
-from sklearn.metrics import precision_score,f1_score, accuracy_score
+from sklearn.metrics import precision_score,f1_score, accuracy_score,recall_score
 from sklearn.cross_validation import KFold
 from read_featureval_csv import getFeatures
 import numpy as np
 import time
 from joblib import Parallel, delayed, dump
 import multiprocessing
+import math
 #from sklearn import preprocessing
+
+def checkForNan(featureVals):
+    for idx,el in enumerate(featureVals):
+        if math.isnan(el):
+            print('attack', str(idx), 'is nan')#make it equal to the following element
+            print(el)
+            featureVals[idx] = featureVals[idx+1]#set equal to next one. In every case it was the first valid entry in the 1,2,or 4 sec feature for CV packet interarrival. For each case, making it same as following sample works.
+    
 
 def oneVAll(attack, table):
     print('here withh ', attack)
@@ -64,6 +73,7 @@ def parallelSVC(i,featureVals,labels):
     precisionScores = []
     f1Scores = []
     accuracyScores = []
+    recallScores  = []
    
     kf = KFold(len(labels),5)
    # print(kf)
@@ -91,9 +101,11 @@ def parallelSVC(i,featureVals,labels):
         print('precision for feature',str(i),precision_score(y_test,predicted))
         print('f1 for feature',str(i),f1_score(y_test,predicted))
         print('accuracy for feature',str(i),accuracy_score(y_test,predicted))
+        print('recall for feature',str(i),recall_score(y_test,predicted))
         precisionScores.append(precision_score(y_test,predicted))
         f1Scores.append(f1_score(y_test,predicted))
         accuracyScores.append(accuracy_score(y_test,predicted))
+        recallScores.append(recall_score(y_test,predicted))
       #  print('and f1')
       #  print('f1',f1_score(y_test,predicted))
        # f1Scores.append(f1_score(y_test,predicted))
@@ -104,10 +116,13 @@ def parallelSVC(i,featureVals,labels):
     dump(f1Scores,filename)
     filename = "./parallel_temp_files/acc_run_" + str(currentFeature) + ".txt"
     dump(accuracyScores,filename)
+    filename = "./parallel_temp_files/rec_run_" + str(currentFeature) + ".txt"
+    dump(recallScores,filename)
     print(str(currentFeature), 'finished')
     print(precisionScores)
     print(f1Scores)
     print(accuracyScores)
+    print(recallScores)
 
     return precisionScores
 
@@ -141,6 +156,11 @@ def main():
     
     print('yo',oneVAll('r2l', labels).reshape(len(labels),))
     
+    np.apply_along_axis(checkForNan, axis=0,arr=featureVals)#sets any NaN value to the same as subsequent value
+    print('If no \"nan\" is printed below, nans are removed')
+    np.apply_along_axis(checkForNan, axis=0,arr=featureVals)#check to make sure they are gone
+
+    
    # lb = preprocessing.LabelBinarizer()
    # lb.fit_transform(u2rTable)
   #  print('binarized labels', u2rTable)
@@ -153,7 +173,7 @@ def main():
     start = time.time()
     num_cores = multiprocessing.cpu_count()
     print("the number of cores is", str(num_cores))
-    var = Parallel(n_jobs=num_cores-2)(delayed(parallelSVC)(i,featureVals[:,i%70].reshape(np.size(featureVals[:,i%70]),-1),allLabels) for i in range(127,133))
+    var = Parallel(n_jobs=num_cores-2)(delayed(parallelSVC)(i,featureVals[:,i%70].reshape(np.size(featureVals[:,i%70]),-1),allLabels) for i in range(13,17))
     
     print(var)
 
