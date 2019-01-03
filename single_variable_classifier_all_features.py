@@ -8,7 +8,7 @@ Created on Thu Dec 13 19:58:20 2018
 from sklearn import svm, grid_search
 #from sklearn.model_selection import cross_val_score,cross_validate
 #from sklearn.preprocessing import LabelBinarizer
-from sklearn.metrics import precision_score,f1_score
+from sklearn.metrics import precision_score,f1_score, accuracy_score
 from sklearn.cross_validation import KFold
 from read_featureval_csv import getFeatures
 import numpy as np
@@ -62,7 +62,8 @@ def parallelSVC(i,featureVals,labels):
     labels = labels.reshape(len(labels),)
    
     precisionScores = []
-   # f1Scores = []
+    f1Scores = []
+    accuracyScores = []
    
     kf = KFold(len(labels),5)
    # print(kf)
@@ -87,16 +88,26 @@ def parallelSVC(i,featureVals,labels):
         #predict
         predicted = myModel.predict(X_test)
        # f.write(predicted.tostring())
-        print('precision',precision_score(y_test,predicted))
+        print('precision for feature',str(i),precision_score(y_test,predicted))
+        print('f1 for feature',str(i),f1_score(y_test,predicted))
+        print('accuracy for feature',str(i),accuracy_score(y_test,predicted))
         precisionScores.append(precision_score(y_test,predicted))
+        f1Scores.append(f1_score(y_test,predicted))
+        accuracyScores.append(accuracy_score(y_test,predicted))
       #  print('and f1')
       #  print('f1',f1_score(y_test,predicted))
        # f1Scores.append(f1_score(y_test,predicted))
        
-    filename = "./parallel_temp_files/run" + str(currentFeature) + ".txt"
+    filename = "./parallel_temp_files/prec_run_" + str(currentFeature) + ".txt"
     dump(precisionScores,filename)  
-    print(str(currentFeature))
+    filename = "./parallel_temp_files/f1_run_" + str(currentFeature) + ".txt"
+    dump(f1Scores,filename)
+    filename = "./parallel_temp_files/acc_run_" + str(currentFeature) + ".txt"
+    dump(accuracyScores,filename)
+    print(str(currentFeature), 'finished')
     print(precisionScores)
+    print(f1Scores)
+    print(accuracyScores)
 
     return precisionScores
 
@@ -142,7 +153,7 @@ def main():
     start = time.time()
     num_cores = multiprocessing.cpu_count()
     print("the number of cores is", str(num_cores))
-    var = Parallel(n_jobs=num_cores-2)(delayed(parallelSVC)(i,featureVals[:,i%70].reshape(np.size(featureVals[:,i%70]),-1),allLabels) for i in range(300,306))
+    var = Parallel(n_jobs=num_cores-2)(delayed(parallelSVC)(i,featureVals[:,i%70].reshape(np.size(featureVals[:,i%70]),-1),allLabels) for i in range(127,133))
     
     print(var)
 
