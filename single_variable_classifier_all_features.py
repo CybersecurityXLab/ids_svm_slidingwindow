@@ -173,7 +173,7 @@ def main():
     start = time.time()
     num_cores = multiprocessing.cpu_count()
     print("the number of cores is", str(num_cores))
-    var = Parallel(n_jobs=num_cores-2)(delayed(parallelSVC)(i,featureVals[:,i%70].reshape(np.size(featureVals[:,i%70]),-1),allLabels) for i in range(13,17))
+    var = Parallel(n_jobs=num_cores-2)(delayed(parallelSVC)(i,featureVals[:,i%70].reshape(np.size(featureVals[:,i%70]),-1),allLabels) for i in range(350))
     
     print(var)
 
