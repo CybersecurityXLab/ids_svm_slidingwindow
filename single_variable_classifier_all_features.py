@@ -25,6 +25,20 @@ def checkForNan(featureVals):
             print(el)
             featureVals[idx] = featureVals[idx+1]#set equal to next one. In every case it was the first valid entry in the 1,2,or 4 sec feature for CV packet interarrival. For each case, making it same as following sample works.
     
+def regVAttack(attack, table):
+    print('here withh ', attack)
+    tempTable = np.array(table)
+  #  print('r2l'==attack)
+    for idx,el in enumerate(tempTable):
+        if el == attack:
+         #   print(el)
+            tempTable[idx] = 0
+        else:
+            tempTable[idx]=1
+           # if attack == 'r2l':
+              #  print(idx)
+            
+    return tempTable
 
 def oneVAll(attack, table):
     print('here withh ', attack)
@@ -91,7 +105,7 @@ def parallelSVC(i,featureVals,labels):
        # myModel = svc_param_selection(featureVals,labels)
         
         #fit svc, later change C to larger amt such as 10. Increases accuracy for a problem that will never have "great" data. I doubt will overfit. Also make gamma larger, which decreases a single point's influence (important for time series)
-        myModel = svm.SVC(gamma=np.std(featureVals),kernel='rbf')#for gamma: (1/n_feats) * stdX. In this case, n_feats is 1, so first part is ignored
+        myModel = svm.SVC(gamma=1.0,kernel='rbf')#,C=20.0)#for gamma: (1/n_feats) * stdX. In this case, n_feats is 1, so first part is ignored
        # myModel = svm.SVC(gamma=2.0,kernel='rbf',C=5.0)
         # print(y_train.shape)
         myModel.fit(X_train,y_train)
@@ -173,7 +187,7 @@ def main():
     start = time.time()
     num_cores = multiprocessing.cpu_count()
     print("the number of cores is", str(num_cores))
-    var = Parallel(n_jobs=num_cores-2)(delayed(parallelSVC)(i,featureVals[:,i%70].reshape(np.size(featureVals[:,i%70]),-1),allLabels) for i in range(13,17))
+    var = Parallel(n_jobs=num_cores-2)(delayed(parallelSVC)(i,featureVals[:,i%70].reshape(np.size(featureVals[:,i%70]),-1),allLabels) for i in range(160,166))
     
     print(var)
 
