@@ -112,6 +112,14 @@ def parallelSVC(i,featureVals,labels):
         #predict
         predicted = myModel.predict(X_test)
        # f.write(predicted.tostring())
+       #percentage of total num of attacks with even 1 correctly classied * average percentage of correctly classified per attack (same as TP / (TP + FN [i.e. total pos])(i.e. sensitivity)) * 1-(FP/TotalNegatives + FP) (is this true negative rate?)
+       #attacks classified percentage * sensitivity * 1-(FP/TotalNegatives)
+       #case 1: all Total negs are false pos, should give 0. good because every normal is predicted wrong
+       #here find the custom accuracy measure which uses the per attack accuracy and high precision
+        # in essence the custom measure is a variation on precision. It still uses the false positives
+        #the formula should produce an output from 0 to 1. It should be ourAcc * FP percentage = (correctly_pred_attack_sec/total_num_attack_secs) * (1-(FP/TotalNegatives + FP)). This will give an answer from 0 to 1 where 1 is better and 0 is worse.
+        #attack specific accuracy and another name
+        #using the above formula, there is no 'arbitrary threshold' to define. Now the score is a function of the confidence of classification and the number of false negs. The more confident the classification and the less False positives, the better the score.
         print('precision for feature',str(i),precision_score(y_test,predicted))
         print('f1 for feature',str(i),f1_score(y_test,predicted))
         print('accuracy for feature',str(i),accuracy_score(y_test,predicted))
@@ -188,7 +196,7 @@ def main():
     num_cores = multiprocessing.cpu_count()
     print("the number of cores is", str(num_cores))
 
-    var = Parallel(n_jobs=num_cores-2)(delayed(parallelSVC)(i,featureVals[:,i%70].reshape(np.size(featureVals[:,i%70]),-1),allLabels) for i in range(160,166))
+    var = Parallel(n_jobs=num_cores-2)(delayed(parallelSVC)(i,featureVals.reshape(np.size(featureVals[:,i%70]),-1),allLabels) for i in range(1))
 
     print(var)
 
