@@ -159,7 +159,6 @@ XCompress.FTPCount = zeros(NumberOfSeconds,1);
 XCompress.HTTPCount = zeros(NumberOfSeconds,1);
 XCompress.UniqSrcIPs = zeros(NumberOfSeconds,length(TimeWindows));
 XCompress.UniqDestIPs = zeros(NumberOfSeconds,length(TimeWindows));
-XCompress.UniqProtocols = zeros(NumberOfSeconds,length(TimeWindows));
 
 %counters below for verification of correctness of expected and actual flag counts
 http_malformed_packet_counter = 0;
@@ -488,7 +487,7 @@ Features.SYNBoolean = zeros(end_time,num_of_time_windows);
 Features.SYNCount = zeros(end_time,num_of_time_windows);
 Features.ECHOBoolean = zeros(total_time,num_of_time_windows);
 Features.ECHOCount = zeros(total_time,num_of_time_windows);
-Features.UniqProtocols = zeros(total_time,num_of_time_windows);
+%%protocols per sec
 Features.UniqSrcIPs = zeros(total_time,num_of_time_windows);
 Features.UniqDestIPs = zeros(total_time,num_of_time_windows);
 %%ports per sec
@@ -562,28 +561,6 @@ for i=1:NumberOfSeconds
     end
     
     
-    %count uniq protocols
-    for x = 1:num_of_time_windows %Loop over windows
-        protoList = {};
-        for y = 1:TimeWindows(x)%length of current time window
-            index = find(SecondIndex==(i - y + 1));%finds index where the value i matches a given second (i.e. there are packets in all listed seconds)
-            proto = X.Protocol(index);
-            
-            %create a hashmap to keep track of occurences
-            if length(index) > 0
-                
-                for n = 1:length(proto)
-                    if ~strcmp(proto, '"')
-                        protoList{end+1}=proto{n};%get a list of all ips in current second
-                        protoList = unique(protoList);%make list only unique ips
-                    end
-                    XCompress.UniqProtocols(i,x) = length(protoList);%count each individual column. 
-                end
-            end
-        end
-    end
-    
-    
 end
 
 Labels.HLClass = cell(end_time,1);
@@ -624,7 +601,7 @@ for sec=start_time:end_time %Loop over times
             Features.HTTPCount(sec-start_time+1,i) = -1;
             Features.UniqSrcIPs(sec-start_time+1,i) = -1;
             Features.UniqDestIPs(sec-start_time+1,i) = -1;
-            Features.UniqProtocols(sec-start_time+1,i) = -1;
+            Features.UniqDestIPs(sec-start_time+1,i) = -1;
             
         %current time window is >= the current seconds passed
         else
@@ -649,7 +626,7 @@ for sec=start_time:end_time %Loop over times
             Features.HTTPCount(sec-start_time+1, i) = sum(XCompress.HTTPCount(sec-TimeWindows(i)+1 : sec));
             Features.UniqSrcIPs(sec-start_time+1, i) = XCompress.UniqSrcIPs(sec,i);
             Features.UniqDestIPs(sec-start_time+1, i) = XCompress.UniqDestIPs(sec,i);
-            Features.UniqProtocols(sec-start_time+1, i) = XCompress.UniqProtocols(sec,i);
+            Features.UniqProtocols(sec-start_time+1, i) = XCompress.UniqDestIPs(sec,i);
             
             % Construct continuous features from stored information: 
             sum_number_packets = sum(XCompress.NumberOfPackets(sec-TimeWindows(i)+1 : sec));

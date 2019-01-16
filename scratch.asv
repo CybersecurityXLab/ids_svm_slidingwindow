@@ -34,11 +34,8 @@ end
 %disp(regexp('malformed' ,'Malformed', 'match', 'ignorecase'));
 %disp(strfind("-DATAFTP ",'FTP'))
 ips = {};
-ips{end+1} = '172.16.112.20';
-ips{end+1} = '172.16.112.20';
-ips{end+1} = '172.16.112.21';
+ips = {ips, {'5'}};
 
 %ips = {'172.16.112.20', '172.16.112.20', '172.16.0.1'};
-c = unique(ips);
+%c = unique(ips);
 disp(c);
-disp(length(c));
