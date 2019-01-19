@@ -185,8 +185,10 @@ for val = 1:(numel(fields)-9)
         predictAllOtherTrafficTypes = repmat({'not'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'not' (i.e. anything but r2l)
        % predictAllCorrectTrafficType = repmat({'u2r'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'r2l'
 
+
         currentTestFeature = featurecombiner_function()%allFeatures.AllFeatures;%delete after run. This is to estimate mem usage
         Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'not',  'u2r'}, 'CrossVal', 'on','kFold', 5, 'Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+
         memory
         fprintf('Model trained\n');
         
@@ -195,9 +197,11 @@ for val = 1:(numel(fields)-9)
         baselinePerformanceNotU2R = classperf(correctLabels, predictAllOtherTrafficTypes);%gives the F1 score when everything is guessed as regular traffic
         baselineF1NotU2R = 2 * baselinePerformanceNotU2R.Sensitivity*baselinePerformanceNotU2R.PositivePredictiveValue/(baselinePerformanceNotU2R.Sensitivity+baselinePerformanceNotU2R.PositivePredictiveValue);
 
-        predicted = kfoldPredict(Model);
+       % predicted = kfoldPredict(Model);
         
         cv_svm_performance_all_features = classperf(correctLabels, predicted);
+        precision = cv_svm_performance_all_features.PositivePredictiveValue;
+        recall = cv_svm_performance_all_features.Sensitivity;
         f1score = 2*cv_svm_performance_all_features.Sensitivity*cv_svm_performance_all_features.PositivePredictiveValue/(cv_svm_performance_all_features.Sensitivity+cv_svm_performance_all_features.PositivePredictiveValue)
 
 

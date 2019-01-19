@@ -1,0 +1,11 @@
+features
+CVPacketSize
+ThirdMomentPacketSize
+CVPacketInterarrival
+ThirdMomentPacketInterarrival
+CorJavaScriptCount
+HTTPorFTPandExeCodeCount
+HTTPandMalformedCount
+FTPandCcodeCount
+SYNCount
+ECHOCount
