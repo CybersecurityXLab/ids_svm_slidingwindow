@@ -4,8 +4,8 @@ function data = featurecombiner_function();
 
 
 
-    allfeaturesfilename = '..\minmax_feature_sets\AllFeatures.mat';
-    alllabelsfilename = '..\minmax_feature_sets\AllLabels.mat';
+    allfeaturesfilename = '.\minmax_feature_sets\AllFeatures.mat';
+    alllabelsfilename = '.\minmax_feature_sets\AllLabels.mat';
     allFeatures = load(allfeaturesfilename);
     allLabels = load(alllabelsfilename);
 
