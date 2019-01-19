@@ -535,34 +535,34 @@ total_time = end_time - start_time;
 Features = struct;
 Labels = struct;
 
-Features.NumberOfPackets = zeros(total_time,num_of_time_windows);
-Features.MeanNumberOfPackets = zeros(total_time,num_of_time_windows);
-Features.CVNumberOfPackets = zeros(total_time,num_of_time_windows);
-Features.ThirdMomentNumberOfPackets = zeros(total_time,num_of_time_windows);
-Features.MeanPacketSize = zeros(total_time,num_of_time_windows);
-Features.CVPacketSize = zeros(total_time,num_of_time_windows);
-Features.ThirdMomentPacketSize = zeros(total_time,num_of_time_windows);
+Features.NumberOfPackets = zeros(total_time,num_of_time_windows);%%
+Features.MeanNumberOfPackets = zeros(total_time,num_of_time_windows);%%
+Features.CVNumberOfPackets = zeros(total_time,num_of_time_windows);%%
+Features.ThirdMomentNumberOfPackets = zeros(total_time,num_of_time_windows);%%
+Features.MeanPacketSize = zeros(total_time,num_of_time_windows);%%
+Features.CVPacketSize = zeros(total_time,num_of_time_windows);%%
+Features.ThirdMomentPacketSize = zeros(total_time,num_of_time_windows);%%
 Features.HTTPorFTPandExeCodeCount = zeros(total_time,num_of_time_windows);%right now this is a boolean count need a per sec count
-Features.CorJavaScriptCount = zeros(total_time,num_of_time_windows);
-Features.HTTPandMalformedCount = zeros(total_time,num_of_time_windows);
-Features.FTPandCcodeCount = zeros(total_time,num_of_time_windows);
-%Features.SYNBoolean = zeros(end_time,num_of_time_windows);
-Features.SYNCount = zeros(end_time,num_of_time_windows);
-%Features.ECHOBoolean = zeros(total_time,num_of_time_windows);
-Features.ECHOCount = zeros(total_time,num_of_time_windows);
-Features.UniqProtocols = zeros(total_time,num_of_time_windows);
-Features.UniqSrcIPs = zeros(total_time,num_of_time_windows);
-Features.UniqDestIPs = zeros(total_time,num_of_time_windows);
-Features.URGCount = zeros(total_time,num_of_time_windows);
+Features.CorJavaScriptCount = zeros(total_time,num_of_time_windows);%
+Features.HTTPandMalformedCount = zeros(total_time,num_of_time_windows);%
+Features.FTPandCcodeCount = zeros(total_time,num_of_time_windows);%
+Features.SYNBoolean = zeros(end_time,num_of_time_windows);%
+Features.SYNCount = zeros(end_time,num_of_time_windows);%
+Features.ECHOBoolean = zeros(total_time,num_of_time_windows);%
+Features.ECHOCount = zeros(total_time,num_of_time_windows);%
+Features.UniqProtocols = zeros(total_time,num_of_time_windows);%
+Features.UniqSrcIPs = zeros(total_time,num_of_time_windows);%
+Features.UniqDestIPs = zeros(total_time,num_of_time_windows);%
+Features.URGCount = zeros(total_time,num_of_time_windows);%
 %mean
 %cv
 %tm
-Features.DNSCount = zeros(total_time,num_of_time_windows);
-Features.TCPCount = zeros(total_time,num_of_time_windows);
-Features.ARPCount = zeros(total_time,num_of_time_windows);
-Features.ICMPCount = zeros(total_time,num_of_time_windows);
-Features.UDPCount = zeros(total_time,num_of_time_windows);
-Features.FTPCount = zeros(total_time,num_of_time_windows);
+Features.DNSCount = zeros(total_time,num_of_time_windows);%
+Features.TCPCount = zeros(total_time,num_of_time_windows);%
+Features.ARPCount = zeros(total_time,num_of_time_windows);%
+Features.ICMPCount = zeros(total_time,num_of_time_windows);%
+Features.UDPCount = zeros(total_time,num_of_time_windows);%
+Features.FTPCount = zeros(total_time,num_of_time_windows);%
 Features.HTTPCount = zeros(total_time,num_of_time_windows);
 Features.RSTCount = zeros(total_time,num_of_time_windows);%"[RST] count https://stackoverflow.com/questions/15182106/what-is-the-reason-and-how-to-avoid-the-fin-ack-rst-and-rst-ack
 Features.CCodeCount = zeros(total_time,num_of_time_windows);
@@ -720,13 +720,13 @@ for sec=start_time:end_time %Loop over times
         %time window is too large to hold first i seconds
         %set all irrelevant sliding windows to -1
         if(TimeWindows(i) > sec)
-           % Features.SYNBoolean(sec-start_time+1, i) = -1;
+            Features.SYNBoolean(sec-start_time+1, i) = -1;
             Features.SYNCount(sec-start_time+1,i) = -1;
             Features.HTTPorFTPandExeCodeCount(sec-start_time+1,i) = -1;
             Features.CorJavaScriptCount(sec-start_time+1, i) = -1;
             Features.HTTPandMalformedCount(sec-start_time+1, i) = -1;
             Features.FTPandCcodeCount(sec-start_time+1, i) = -1;
-            %Features.ECHOBoolean(sec-start_time+1, i) = -1;
+            Features.ECHOBoolean(sec-start_time+1, i) = -1;
             Features.ECHOCount(sec-start_time+1, i) = -1;
             Features.MeanPacketSize(sec-start_time+1, i) = -1;
             Features.CVPacketSize(sec-start_time+1, i) = -1;
@@ -755,13 +755,13 @@ for sec=start_time:end_time %Loop over times
         %current time window is >= the current seconds passed
         else
 
-           % Features.SYNBoolean(sec-start_time+1, i) = sum(XCompress.SYNBoolean(sec-TimeWindows(i)+1 : sec));
+            Features.SYNBoolean(sec-start_time+1, i) = sum(XCompress.SYNBoolean(sec-TimeWindows(i)+1 : sec));
             Features.SYNCount(sec-start_time+1, i) = sum(XCompress.SYNCount(sec-TimeWindows(i)+1 : sec));
             Features.HTTPorFTPandExeCodeCount(sec-start_time+1,i) = sum(XCompress.HTTPorFTPandExeCodeCount(sec-TimeWindows(i)+1 : sec));
             Features.CorJavaScriptCount(sec-start_time+1, i) = sum(XCompress.CorJavaScriptCount(sec-TimeWindows(i)+1 : sec));
             Features.HTTPandMalformedCount(sec-start_time+1, i) = sum(XCompress.HTTPandMalformedCount(sec-TimeWindows(i)+1 : sec));
             Features.FTPandCcodeCount(sec-start_time+1, i) = sum(XCompress.FTPandCcodeCount(sec-TimeWindows(i)+1 : sec));
-          %  Features.ECHOBoolean(sec-start_time+1, i) = sum(XCompress.ECHOBoolean(sec-TimeWindows(i)+1 : sec));
+            Features.ECHOBoolean(sec-start_time+1, i) = sum(XCompress.ECHOBoolean(sec-TimeWindows(i)+1 : sec));
             Features.ECHOCount(sec-start_time+1, i) = sum(XCompress.ECHOCount(sec-TimeWindows(i)+1 : sec));
             Features.NumberOfPackets(sec-start_time+1, i) = sum(XCompress.NumberOfPackets(sec-TimeWindows(i)+1 : sec));
             Features.RSTCount(sec-start_time+1, i) = sum(XCompress.RSTCount(sec-TimeWindows(i)+1 : sec));
@@ -816,28 +816,3 @@ end
 % by 1 to 1 by 2
 Labels.HLClass = reshape(Labels.HLClass, [ max(size(Labels.HLClass)), 1]);
 Labels.LLClass = reshape(Labels.LLClass, [ max(size(Labels.LLClass)), 1]);
-
-function result = runInPar(i,X,tempList,x)
-        %count uniq protocols
-   % parfor x = 1:num_of_time_windows %Loop over windows
-   %calls here
-        protoList = {};
-        for y = 1:TimeWindows(x)%length of current time window
-            index = find(SecondIndex==(i - y + 1));%finds index where the value i matches a given second (i.e. there are packets in all listed seconds)
-            proto = X.Protocol(index);
-            
-
-            if ~isempty(index)
-                
-                for n = 1:length(proto)
-                    if ~strcmp(proto, '"')
-                        protoList{end+1}=proto{n};%get a list of all ips in current second
-                        protoList = unique(protoList);%make list only unique ips
-                    end
-                    tempList = length(protoList);
-                   % XCompress.UniqProtocols(i,x) = length(protoList);%count each individual column. 
-                end
-            end
-        end
-  %  end
-end
