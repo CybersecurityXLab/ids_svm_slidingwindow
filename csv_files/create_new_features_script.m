@@ -16,7 +16,7 @@ TimeWindows = [1 2 4 8 16 32 60];
 %filename = 'C:\Users\Casey\Documents\GitHub\ids_svm_slidingwindow\csv_files\inside_5_4_split_7_fdformat_u2r.csv'
 %filename = 'C:\Users\Casey\Documents\GitHub\ids_svm_slidingwindow\csv_files\inside_4_3_split_14_smurf_dos.csv'
 filename = 'C:\Users\Casey\Documents\GitHub\ids_svm_slidingwindow\csv_files\inside_5_5_split_0_portsweep_probe.csv'
-
+%filename = 'C:\Users\Casey\Documents\GitHub\ids_svm_slidingwindow\csv_files\inside_5_1_split_5_apache2_dos.csv'
 for m = 1:50
     fprintf("\nNEW RUN.......... on %s",filename);
 end
@@ -157,6 +157,10 @@ XCompress.ICMPCount = zeros(NumberOfSeconds,1);
 XCompress.UDPCount = zeros(NumberOfSeconds,1);
 XCompress.FTPCount = zeros(NumberOfSeconds,1);
 XCompress.HTTPCount = zeros(NumberOfSeconds,1);
+XCompress.TELNETCount = zeros(NumberOfSeconds,1);
+XCompress.SSHCount = zeros(NumberOfSeconds,1);
+XCompress.CCodeCount = zeros(NumberOfSeconds,1);
+XCompress.EXECodeCount = zeros(NumberOfSeconds,1);
 XCompress.UniqSrcIPs = zeros(NumberOfSeconds,length(TimeWindows));
 XCompress.UniqDestIPs = zeros(NumberOfSeconds,length(TimeWindows));
 XCompress.UniqProtocols = zeros(NumberOfSeconds,length(TimeWindows));
@@ -178,6 +182,10 @@ icmp_counter = 0;
 udp_counter = 0;
 ftp_counter = 0;
 http_counter = 0;
+c_code_counter = 0;
+EXE_code_counter = 0;
+telnet_counter = 0;
+ssh_counter = 0;
 
 
 for i=1:NumberOfSeconds
@@ -381,7 +389,7 @@ for i=1:NumberOfSeconds
     
     % Record DNS protocol count
     if length(index)>0
-       dns_protocol = strfind(X.Protocol(index),'DNS');%returns value if it is a TCP protocol
+       dns_protocol = strfind(X.Protocol(index),'DNS');%returns value if it is a dns protocol
        for n = 1:length(dns_protocol)
            if ~isempty(dns_protocol{n})%if this is empty, it is not dns protocol
                  dns_counter = dns_counter + 1;%global count
@@ -392,7 +400,7 @@ for i=1:NumberOfSeconds
     
     % Record ARP protocol count
     if length(index)>0
-       arp_protocol = strfind(X.Protocol(index),'ARP');%returns value if it is a TCP protocol
+       arp_protocol = strfind(X.Protocol(index),'ARP');%returns value if it is a arp protocol
        for n = 1:length(arp_protocol)
            if ~isempty(arp_protocol{n})%if this is empty, it is not arp protocol
                  arp_counter = arp_counter + 1;%global count
@@ -405,7 +413,7 @@ for i=1:NumberOfSeconds
     if length(index)>0
        icmp_protocol = strfind(X.Protocol(index),'ICMP');%returns value if it is a ICMP protocol
        for n = 1:length(icmp_protocol)
-           if ~isempty(icmp_protocol{n})%if this is empty, it is not TCP protocol
+           if ~isempty(icmp_protocol{n})%if this is empty, it is not icmp protocol
                  icmp_counter = icmp_counter + 1;%global count
                  XCompress.ICMPCount(i) = XCompress.ICMPCount(i) + 1;%counter for current sec  
            end
@@ -416,7 +424,7 @@ for i=1:NumberOfSeconds
     if length(index)>0
        udp_protocol = strfind(X.Protocol(index),'UDP');%returns value if it is a udp protocol
        for n = 1:length(udp_protocol)
-           if ~isempty(udp_protocol{n})%if this is empty, it is not TCP protocol
+           if ~isempty(udp_protocol{n})%if this is empty, it is not udp protocol
                  udp_counter = udp_counter + 1;%global count
                  XCompress.UDPCount(i) = XCompress.UDPCount(i) + 1;%counter for current sec  
            end
@@ -445,6 +453,56 @@ for i=1:NumberOfSeconds
        end
     end
     
+        % Record C count
+    if length(index)>0
+        expr_C = '\.*((\.c[^a-zA-Z+]|\.c$))';%if .c with whitespace immediately after or other attributes. Ignores .c in cases like .com
+        for j=index(1):index(length(index));
+            [startStr1] = regexp(X.Info(j), expr_C);
+            if(length(startStr1{1,1}) > 0 )
+                c_code_counter = c_code_counter+1;%global counter
+                %disp('here')
+                XCompress.CCodeCount(i) = XCompress.CCodeCount(i) + 1;%counter for current sec
+            end
+        end
+    end
+    
+      % Record EXE count
+    if length(index)>0
+        expr_EXE = '\.*((\.exe[^a-zA-Z+]|\.exe$))';%if exe with whitespace immediately after or other attributes. Ignores .c in cases like .com
+        for j=index(1):index(length(index));
+            [startStr1] = regexp(X.Info(j), expr_EXE);
+            if(length(startStr1{1,1}) > 0 )
+                EXE_code_counter = EXE_code_counter+1;%global counter
+                %disp('here')
+                XCompress.EXECodeCount(i) = XCompress.EXECodeCount(i) + 1;%counter for current sec
+            end
+        end
+    end
+    
+    
+             % Record telnet protocol count
+    if length(index)>0
+       telnet_protocol = strfind(X.Protocol(index),'TELNET');%returns value if it is a udp protocol
+       for n = 1:length(telnet_protocol)
+           if ~isempty(telnet_protocol{n})%if this is empty, it is not Telnet protocol
+                 telnet_counter = telnet_counter + 1;%global count
+                 XCompress.TELNETCount(i) = XCompress.TELNETCount(i) + 1;%counter for current sec  
+           end
+       end
+    end
+    
+    
+    % Record ssh protocol count
+    if length(index)>0
+       ssh_protocol = strfind(X.Protocol(index),'SSH');%returns value if it is a udp protocol
+       for n = 1:length(ssh_protocol)
+           if ~isempty(ssh_protocol{n})%if this is empty, it is not SSH protocol
+                 ssh_counter = ssh_counter + 1;%global count
+                 XCompress.SSHCount(i) = XCompress.SSHCount(i) + 1;%counter for current sec  
+           end
+       end
+    end
+    
 end
 
 fprintf('\n\nthe number of HTTP Malformed packets is %i', http_malformed_packet_counter);
@@ -461,6 +519,10 @@ fprintf('\nthe number of ICMP protocols is %i', icmp_counter);
 fprintf('\nthe number of UDP protocols is %i', udp_counter);
 fprintf('\nthe number of FTP protocols is %i', ftp_counter);
 fprintf('\nthe number of HTTP protocols is %i', ftp_counter);
+fprintf('\nthe number of c code packets is is %i', c_code_counter);
+fprintf('\nthe number of EXE code packets is is %i', EXE_code_counter);
+fprintf('\nthe number of Telnet protocols is is %i', telnet_counter);
+fprintf('\nthe number of SSH protocols is is %i', ssh_counter);
 
 %% Define Features In Various Time Windows
 
@@ -484,17 +546,13 @@ Features.HTTPorFTPandExeCodeCount = zeros(total_time,num_of_time_windows);%right
 Features.CorJavaScriptCount = zeros(total_time,num_of_time_windows);
 Features.HTTPandMalformedCount = zeros(total_time,num_of_time_windows);
 Features.FTPandCcodeCount = zeros(total_time,num_of_time_windows);
-Features.SYNBoolean = zeros(end_time,num_of_time_windows);
+%Features.SYNBoolean = zeros(end_time,num_of_time_windows);
 Features.SYNCount = zeros(end_time,num_of_time_windows);
-Features.ECHOBoolean = zeros(total_time,num_of_time_windows);
+%Features.ECHOBoolean = zeros(total_time,num_of_time_windows);
 Features.ECHOCount = zeros(total_time,num_of_time_windows);
 Features.UniqProtocols = zeros(total_time,num_of_time_windows);
 Features.UniqSrcIPs = zeros(total_time,num_of_time_windows);
 Features.UniqDestIPs = zeros(total_time,num_of_time_windows);
-%%ports per sec
-%%mean pps
-%%cv pps
-%%tm pps
 Features.URGCount = zeros(total_time,num_of_time_windows);
 %mean
 %cv
@@ -507,11 +565,47 @@ Features.UDPCount = zeros(total_time,num_of_time_windows);
 Features.FTPCount = zeros(total_time,num_of_time_windows);
 Features.HTTPCount = zeros(total_time,num_of_time_windows);
 Features.RSTCount = zeros(total_time,num_of_time_windows);%"[RST] count https://stackoverflow.com/questions/15182106/what-is-the-reason-and-how-to-avoid-the-fin-ack-rst-and-rst-ack
-%c count
-%exe count
-%telnet count
+Features.CCodeCount = zeros(total_time,num_of_time_windows);
+Features.EXECodeCount = zeros(total_time,num_of_time_windows);
+Features.TELNETCount = zeros(total_time,num_of_time_windows);
+Features.SSHCount = zeros(total_time,num_of_time_windows);%ssh for ssh processtable dos
 
 %% create occurence count over time windows features
+%x = 1:num_of_time_windows;
+%y = TimeWindows(x);
+%i = 1:NumberOfSeconds;
+%index = zeros(length(SecondIndex),1);
+%for i=1:NumberOfSeconds
+%    if ~isempty(index)
+%       telnet_protocol = strfind(X.Protocol(index),'.');%returns value if it is a udp protocol
+%       for n = 1:length(telnet_protocol)
+%           if ~isempty(telnet_protocol{n})%if this is empty, it is not Telnet protocol
+%                 telnet_counter = telnet_counter + 1;%global count
+%                 XCompress.UniqProtocols(i) = XCompress.UniqProtocols(i) + 1;%counter for current sec  
+%           end
+%       end
+%    end
+%end
+%index = find(SecondIndex==i);
+%SecondIndex(i);
+
+%syn_protocol = strfind(X.Protocol(index),'RIP');%returns value if it is a TCP protocol
+%indx = find(SecondIndex==i);
+%index = zeros(NumberOfSeconds,1);
+%disp(x);
+%disp(y);
+%index = unique(SecondIndex);
+%disp(index);
+%srcIP = X.Source(index);
+%index = find(SecondIndex(i)==(y));
+%disp(index);
+%for i = 1:NumberOfSeconds
+
+
+%    index = find(SecondIndex==(i - y + 1));
+%    disp(index);
+%end
+
 for i=1:NumberOfSeconds
     
     %count uniq src ips
@@ -523,8 +617,8 @@ for i=1:NumberOfSeconds
             srcIP = X.Source(index);
            % disp(srcIP);
             
-            %create a hashmap to keep track of occurences
-            if length(index) > 0
+
+            if ~isempty(index)
                 
                 for n = 1:length(srcIP)
                     if ~strcmp(srcIP, '"')
@@ -547,8 +641,8 @@ for i=1:NumberOfSeconds
             index = find(SecondIndex==(i - y + 1));%finds index where the value i matches a given second (i.e. there are packets in all listed seconds)
             destIP = X.Destination(index);
             
-            %create a hashmap to keep track of occurences
-            if length(index) > 0
+
+            if ~isempty(index)
                 
                 for n = 1:length(destIP)
                     if ~strcmp(destIP, '"')
@@ -561,21 +655,20 @@ for i=1:NumberOfSeconds
         end
     end
     
-    
-    %count uniq protocols
+        %count uniq protocols
     for x = 1:num_of_time_windows %Loop over windows
         protoList = {};
         for y = 1:TimeWindows(x)%length of current time window
             index = find(SecondIndex==(i - y + 1));%finds index where the value i matches a given second (i.e. there are packets in all listed seconds)
             proto = X.Protocol(index);
             
-            %create a hashmap to keep track of occurences
-            if length(index) > 0
+
+            if ~isempty(index)
                 
                 for n = 1:length(proto)
                     if ~strcmp(proto, '"')
-                        protoList{end+1}=proto{n};%get a list of all ips in current second
-                        protoList = unique(protoList);%make list only unique ips
+                        protoList{end+1}=proto{n};%get a list of all protocols in current second
+                        protoList = unique(protoList);%make list only unique protocols
                     end
                     XCompress.UniqProtocols(i,x) = length(protoList);%count each individual column. 
                 end
@@ -583,7 +676,36 @@ for i=1:NumberOfSeconds
         end
     end
     
+        
+ %   for x = 1:num_of_time_windows %Loop over windows
+  %      disp("here");
+   %     disp(x);
+    %    protoList = {};
+     %   idx = 1:num_of_time_windows;
+        %index = zeros(NumberOfSeconds,1);
+        %size(index(idx))
+      %  index = find(SecondIndex==(i - TimeWindows(idx) + 1));
+       % disp(index);
+        %proto = X.Protocol(index);
+        %for y = 1:TimeWindows(x)%length of current time window
+            %index = find(SecondIndex==(i - y + 1));%finds index where the value i matches a given second (i.e. there are packets in all listed seconds)
+           % proto = X.Protocol(index);
+            
+
+    %        if ~isempty(index)
+   %             
+  %              for n = 1:length(proto)
+ %                   if ~strcmp(proto, '"')
+ %                       protoList{end+1}=proto{n};%get a list of all ips in current second
+ %                       protoList = unique(protoList);%make list only unique ips
+ %                   end
+ %                   XCompress.UniqProtocols(i,x) = length(protoList);%count each individual column. 
+ %              end
+ %           end
+ %       %end
+ %   end
     
+ 
 end
 
 Labels.HLClass = cell(end_time,1);
@@ -598,13 +720,13 @@ for sec=start_time:end_time %Loop over times
         %time window is too large to hold first i seconds
         %set all irrelevant sliding windows to -1
         if(TimeWindows(i) > sec)
-            Features.SYNBoolean(sec-start_time+1, i) = -1;
+           % Features.SYNBoolean(sec-start_time+1, i) = -1;
             Features.SYNCount(sec-start_time+1,i) = -1;
             Features.HTTPorFTPandExeCodeCount(sec-start_time+1,i) = -1;
             Features.CorJavaScriptCount(sec-start_time+1, i) = -1;
             Features.HTTPandMalformedCount(sec-start_time+1, i) = -1;
             Features.FTPandCcodeCount(sec-start_time+1, i) = -1;
-            Features.ECHOBoolean(sec-start_time+1, i) = -1;
+            %Features.ECHOBoolean(sec-start_time+1, i) = -1;
             Features.ECHOCount(sec-start_time+1, i) = -1;
             Features.MeanPacketSize(sec-start_time+1, i) = -1;
             Features.CVPacketSize(sec-start_time+1, i) = -1;
@@ -622,6 +744,10 @@ for sec=start_time:end_time %Loop over times
             Features.UDPCount(sec-start_time+1,i) = -1;
             Features.FTPCount(sec-start_time+1,i) = -1;
             Features.HTTPCount(sec-start_time+1,i) = -1;
+            Features.CCodeCount(sec-start_time+1,i) = -1;
+            Features.EXECodeCount(sec-start_time+1,i) = -1;
+            Features.TELNETCount(sec-start_time+1,i) = -1;
+            Features.SSHCount(sec-start_time+1,i) = -1;
             Features.UniqSrcIPs(sec-start_time+1,i) = -1;
             Features.UniqDestIPs(sec-start_time+1,i) = -1;
             Features.UniqProtocols(sec-start_time+1,i) = -1;
@@ -629,13 +755,13 @@ for sec=start_time:end_time %Loop over times
         %current time window is >= the current seconds passed
         else
 
-            Features.SYNBoolean(sec-start_time+1, i) = sum(XCompress.SYNBoolean(sec-TimeWindows(i)+1 : sec));
+           % Features.SYNBoolean(sec-start_time+1, i) = sum(XCompress.SYNBoolean(sec-TimeWindows(i)+1 : sec));
             Features.SYNCount(sec-start_time+1, i) = sum(XCompress.SYNCount(sec-TimeWindows(i)+1 : sec));
             Features.HTTPorFTPandExeCodeCount(sec-start_time+1,i) = sum(XCompress.HTTPorFTPandExeCodeCount(sec-TimeWindows(i)+1 : sec));
             Features.CorJavaScriptCount(sec-start_time+1, i) = sum(XCompress.CorJavaScriptCount(sec-TimeWindows(i)+1 : sec));
             Features.HTTPandMalformedCount(sec-start_time+1, i) = sum(XCompress.HTTPandMalformedCount(sec-TimeWindows(i)+1 : sec));
             Features.FTPandCcodeCount(sec-start_time+1, i) = sum(XCompress.FTPandCcodeCount(sec-TimeWindows(i)+1 : sec));
-            Features.ECHOBoolean(sec-start_time+1, i) = sum(XCompress.ECHOBoolean(sec-TimeWindows(i)+1 : sec));
+          %  Features.ECHOBoolean(sec-start_time+1, i) = sum(XCompress.ECHOBoolean(sec-TimeWindows(i)+1 : sec));
             Features.ECHOCount(sec-start_time+1, i) = sum(XCompress.ECHOCount(sec-TimeWindows(i)+1 : sec));
             Features.NumberOfPackets(sec-start_time+1, i) = sum(XCompress.NumberOfPackets(sec-TimeWindows(i)+1 : sec));
             Features.RSTCount(sec-start_time+1, i) = sum(XCompress.RSTCount(sec-TimeWindows(i)+1 : sec));
@@ -647,6 +773,10 @@ for sec=start_time:end_time %Loop over times
             Features.UDPCount(sec-start_time+1, i) = sum(XCompress.UDPCount(sec-TimeWindows(i)+1 : sec));
             Features.FTPCount(sec-start_time+1, i) = sum(XCompress.FTPCount(sec-TimeWindows(i)+1 : sec));
             Features.HTTPCount(sec-start_time+1, i) = sum(XCompress.HTTPCount(sec-TimeWindows(i)+1 : sec));
+            Features.CCodeCount(sec-start_time+1, i) = sum(XCompress.CCodeCount(sec-TimeWindows(i)+1 : sec));
+            Features.EXECodeCount(sec-start_time+1, i) = sum(XCompress.EXECodeCount(sec-TimeWindows(i)+1 : sec));
+            Features.TELNETCount(sec-start_time+1, i) = sum(XCompress.TELNETCount(sec-TimeWindows(i)+1 : sec));
+            Features.SSHCount(sec-start_time+1, i) = sum(XCompress.SSHCount(sec-TimeWindows(i)+1 : sec));
             Features.UniqSrcIPs(sec-start_time+1, i) = XCompress.UniqSrcIPs(sec,i);
             Features.UniqDestIPs(sec-start_time+1, i) = XCompress.UniqDestIPs(sec,i);
             Features.UniqProtocols(sec-start_time+1, i) = XCompress.UniqProtocols(sec,i);
@@ -687,3 +817,27 @@ end
 Labels.HLClass = reshape(Labels.HLClass, [ max(size(Labels.HLClass)), 1]);
 Labels.LLClass = reshape(Labels.LLClass, [ max(size(Labels.LLClass)), 1]);
 
+function result = runInPar(i,X,tempList,x)
+        %count uniq protocols
+   % parfor x = 1:num_of_time_windows %Loop over windows
+   %calls here
+        protoList = {};
+        for y = 1:TimeWindows(x)%length of current time window
+            index = find(SecondIndex==(i - y + 1));%finds index where the value i matches a given second (i.e. there are packets in all listed seconds)
+            proto = X.Protocol(index);
+            
+
+            if ~isempty(index)
+                
+                for n = 1:length(proto)
+                    if ~strcmp(proto, '"')
+                        protoList{end+1}=proto{n};%get a list of all ips in current second
+                        protoList = unique(protoList);%make list only unique ips
+                    end
+                    tempList = length(protoList);
+                   % XCompress.UniqProtocols(i,x) = length(protoList);%count each individual column. 
+                end
+            end
+        end
+  %  end
+end
