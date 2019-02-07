@@ -185,8 +185,10 @@ for val = 1:(numel(fields)-9)
         predictAllOtherTrafficTypes = repmat({'not'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'not' (i.e. anything but r2l)
        % predictAllCorrectTrafficType = repmat({'u2r'},size(currentTestFeature,1),1);%to get a baseline for what the f1 score would be in the case of all traffic being predicted as 'r2l'
 
-        precisionAllNeg = baselinePerformanceNotU2R.PositivePredictiveValue;
-       % Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'not',  'u2r'}, 'CrossVal', 'on','Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+
+        currentTestFeature = featurecombiner_function()%allFeatures.AllFeatures;%delete after run. This is to estimate mem usage
+        Model = fitcsvm(currentTestFeature,correctLabels,'Classnames',{'not',  'u2r'}, 'CrossVal', 'on','kFold', 5, 'Standardize',1,'KernelFunction','gaussian','KernelScale','auto');
+
         memory
         fprintf('Model trained\n');
         
