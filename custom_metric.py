@@ -6,83 +6,98 @@ Created on Sat Feb  9 11:28:05 2019
 
 create custom metric to give score to evaluate performance for ranking in recursive feature elim
 
-For this problem, standard classification metrics are inadequate. The nature of time windows presents 
-an interesting metric problem when compared to usual classification tasks. A simple one to one 
+For this problem, standard classification metrics are inadequate. The nature of time windows for attacks 
+presents an interesting metric problem when compared to usual classification tasks. A simple one to one 
 comparison of prediction to label for each individual second does not completely capture the 
-effectiveness of attack classification when an attack is a sequence of seconds, not a single second.
-This means we not only want to maximize standard TPR, where each individual SECOND in an attack is
+effectiveness of attack classification when an 'attack' is better defined as a sequence of seconds, not a single 
+second. This means we not only want to maximize standard TPR, where each individual SECOND in an attack is
 considered a positive, we also want to maximize the TPR when considering each individual ATTACK as 
 a positive. 
-For a simple example where 0 is a non-attack second and 1 is an attack second:[0,0,0,1,1,1,1,0,0,0]. 
+A simple 10 sec example where 0 is a non-attack second and 1 is an attack second:[0,0,0,1,1,1,1,0,0,0]. 
 In this example indeces 3, 4, 5, and 6 are each part of single, four-second attack. We not only want 
-each index to be considered in its own right (a perfect TPR being 4/4 correctly classified positives),
-we want the entire attack itself to be considered valueable (1/1 attacks in this 10 second interval
-correctly classified). We don't simply want one or the other, both are important to maximize. For this
-reason, we want to use both measures in our metric. These are standard TPR, and per-attack TPR. Per
-attack TPR is calculated by if even 1 second is correctly classified as positive in the attack, the 
-attack itself counts as a true positive.
+each index to be considered in its own right (a perfect standard TPR being 4/4 correctly classified positives),
+we also want the classification of the entire attack itself to be considered (a perfect per-attack TPR being 1/1
+correctly classified attacks). We don't simply want one or the other, both are important to maximize. For this
+reason, we want to use both measures in our metric. These are standard TPR, and per-attack TPR. A true positive 
+in per-attack TPR is defined as: when even 1 second is correctly classified as positive in the attack window,
+the attack itself counts as a true positive.
 
 In addition to these two metrics, we want to reduce the false positive rate, for well-established
 reasons given in the base rate fallacy paper.
 
-Another factor is that while we do want standard TPR to have value, if it is given equal weight to FPR 
+Another factor is that while we do want standard TPR to help define a score, if it is given equal weight as FPR 
 and per-attack TPR, the standard TPR can overwhelm the score of the metric and give a poor score to an 
-IDS that in reality performs very well with regards to total attacks detected and FPR.
+IDS that in reality performs very well with regards to total attacks detected and FPR in a practical sense.
 For example, consider 1000 seconds, with 5 attacks, each 50 seconds. If the classifier has zero FPs
-and correctly classifies 20/50 seconds in each attack as a positive, while in reality this would be
-a very effective IDS, the score would be ((20*5/50*5) * 1.0 * 1.0) = 0.4, even though every attack
+and correctly classifies 20/50 seconds in each attack as a positive, this would be an effective IDS
+in reality, but the score would be ((20*5/50*5) * 1.0 * 1.0) = 0.4. Even though every attack
 was classified as such, there were no false positives, and a large percentage of the individual 
 seconds were classified as an attack relative to the number of false positives. 
 For this reason, the standard TPR is weighted to only have 1/4 the importance of the other two measures.
-This way, it still is considered, but it is not as important as actually detecting attacks or reducing
-false positives. In an intuitive sense, a few missed time windows don't penalize the score all that much,
-which is good, because they might not really matter.
+This way, it still is used to measure performance, but it is not as important as actually detecting attacks 
+or reducing false positives. In an intuitive sense, a few missed seconds don't penalize the score all 
+that much when the overall attack is detected. However, if very large percentage of individual seconds are
+missed, the score is penalized (because the true positives make up a small percentage of actual positives, 
+therefore the true positives do not look confident percentage-wise, and therefore they start to look like 
+false positives. Thus a true positive is more likely to be ignored by an analyst, and become a false negative).
 
 Since we still want the score to be between 0 for the worst and 1 for a perfect prediction, the standard
 TPR is weighted in a way that allows the scores to stay in this range with these attributes. This means
 that instead of pure TPR, we want to reduce the penalization of this measure, while still keeping the
-best and worse case of the TPR between 0 and 1. This is done by creating a functiono f the TPR, shown
+worst and best case of the TPR between 0 and 1. This is done by creating a function of the TPR, shown
 below.   
 f(tpr) = tpr / (tpr + (0.25*(1-tpr)))  #gives tpr 1/4 weight but still allows customMetric to be between 0 and 1
 
+We also penalize FPR by 50%. The formula is given below. This equivalently gives double weight to TNR
+f(fpr) = fpr / (fpr + (0.5*(1-fpr)))
+f(tnr) = 1 - f(fpr)
 
 The final formula for the metric is given below:
     
-customMetric = f(tpr) * tnr * perAttackTPR
+customMetric = f(tpr) * f(tnr) * perAttackTPR
 0   <=   customMetric   <=   1
 
 
 Adjustments should be made to the formula in the case of all 0s or all 1s in the correctly labelled
-data. In these cases, simply remove the metrics where the denomintors would be 0.
+data. In these cases, to calculate customMetric, simply remove the metrics where the denomintors 
+would be 0. This can be done in the form of a simple check. If the denom equals 0, simply set the value
+of that metric to 1.
+
+
+future work should look into this three factors and find the weights for each that most correspond to best
+security incident reduction for analyst team
+
+#Note. If all are predicted 0s or 1s it may be better to determine more than just 0 or 1 for score
+
 """
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, accuracy_score
 
 
 def main():
-    actualY = [0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0]
+    #each of the lists below has a description of what the are supposed to be
+    actualY = [0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0]#sample correct labels. 0 for regular. 1 for attack
     perfectY = actualY#everything predicted correct, should be 1, a perfect score
+    
+    test = [1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     
     allPosY = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]#all predicted positive. Useless. should be 0
     allNegY = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]#all predicted negative. Useless. should be 0
-    sampleYBadThreshold = [0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]#perfect attack WINDOW percent (there could be multiple overlapping attacks), perfect rule 2, each attack only has 1 correctly positively classified second
-    sampleYBadFPs = [0,1,0,1,1,0,0,0,1,1,1,0,1,1,1,1,0,1,0,1,1,1,1,1,1,1,0,1,0,0,1,1,0,1,0,0,0,0,1,0,0,1,1,0,0,0,0,1,1,0]#perfect attack percent, bad FP, good threshold
-    sampleYBadAttackPercent = [0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]#missed half attacks, perfect fp, perfect threshold
-    sampleYBadFPandThresh = [0,1,1,0,1,0,0,1,1,0,0,0,0,0,1,1,0,0,1,0,1,0,1,1,0,1,0,0,0,0,0,1,1,0,1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0]#perfect attacks, bad fp, bad threshold
-    randomY = [1,1,0,0,0,1,1,1,0,0,1,1,1,0,0,1,1,1,0,0,0,0,1,1,1,1,1,1,0,1,1,0,0,0,0,1,1,0,0,1,1,1,0,1,1,1,0,0,0,1]
-    sampleYBadThresholdQuarter = [0,0,0,0,1,0,0,0,1,1,1,0,1,1,0,1,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0]
+    
+    sampleYBadThreshold = [0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]#percentage of standard TPR very poor, perfect TNR, perfect per-attack TPR,
+    sampleYBadFPs = [0,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,0,0,0,0,1,1,0,0,0,1,1,1,1]#perfect standard TPR, bad FP, perfect per-attack TPR
+    sampleYBadAttackPercent = [0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]# perfect standard TPR (of detected attacks), perfect fp, missed half attacks
+    sampleYBadFPandThresh = [0,1,1,0,1,0,0,1,1,0,0,0,0,0,1,1,0,0,1,0,1,0,1,1,0,1,0,0,0,0,0,1,1,0,1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0]#bad standard TPR, bad fp, perfect per-attack TPR
+    randomY = [1,1,0,0,0,1,1,1,0,0,1,1,1,0,0,1,1,1,0,0,0,0,1,1,1,1,1,1,0,1,1,0,0,0,0,1,1,0,0,1,1,1,0,1,1,1,0,0,0,1]#randomly assign 0s and 1s. Should give very poor score
+    sampleYGoodThresh = [0,0,0,0,1,0,0,0,1,1,1,1,1,1,0,1,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0]#only misses 1 second from 1 attack. No FPs. Should still have a high score
 
     
-    chosenList = sampleYBadThresholdQuarter
-    
-    getCustomMetric(actualY,chosenList)
+    #first param is ground truth/correct values. second param is predicted
+    #adjust try any relevant combo of correct and predicted value and see score returned
+    #with this metric, a very high score is hard to achieve in most real scenarios. somewhere in the 70s or 80s is a good score for practical purposes (low fps, high attacks detected, decent percentage of attack seconds detected)
+    customMetric = getCustomMetric(test,allPosY)
 
-#I think that the threshold should  be weighted to carry less of a penalty. It is a harder problem to solve, and often times, 1 or a few positives per attack is enough. We still want to maximize, but we don't want to penalize for ex, a classifier that correctly classifies some of every attack and has no FPs, which would still likely get a low score
-#we decided to give the threshold half the weight of the other variables. To keep the score from 0 to 1, the entire equation was multiplied by two
-#future work should look into this three factors and find the weights that most correspond to best security reduction for analyst team
-
-# for threshold and FP
-#avg number of correctly predicted per attack window is same as TPR, sensitiveity, or recall
-#1 - FPR = TNR
+    print(customMetric)
+    return customMetric
 
 #attack indeces for total attack calc
 #save the first index of attack window, and num of pos seconds as a list ex ([34, 7]) means index 34 has 7 seconds of attack
@@ -90,7 +105,7 @@ def main():
 #after this, find the percentage of attacks classified with at least 1 window as an attack.
 
 
-#eventually check to make sure all actualY are not the same (i.e. all 0s or all 1s). This will give nan, in the case of zero, use regular accuracy as the metric, which in this case is essentially the same thing as the TNR. In the case of all 1s, use custom metric without TNR. This because the FPR would have a denominator of 0, and would not be a relevant metric.
+#eventually check to make sure all actualY are not the same (i.e. all 0s or all 1s).  In the case of all 1s, use custom metric without TNR. This because the FPR would have a denominator of 0, and would not be a relevant metric.
 def getCustomMetric(actualY,predictedY):
     
     attackIndexList = []
@@ -119,14 +134,21 @@ def getCustomMetric(actualY,predictedY):
     
     print(attackIndexList)
     
-    tn, falsePositives, fn, truePositives = confusion_matrix(actualY,predictedY).ravel()
-    print(truePositives, falsePositives)
+    if totalPositives == len(actualY):
+        val = allPositive(actualY,predictedY,attackIndexList,totalPositives)
+        print('here')
+    elif totalPositives == 0:
+        val = allNegative(actualY,predictedY)
+    else:
+        val = posAndNegValues(actualY,predictedY,attackIndexList,totalPositives,totalNegatives)
+        
+    #val contains f(tpr), f(tnr), and per attack tpr in that order.
+    print(val)
+    print('\n\nweighted tpr:', val[0], "\nweighted tnr:",val[1],'\nperAttackTPR:',val[2],'\n')#,'\n\nCustom Metric Score:', customMetric)
+
+    return val[0] * val[1] * val[2]
     
-    #the true positive rate is the total number of true positives predicted as such divided by the total number of true positives (i.e. the sum of the second column in the attackIndexList)
-    tpr = truePositives/totalPositives
-    fpr = falsePositives/totalNegatives
-    tnr = 1 - fpr
-    
+def calcPerAttackTPR(predictedY, attackIndexList):
     totalAttacksCounted = 0
     
     for i in range(len(attackIndexList)):#for every attack
@@ -139,21 +161,97 @@ def getCustomMetric(actualY,predictedY):
     print('total attacks',totalAttacksCounted)
     
     perAttackTPR = totalAttacksCounted / len(attackIndexList)
+    return perAttackTPR
+
+def posAndNegValues(actualY,predictedY,attackIndexList,totalPositives,totalNegatives):
+    tn, falsePositives, fn, truePositives = confusion_matrix(actualY,predictedY).ravel()
+    print(truePositives, falsePositives)
+
+    perAttackTPR = calcPerAttackTPR(predictedY,attackIndexList)
     print(perAttackTPR)
+
+        
+     #the true positive rate is the total number of true positives predicted as such divided by the total number of true positives (i.e. the sum of the second column in the attackIndexList)
+    tpr = truePositives/totalPositives
+    fpr = falsePositives/totalNegatives
+    print('fpr',fpr)
+    fOfTnr = 1 - fOfFPR(fpr)
+    fOfTpr = fOfTPR(tpr)
+       
     
     #we want to use the TPR, but we only want to give it 1/4 weight. Getting every second classified in a window is not as important as classifying some of the correct seconds or reducing false positive rates
     # f(tpr) gives the value only 1/4 weight, but still keeps the final score between 0 (worst) and 1 (best)
-    fOfTpr = tpr / (tpr + (0.25*(1-tpr)))
+    
     print('weighted tpr', fOfTpr)
+
     
-    #we want tpr to be tpr / (0.5*(1-tpr))
+    return fOfTpr, fOfTnr, perAttackTPR
+
+def allPositive(actualY,predictedY,attackIndexList,totalPositives):
+    print('the entire list is positive')
+    TNR = 1#there are no negs, therefore denom is 0, therefore set value to 1 to eliminate TNR effect on formula
     
-    oldcustomMetric = (tpr*tnr*perAttackTPR)
-    print(oldcustomMetric)
+    truePositives = confusion_matrix(actualY,predictedY).ravel()#bad sklearn design, returns only 1 val if perfect, else returns 4, must be handled
+    print(truePositives)
+    #everything is wrong, final score is 0
+    if(len(truePositives)==1):#there everything is predicted 1, i.e. everything is right. score of 1
+        print('score of 1')
+        return 1, 1, 1.0
     
-    customMetric = fOfTpr * tnr * perAttackTPR
+    tn, falsePositives, fn, truePositives = confusion_matrix(actualY,predictedY).ravel()#normal case. not a perfect score
+    #print(truePositives)
     
-    print('pure tpr:',tpr, '\n\nweighted tpr:', fOfTpr, "\ntnr:",tnr,'\nperAttackTPR:',perAttackTPR,'\n\nCustom Metric Score:', customMetric)
+    #Verify that per attack TPR does not matter in this case by uncommenting two lines below this comment. 
+    #If the normal TPR is >1, perattack tpr = 1, leaving it the same. 
+    #If standard tpr is 0, so is per attack tpr, again leaving it the same. For practical purposes, per attack TPR can be set to 1 in either case and give the correct score
+    #perAttackTPR = calcPerAttackTPR(predictedY,attackIndexList)
+    #print(perAttackTPR)
     
+    perAttackTPR = 1
+    
+    tpr = truePositives/totalPositives
+    #print(tpr)
+    fOfTpr = fOfTPR(tpr)#still needs to be weighted for same reasons as usual case
+    return fOfTpr, TNR, perAttackTPR
+    
+    
+#This will give nan, in the case of zero, use regular accuracy as the metric, which in this case is essentially the same thing as the TNR.  
+#There are no true positives of either standard or per-attack TPR (i.e. both denoms are 0. set them to 1 in formula)
+def allNegative(actualY,predictedY):
+    print('the entire list is negative')
+    #set the two variables below to 1 because for normal calcuation, they would have a value of 0
+    fOfTpr = 1
+    perAttackTPR = 1
+    
+    #in this case, since there are no positives, the TNR is equal to accuracy
+   # TNR = accuracy_score(actualY,predictedY)#,normalize=True)
+   # accuracy_score()
+  #  print(TNR)
+  
+    truePositives = confusion_matrix(actualY,predictedY).ravel()#bad sklearn design, returns only 1 val if perfect, else returns 4, must be handled
+  
+    if(len(truePositives)==1):#there everything is predicted 0, i.e. everything is right. score of 1
+        print('score of 1')
+        return 1, 1, 1.0
+    
+    
+    #to verify that accuracy is correct for the scenario of all zeros in actualY, note that
+    #accuracy gives the exact same score as below lines, which use the full TNR formula
+    tn, falsePositives, fn, truePositives = confusion_matrix(actualY,predictedY).ravel()
+    print(tn, falsePositives, fn, truePositives)
+    FPR = falsePositives/(tn + falsePositives)
+    #TNR = 1 - FPR
+    #print(TNR)
+    fOfTNR = 1 - fOfFPR(FPR)
+    
+    return fOfTpr, fOfTNR, perAttackTPR
+    
+#function of TPR
+def fOfTPR(tpr):
+    return tpr / (tpr + (0.25*(1-tpr)))
+
+#function of FPR
+def fOfFPR(fpr):
+    return fpr / (fpr + (0.25*(1-fpr)))
 
 main()
