@@ -63,6 +63,15 @@ data. In these cases, to calculate customMetric, simply remove the metrics where
 would be 0. This can be done in the form of a simple check. If the denom equals 0, simply set the value
 of that metric to 1.
 
+Current work. In the reg vs all attacks (R = 0; u2r, r2l, dos, or probe = 1), Use custom metric, 
+accuracy, and f1 to rank RFE performance. compare performances of final feature sets of F1, accuracies, 
+false positives, true positives, attacks detected percentages, and custom metric of the selected features 
+for ranking metric. My hypothesis is each score used to rank (F1, acc, and custom) will be highest in the scenario
+that it is used to rank, but custom will be highest not only in its own score, but also have the least FPs and 
+most detected attacks (per-attack TPR), and maybe standard (per-second) TPR. 
+Probably do this on 16 second time window. Verify again using optimally selected features/windows at the end
+if time/resources allow.
+Also consider adding F1 * perAttackTPR. See which is best.
 
 future work should look into this three factors and find the weights for each that most correspond to best
 security incident reduction for analyst team
@@ -78,7 +87,7 @@ def main():
     actualY = [0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0]#sample correct labels. 0 for regular. 1 for attack
     perfectY = actualY#everything predicted correct, should be 1, a perfect score
     
-    test = [1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+   # test = [1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     
     allPosY = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]#all predicted positive. Useless. should be 0
     allNegY = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]#all predicted negative. Useless. should be 0
@@ -94,7 +103,7 @@ def main():
     #first param is ground truth/correct values. second param is predicted
     #adjust try any relevant combo of correct and predicted value and see score returned
     #with this metric, a very high score is hard to achieve in most real scenarios. somewhere in the 70s or 80s is a good score for practical purposes (low fps, high attacks detected, decent percentage of attack seconds detected)
-    customMetric = getCustomMetric(test,allPosY)
+    customMetric = getCustomMetric(actualY,perfectY)
 
     print(customMetric)
     return customMetric
@@ -198,6 +207,11 @@ def allPositive(actualY,predictedY,attackIndexList,totalPositives):
         print('score of 1')
         return 1, 1, 1.0
     
+    
+    #default to weighted accuracy score which penalizes incorrect 1s more than incorrect 0s. 
+    #This is because since the TNR will always be 0, when all are predicted 1s, it will get a score of 0 regardless if 1 or n-1 are correct.
+    #we still wish to penalize FPs more than FNs, since the attack is composed of multiple seconds.
+    #This implies predicting all 1s will be penalized more heavily than predicting all 0s
     tn, falsePositives, fn, truePositives = confusion_matrix(actualY,predictedY).ravel()#normal case. not a perfect score
     #print(truePositives)
     
