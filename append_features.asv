@@ -1,0 +1,26 @@
+%append the features and labels
+
+features1 = load('features_1/AllFeatures');
+features2 = load('features_2/AllFeatures');
+features3 = load('features_3/AllFeatures');
+features4 = load('features_4/AllFeatures');
+labels1 = load('features_1/AllLabels');
+labels2 = load('features_2/AllLabels');
+labels3 = load('features_3/AllLabels');
+labels4 = load('features_4/AllLabels');
+
+
+
+featsToSave = [features1.AllFeatures.NumberOfPackets,features1.AllFeatures.MeanNumberOfPackets,features1.AllFeatures.ThirdMomentNumberOfPackets,features1.AllFeatures.MeanPacketSize,features1.AllFeatures.CVPacketSize,features1.AllFeatures.ThirdMomentPacketSize,features1.AllFeatures.HTTPorFTPandExeCodeCount,features1.AllFeatures.CorJavaScriptCount,features1.AllFeatures.HTTPandMalformedCount,features1.AllFeatures.FTPandCcodeCount,features1.AllFeatures.SYNBoolean,features1.AllFeatures.SYNCount,features1.AllFeatures.ECHOBoolean,features1.AllFeatures.ECHOCount,features1.AllFeatures.UniqProtocols,features1.AllFeatures.UniqSrcIPs,features1.AllFeatures.UniqDestIPs,features1.AllFeatures.URGCount,features1.AllFeatures.DNSCount,features1.AllFeatures.TCPCount,features1.AllFeatures.ARPCount,features1.AllFeatures.ICMPCount,features1.AllFeatures.UDPCount,features1.AllFeatures.FTPCount,features1.AllFeatures.HTTPCount,features1.AllFeatures.RSTCount,features1.AllFeatures.CCodeCount,features1.AllFeatures.EXECodeCount,features1.AllFeatures.TELNETCount,features1.AllFeatures.SSHCount];
+featsToSave = [featsToSave;features2.AllFeatures.NumberOfPackets,features2.AllFeatures.MeanNumberOfPackets,features2.AllFeatures.ThirdMomentNumberOfPackets,features2.AllFeatures.MeanPacketSize,features2.AllFeatures.CVPacketSize,features2.AllFeatures.ThirdMomentPacketSize,features2.AllFeatures.HTTPorFTPandExeCodeCount,features2.AllFeatures.CorJavaScriptCount,features2.AllFeatures.HTTPandMalformedCount,features2.AllFeatures.FTPandCcodeCount,features2.AllFeatures.SYNBoolean,features2.AllFeatures.SYNCount,features2.AllFeatures.ECHOBoolean,features2.AllFeatures.ECHOCount,features2.AllFeatures.UniqProtocols,features2.AllFeatures.UniqSrcIPs,features2.AllFeatures.UniqDestIPs,features2.AllFeatures.URGCount,features2.AllFeatures.DNSCount,features2.AllFeatures.TCPCount,features2.AllFeatures.ARPCount,features2.AllFeatures.ICMPCount,features2.AllFeatures.UDPCount,features2.AllFeatures.FTPCount,features2.AllFeatures.HTTPCount,features2.AllFeatures.RSTCount,features2.AllFeatures.CCodeCount,features2.AllFeatures.EXECodeCount,features2.AllFeatures.TELNETCount,features2.AllFeatures.SSHCount];
+featsToSave = [featsToSave;features3.AllFeatures.NumberOfPackets,features3.AllFeatures.MeanNumberOfPackets,features3.AllFeatures.ThirdMomentNumberOfPackets,features3.AllFeatures.MeanPacketSize,features3.AllFeatures.CVPacketSize,features3.AllFeatures.ThirdMomentPacketSize,features3.AllFeatures.HTTPorFTPandExeCodeCount,features3.AllFeatures.CorJavaScriptCount,features3.AllFeatures.HTTPandMalformedCount,features3.AllFeatures.FTPandCcodeCount,features3.AllFeatures.SYNBoolean,features3.AllFeatures.SYNCount,features3.AllFeatures.ECHOBoolean,features3.AllFeatures.ECHOCount,features3.AllFeatures.UniqProtocols,features3.AllFeatures.UniqSrcIPs,features3.AllFeatures.UniqDestIPs,features3.AllFeatures.URGCount,features3.AllFeatures.DNSCount,features3.AllFeatures.TCPCount,features3.AllFeatures.ARPCount,features3.AllFeatures.ICMPCount,features3.AllFeatures.UDPCount,features3.AllFeatures.FTPCount,features3.AllFeatures.HTTPCount,features3.AllFeatures.RSTCount,features3.AllFeatures.CCodeCount,features3.AllFeatures.EXECodeCount,features3.AllFeatures.TELNETCount,features3.AllFeatures.SSHCount];
+featsToSave= [featsToSave;features4.AllFeatures.NumberOfPackets,features4.AllFeatures.MeanNumberOfPackets,features4.AllFeatures.CVNumberOfPackets,features4.AllFeatures.ThirdMomentNumberOfPackets,features4.AllFeatures.MeanPacketSize,features4.AllFeatures.CVPacketSize,features4.AllFeatures.ThirdMomentPacketSize,features4.AllFeatures.HTTPorFTPandExeCodeCount,features4.AllFeatures.CorJavaScriptCount,features4.AllFeatures.HTTPandMalformedCount,features4.AllFeatures.FTPandCcodeCount,features4.AllFeatures.SYNBoolean,features4.AllFeatures.SYNCount,features4.AllFeatures.ECHOBoolean,features4.AllFeatures.ECHOCount,features4.AllFeatures.UniqProtocols,features4.AllFeatures.UniqSrcIPs,features4.AllFeatures.UniqDestIPs,features4.AllFeatures.URGCount,features4.AllFeatures.DNSCount,features4.AllFeatures.TCPCount,features4.AllFeatures.ARPCount,features4.AllFeatures.ICMPCount,features4.AllFeatures.UDPCount,features4.AllFeatures.FTPCount,features4.AllFeatures.HTTPCount,features4.AllFeatures.RSTCount,features4.AllFeatures.CCodeCount,features4.AllFeatures.EXECodeCount,features4.AllFeatures.TELNETCount,features4.AllFeatures.SSHCount];
+
+labelsToSave = [labels1.AllLabels.HLClass;labels2.AllLabels.HLClass;labels3.AllLabels.HLClass;labels4.AllLabels.HLClass];
+
+
+featsToSave = array2table(featsToSave);
+writetable(featsToSave,"featureVals.csv");
+
+labelsToSave = array2table(labelsToSave);
+writetable(labelsToSave,"labels.csv");

@@ -11,19 +11,20 @@ import numpy as np
 def getFeatures():
     featureVals = pd.read_csv('featureVals.csv',
                             sep=',',
-                            header=None)
+                            header=0)
     
     labels = pd.read_csv('labels.csv',
                          sep=',',
-                         header=0)#ignore first col because matlab writes an irrelevant var name to first col
+                         header=0)#ignore first row because matlab writes an irrelevant var name to first row
         
-    featureNames = pd.read_csv('features.csv',
-                         sep=',',
-                         header=0)#same as above
+   # featureNames = pd.read_csv('features.csv',
+    #                     sep=',',
+    #                     header=0)#same as above
                          
     featureValnp = np.array(featureVals,dtype="float32")
     labelsnp = np.array(labels)
-    featureNamesnp=np.array(featureNames)
+    featureNamesnp = featureVals.head(0).columns.values
+    #featureNamesnp=np.array(featureNames)
     
     return featureValnp, labelsnp, featureNamesnp
 
@@ -32,3 +33,17 @@ def getFeatures():
 
 #print(labels)
 #print(featureNames)
+    
+def chooseFeatures(XFeatures, XFile,yFile):
+    inputData = pd.read_csv(XFile,
+                            sep=',',
+                            usecols=XFeatures,
+                            header=0)
+    outputData = pd.read_csv(yFile,
+                             sep=',',
+                             usecols=[0],
+                             header=0)
+
+    tempAllX = np.array(inputData, dtype="float")
+ 
+    return tempAllX, np.array(outputData), inputData.head(0).columns.values

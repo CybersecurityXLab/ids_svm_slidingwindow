@@ -103,7 +103,7 @@ def main():
     #first param is ground truth/correct values. second param is predicted
     #adjust try any relevant combo of correct and predicted value and see score returned
     #with this metric, a very high score is hard to achieve in most real scenarios. somewhere in the 70s or 80s is a good score for practical purposes (low fps, high attacks detected, decent percentage of attack seconds detected)
-    customMetric = getCustomMetric(actualY,perfectY)
+    customMetric = getCustomMetric(actualY,allPosY)
 
     print(customMetric)
     return customMetric
@@ -155,7 +155,7 @@ def getCustomMetric(actualY,predictedY):
     print(val)
     print('\n\nweighted tpr:', val[0], "\nweighted tnr:",val[1],'\nperAttackTPR:',val[2],'\n')#,'\n\nCustom Metric Score:', customMetric)
 
-    return val[0] * val[1] * val[2]
+    return (val[0] * val[1] * val[2])
     
 def calcPerAttackTPR(predictedY, attackIndexList):
     totalAttacksCounted = 0
