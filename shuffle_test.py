@@ -55,6 +55,8 @@ def main():
             print('good')
         else:
             print('bad')
+            
+    print(np.any(shufy))#returns false if all zeros
     
     #print(shuffled)
     

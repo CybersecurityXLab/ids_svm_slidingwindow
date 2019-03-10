@@ -34,6 +34,17 @@ def getFeatures():
 #print(labels)
 #print(featureNames)
     
+def getNames():
+    featureVals = pd.read_csv('featureVals_8sec.csv',
+                            sep=',',
+                            header=0)
+    
+
+    featureNamesnp = featureVals.head(0).columns.values
+
+    
+    return featureNamesnp
+    
 def chooseFeatures(XFeatures, XFile,yFile):
     inputData = pd.read_csv(XFile,
                             sep=',',

@@ -114,11 +114,12 @@ def clean():#should return two arrays, a feature array, and a label array, that 
  #   now = stats.zscore(cleanedFeatVals)
  #   print(now)
 
-   # return getFeatureStack([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],stats.zscore(cleanedFeatVals)),cleanedLabels
+   # return getFeatureStack([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26],stats.zscore(cleanedFeatVals)),cleanedLabels
    # return getFeatureStack([0,1,2,3],stats.zscore(cleanedFeatVals)),cleanedLabels 
-    return getFeatureStack([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26],stats.zscore(cleanedFeatVals))[:20000,:],cleanedLabels[:20000,:] 
-    
-   # return stats.zscore(cleanedFeatVals),cleanedLabels
+    #return getFeatureStack([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26],stats.zscore(cleanedFeatVals))[:20000,:],cleanedLabels[:20000,:] 
+  #  return getFeatureStack([0,4,7,9,19,20,21,22,23,24,25,26],stats.zscore(cleanedFeatVals))[:40000,:],cleanedLabels[:40000,:] 
+   # return stats.zscore(cleanedFeatVals)[:40000,:],cleanedLabels[:40000,:]
+    return stats.zscore(cleanedFeatVals),cleanedLabels
 
     
 def main():
