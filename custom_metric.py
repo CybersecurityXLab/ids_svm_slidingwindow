@@ -80,6 +80,7 @@ security incident reduction for analyst team
 
 """
 from sklearn.metrics import confusion_matrix, accuracy_score
+import math
 
 
 def main():
@@ -103,7 +104,7 @@ def main():
     #first param is ground truth/correct values. second param is predicted
     #adjust try any relevant combo of correct and predicted value and see score returned
     #with this metric, a very high score is hard to achieve in most real scenarios. somewhere in the 70s or 80s is a good score for practical purposes (low fps, high attacks detected, decent percentage of attack seconds detected)
-    customMetric = getCustomMetric(actualY,allPosY)
+    customMetric = getCustomMetric(allNegY,allPosY)
 
     print(customMetric)
     return customMetric
@@ -154,8 +155,24 @@ def getCustomMetric(actualY,predictedY):
     #val contains f(tpr), f(tnr), and per attack tpr in that order.
     print(val)
     print('\n\nweighted tpr:', val[0], "\nweighted tnr:",val[1],'\nperAttackTPR:',val[2],'\n')#,'\n\nCustom Metric Score:', customMetric)
+    print('old metric', val[0]*val[1]*val[2])
 
-    return (val[0] * val[1] * val[2])
+    harmonicMean = calcHarmonicMean(val[0],val[1],val[2])
+
+    
+    if math.isnan(harmonicMean):#two or three of the values is 0, making the denom 0.
+        return 0.0
+    
+    return harmonicMean
+    
+    
+
+def calcHarmonicMean(tpr,tnr,pATpr):
+    numerator = 3*(tpr*tnr*pATpr)
+    denominator = (tpr*tnr)+(tpr*pATpr)+(tnr*pATpr)
+    
+    harmonicMean = numerator/denominator
+    return harmonicMean
     
 def calcPerAttackTPR(predictedY, attackIndexList):
     totalAttacksCounted = 0
@@ -190,7 +207,7 @@ def posAndNegValues(actualY,predictedY,attackIndexList,totalPositives,totalNegat
     
     #we want to use the TPR, but we only want to give it 1/4 weight. Getting every second classified in a window is not as important as classifying some of the correct seconds or reducing false positive rates
     # f(tpr) gives the value only 1/4 weight, but still keeps the final score between 0 (worst) and 1 (best)
-    
+    print('tpr',tpr)
     print('weighted tpr', fOfTpr)
 
     

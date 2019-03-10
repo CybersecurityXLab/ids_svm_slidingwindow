@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 
 def getFeatures():
-    featureVals = pd.read_csv('featureVals.csv',
+    featureVals = pd.read_csv('featureVals_8sec.csv',
                             sep=',',
                             header=0)
     
