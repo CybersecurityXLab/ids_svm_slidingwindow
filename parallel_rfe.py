@@ -361,7 +361,7 @@ def main(attack):
     startingFeatureIndeces = np.delete(startingFeatureIndeces,0) #remove -1
     startingFeatures = getFeatureStack(startingFeatureIndeces,X)
     print("the final feature set is", startingFeatures)
-    recordRun(0,startingFeatureIndeces,y.astype('int'),X)    #final run with last feature. Remove -1
+    recordRun(0,startingFeatureIndeces,y.astype('int'),X, names)    #final run with last feature. Remove -1
     
     print('total run time', (time.time() - start))
     f = open('completion_sentinel.txt',"a")
