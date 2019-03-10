@@ -9,6 +9,7 @@ checklist for individual changes for each run
 2 in record run, change the scores to be written as needed
 3 in parallelrfe, change the ranking metric to be returned
 4 check that the number of folds is correct in both functions
+5 delete scores.txt and complete_sentinel.txt
 """
 
 #from recursive_feature_elimination import specifyDataset
@@ -120,6 +121,9 @@ def recordRun(i,featureIndices,labels,X,names):#not used in RFE, only used to re
     for i in featureIndices:
         f.write(str(i))
         f.write(' ')
+        f.write(names[i])
+        f.write(' ')
+        
     
     f.write('\n\n')
     f.close()
