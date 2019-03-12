@@ -110,9 +110,10 @@ def recordRun(i,featureIndices,labels,X,names):#not used in RFE, only used to re
     print(f1Scores)
     print(f1ScoresAvg)
 
-    f = open('custom_scores.txt','a')
+    f = open('custom_scores_unweighted.txt','a')
     f.write('custom: ')
     f.write(str(customScoresAvg))
+    writeArrayElements(customMetricScores,f)
     f.write('\naccuracy: ')
     f.write(str(accScoresAvg))
     writeArrayElements(accuracyScores,f)
@@ -225,12 +226,9 @@ def parallelRFE(i,featureIndices,labels,X,names):
     print(f1Scores)
     print(f1ScoresAvg)
     
-<<<<<<< HEAD
-    rankingScoresVerbose.append([f1ScoresAvg,nonFeatures,i])
-=======
-    rankingScoresVerbose.append([accScoresAvg,nonFeatures,i])
->>>>>>> 512c0e891df7f02fea61748efbae9e3529607e0a
-        
+
+    rankingScoresVerbose.append([customScoresAvg,nonFeatures,i])
+
     print(rankingScoresVerbose)
     return rankingScoresVerbose
 
@@ -374,7 +372,7 @@ def main(attack):
     recordRun(0,startingFeatureIndeces,y.astype('int'),X, names)    #final run with last feature. Remove -1
     
     print('total run time', (time.time() - start))
-    f = open('completion_sentinel.txt',"a")
+    f = open('completion_sentinel_custom_weighted.txt',"a")
     f.write('finished run at ')
     f.write(str(time.time()))
     #for total number of rounds (round)
