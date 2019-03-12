@@ -1,0 +1,20 @@
+custom: 0.016673760428013957   [0.005411900890104031 0.06710080139800607 0.0 0.010856099851959676 0.0 ]
+accuracy: 0.9086664802907464
+f1: 0.0031210829535724275
+0 SYNCount 1 NumberOfPackets 2 MeanNumberOfPackets 3 UniqProtcols 4 UniqSrcIPs 5 UniqDestIPs 6 DNSCount 7 TCPCount 8 ARPCount 9 ICMPCount 10 UDPCount 11 FTPCount 12 HTTPCount 13 RSTCount 14 CCodeCount 15 EXECodeCount 16 TELNETCount 17 SSHCount 18 ThirdMNumberPackets 19 MeanPacketSize 20 CVPacketSize 21 ThirdMPacketSize 22 HTTPorFTPandEXE 23 CorJSCount 24 HTTPandMalformed 25 FTPandC 26 SYNBool 27 ECHOBool 28 ECHOCount 
+
+custom: 0.01454144076525975   [0.0 0.061851122633945294 0.0 0.010856081192353463 0.0 ]
+accuracy: 0.9086874475817724
+f1: 0.0027112747233349567
+13 RSTCount 6 DNSCount 8 ARPCount 3 UniqProtcols 17 SSHCount 27 ECHOBool 16 TELNETCount 18 ThirdMNumberPackets 23 CorJSCount 28 ECHOCount 15 EXECodeCount 24 HTTPandMalformed 22 HTTPorFTPandEXE 9 ICMPCount 0 SYNCount 10 UDPCount 7 TCPCount 4 UniqSrcIPs 20 CVPacketSize 12 HTTPCount 11 FTPCount 19 MeanPacketSize 2 MeanNumberOfPackets 1 NumberOfPackets 21 ThirdMPacketSize 5 UniqDestIPs 26 SYNBool 
+
+custom: 0.014555852838088242   [0.0036314093234091805 0.06185093299463113 0.0 0.007296921872400905 0.0 ]
+accuracy: 0.908757338551859
+f1: 0.0027122696367031076
+0 SYNCount 1 NumberOfPackets 2 MeanNumberOfPackets 18 ThirdMNumberPackets 21 ThirdMPacketSize 27 ECHOBool 28 ECHOCount 19 MeanPacketSize 24 HTTPandMalformed 3 UniqProtcols 17 SSHCount 12 HTTPCount 13 RSTCount 10 UDPCount 7 TCPCount 23 CorJSCount 22 HTTPorFTPandEXE 20 CVPacketSize 16 TELNETCount 15 EXECodeCount 6 DNSCount 11 FTPCount 9 ICMPCount 8 ARPCount 26 SYNBool 
+
+custom: 0.014917612015178272   [0.005441348931228314 0.061849794887252146 0.0 0.007296916257410893 0.0 ]
+accuracy: 0.9087363712608332
+f1: 0.0027651407206939578
+12 HTTPCount 20 CVPacketSize 17 SSHCount 24 HTTPandMalformed 23 CorJSCount 18 ThirdMNumberPackets 13 RSTCount 2 MeanNumberOfPackets 1 NumberOfPackets 7 TCPCount 27 ECHOBool 28 ECHOCount 26 SYNBool 9 ICMPCount 15 EXECodeCount 8 ARPCount 6 DNSCount 22 HTTPorFTPandEXE 3 UniqProtcols 19 MeanPacketSize 16 TELNETCount 0 SYNCount 21 ThirdMPacketSize 
+

@@ -109,11 +109,13 @@ def recordRun(i,featureIndices,labels,X,names):#not used in RFE, only used to re
     print('f1')
     print(f1Scores)
     print(f1ScoresAvg)
-    f = open('f1_scores.txt','a')
+
+    f = open('custom_scores.txt','a')
     f.write('custom: ')
     f.write(str(customScoresAvg))
     f.write('\naccuracy: ')
     f.write(str(accScoresAvg))
+    writeArrayElements(accuracyScores,f)
     f.write('\nf1: ')
     f.write(str(f1ScoresAvg))
     writeArrayElements(f1Scores,f)
@@ -223,7 +225,11 @@ def parallelRFE(i,featureIndices,labels,X,names):
     print(f1Scores)
     print(f1ScoresAvg)
     
+<<<<<<< HEAD
     rankingScoresVerbose.append([f1ScoresAvg,nonFeatures,i])
+=======
+    rankingScoresVerbose.append([accScoresAvg,nonFeatures,i])
+>>>>>>> 512c0e891df7f02fea61748efbae9e3529607e0a
         
     print(rankingScoresVerbose)
     return rankingScoresVerbose
