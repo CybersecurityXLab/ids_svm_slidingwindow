@@ -109,14 +109,14 @@ def recordRun(i,featureIndices,labels,X,names):#not used in RFE, only used to re
     print('f1')
     print(f1Scores)
     print(f1ScoresAvg)
-    f = open('scores.txt','a')
+    f = open('f1_scores.txt','a')
     f.write('custom: ')
     f.write(str(customScoresAvg))
-    writeArrayElements(customMetricScores,f)
     f.write('\naccuracy: ')
     f.write(str(accScoresAvg))
     f.write('\nf1: ')
     f.write(str(f1ScoresAvg))
+    writeArrayElements(f1Scores,f)
     f.write('\n')
     for i in featureIndices:
         f.write(str(i))
@@ -223,7 +223,7 @@ def parallelRFE(i,featureIndices,labels,X,names):
     print(f1Scores)
     print(f1ScoresAvg)
     
-    rankingScoresVerbose.append([customScoresAvg,nonFeatures,i])
+    rankingScoresVerbose.append([f1ScoresAvg,nonFeatures,i])
         
     print(rankingScoresVerbose)
     return rankingScoresVerbose
@@ -390,5 +390,5 @@ def main(attack):
     #eventually, at the end run a cross-val with 20 rounds for robustness and lessen poor scores.
     #if f1 performs better, it is likely because of PATPR, which may need to have its weight lessened
     #not using 'all' because PATPR doesn't calculate correctly for this scenario.
-main('r2l')#BEFORE FINAL RUN, MAKE SURE ALL CORRECTLY SEPARATES ATTACKS FOR PATPR
+main('dos')#BEFORE FINAL RUN, MAKE SURE ALL CORRECTLY SEPARATES ATTACKS FOR PATPR
 #if the best feature set is all features, choose a local minimum under a reasonable threshold of features
