@@ -161,7 +161,7 @@ def parallelRFE(i,featureIndices,labels,X,names):
     kf = KFold(len(labels),5)
     nonFeatures = names[i]
     print('current feature: ',str(i), nonFeatures)
-    
+    print('\n\n\n\n\n\n\nMADE IT HERasdfasdfEEEEEEEEEEEEEEEEEEEEE\n\n\n\n\n\n\n')
     #if either all y_train or y_test are 0, skip the iteration
     for train_index, test_index in kf:
         print("TRAIN:", train_index, "TEST:", test_index)
