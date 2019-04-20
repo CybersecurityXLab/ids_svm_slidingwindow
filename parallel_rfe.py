@@ -110,7 +110,7 @@ def recordRun(i,featureIndices,labels,X,names):#not used in RFE, only used to re
     print(f1Scores)
     print(f1ScoresAvg)
 
-    f = open('custom_scores_unweighted.txt','a')
+    f = open('custom13feats_customoptimalwindows.txt','a')
     f.write('custom: ')
     f.write(str(customScoresAvg))
     writeArrayElements(customMetricScores,f)
@@ -202,25 +202,25 @@ def parallelRFE(i,featureIndices,labels,X,names):
             #in the future, experimentation can be done to consider the optimal weights given to each of these
             
             
-            print('accuracy minus feature',str(i), nonFeatures,accuracy_score(y_test,predicted))
+ #           print('accuracy minus feature',str(i), nonFeatures,accuracy_score(y_test,predicted))
             print('custom score minus feature',str(i), nonFeatures,getCustomMetric(y_test,predicted))
             print('f1 minus feature',str(i), nonFeatures,f1_score(y_test,predicted))
             
     
             customMetricScores.append(getCustomMetric(y_test,predicted))
-            accuracyScores.append(accuracy_score(y_test,predicted))
+ #           accuracyScores.append(accuracy_score(y_test,predicted))
             f1Scores.append(f1_score(y_test,predicted))
 
 
-    accScoresAvg = np.mean(np.asarray(accuracyScores))#
+  #  accScoresAvg = np.mean(np.asarray(accuracyScores))#
     customScoresAvg = np.mean(np.asarray(customMetricScores))
     f1ScoresAvg = np.mean(np.asarray(f1Scores))
     print('custom')
     print(customMetricScores)
     print(customScoresAvg)
-    print('accuracy')
-    print(accuracyScores)
-    print(accScoresAvg)
+#    print('accuracy')
+#    print(accuracyScores)
+#    print(accScoresAvg)
     print('f1')
     print(f1Scores)
     print(f1ScoresAvg)
@@ -371,7 +371,7 @@ def main(attack):
     recordRun(0,startingFeatureIndeces,y.astype('int'),X, names)    #final run with last feature. Remove -1
     
     print('total run time', (time.time() - start))
-    f = open('completion_sentinel_custom_weighted.txt',"a")
+    f = open('completion_sentinel_custom_custom.txt',"a")
     f.write('finished run at ')
     f.write(str(time.time()))
     #for total number of rounds (round)

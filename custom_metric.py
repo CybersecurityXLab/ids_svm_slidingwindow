@@ -279,10 +279,10 @@ def allNegative(actualY,predictedY):
     
 #function of TPR
 def fOfTPR(tpr):
-    return tpr / (tpr + (1*(1-tpr)))
+    return tpr / (tpr + (0.25*(1-tpr)))
 
 #function of FPR
 def fOfFPR(fpr):
-    return fpr / (fpr + (1*(1-fpr)))
+    return fpr / (fpr + (0.5*(1-fpr)))
 
 main()
