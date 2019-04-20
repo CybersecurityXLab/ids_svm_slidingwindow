@@ -63,7 +63,7 @@ def recordRun(i,featureIndices,labels,X,names):#not used in RFE, only used to re
 
     featureVals = getFeatureStack(featureIndices, X)
     
-    accuracyScores = []
+   # accuracyScores = []
     customMetricScores = []
     f1Scores = []
     
@@ -88,24 +88,24 @@ def recordRun(i,featureIndices,labels,X,names):#not used in RFE, only used to re
             predicted = myModel.predict(X_test)
     
             print('custom score all feats',getCustomMetric(y_test,predicted))
-            print('accuracy all feats',accuracy_score(y_test,predicted))
+          #  print('accuracy all feats',accuracy_score(y_test,predicted))
             print('f1 for all feats',f1_score(y_test,predicted))
             
             customMetricScores.append(getCustomMetric(y_test,predicted))
-            accuracyScores.append(accuracy_score(y_test,predicted))
+           # accuracyScores.append(accuracy_score(y_test,predicted))
             f1Scores.append(f1_score(y_test,predicted))
 
     
 
-    accScoresAvg = np.mean(np.asarray(accuracyScores))#
+  #  accScoresAvg = np.mean(np.asarray(accuracyScores))#
     customScoresAvg = np.mean(np.asarray(customMetricScores))
     f1ScoresAvg = np.mean(np.asarray(f1Scores))
     print('custom')
     print(customMetricScores)
     print(customScoresAvg)
-    print('accuracy')
-    print(accuracyScores)
-    print(accScoresAvg)
+ #   print('accuracy')
+ #   print(accuracyScores)
+ #   print(accScoresAvg)
     print('f1')
     print(f1Scores)
     print(f1ScoresAvg)
@@ -114,9 +114,9 @@ def recordRun(i,featureIndices,labels,X,names):#not used in RFE, only used to re
     f.write('custom: ')
     f.write(str(customScoresAvg))
     writeArrayElements(customMetricScores,f)
-    f.write('\naccuracy: ')
-    f.write(str(accScoresAvg))
-    writeArrayElements(accuracyScores,f)
+  #  f.write('\naccuracy: ')
+  #  f.write(str(accScoresAvg))
+  #  writeArrayElements(accuracyScores,f)
     f.write('\nf1: ')
     f.write(str(f1ScoresAvg))
     writeArrayElements(f1Scores,f)
