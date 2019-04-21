@@ -1,0 +1,140 @@
+custom: 0.4589018340972929   [0.4903855731949442 0.883269393253289 0.37317574358394734 0.5476784604542844 0.0 ]
+f1: 0.4239791099111673   [0.8009404388714734 0.5522222222222222 0.2639186295503212 0.5028142589118199 0.0 ]
+0 HTTPorFTPandExeCount1 1 HTTPorFTPandExeCount2 2 HTTPorFTPandExeCount4 3 HTTPorFTPandExeCount8 4 HTTPorFTPandExeCount16 5 HTTPorFTPandExeCount32 6 HTTPorFTPandExeCount60 7 HTTPandMalformedCount1 8 HTTPandMalformedCount2 9 HTTPandMalformedCount4 10 HTTPandMalformedCount8 11 HTTPandMalformedCount16 12 HTTPandMalformedCount32 13 HTTPandMalformedCount60 14 SYNBoolean1 15 SYNBoolean2 16 SYNBoolean4 17 SYNBoolean8 18 SYNBoolean16 19 SYNBoolean32 20 SYNBoolean60 21 ECHOBoolean1 22 ECHOBoolean2 23 ECHOBoolean4 24 ECHOBoolean8 25 ECHOBoolean16 26 ECHOBoolean32 27 ECHOBoolean60 28 ECHOCount1 29 ECHOCount2 30 ECHOCount4 31 ECHOCount8 32 ECHOCount16 33 ECHOCount32 34 ECHOCount60 35 UDPCount1 36 UDPCount2 37 UDPCount4 38 UDPCount8 39 UDPCount16 40 UDPCount32 41 UDPCount60 42 TCPCount1 43 TCPCount2 44 TCPCount4 45 TCPCount8 46 TCPCount16 47 TCPCount32 48 TCPCount60 49 CCodeCount1 50 CCodeCount2 51 CCodeCount4 52 CCodeCount8 53 CCodeCount16 54 CCodeCount32 55 CCodeCount60 56 EXECodeCount1 57 EXECodeCount2 58 EXECodeCount4 59 EXECodeCount8 60 EXECodeCount16 61 EXECodeCount32 62 EXECodeCount60 63 FTPandCcodeCount1 64 FTPandCcodeCount2 65 FTPandCcodeCount4 66 FTPandCcodeCount8 67 FTPandCcodeCount16 68 FTPandCcodeCount32 69 FTPandCcodeCount60 70 TelnetCount1 71 TelnetCount2 72 TelnetCount4 73 TelnetCount8 74 TelnetCount16 75 TelnetCount32 76 TelnetCount60 77 ThirdMomentNumberOfPackets4 78 ThirdMomentNumberOfPackets8 79 ThirdMomentNumberOfPackets16 80 ThirdMomentNumberOfPackets32 81 ThirdMomentNumberOfPackets60 82 ThirdMomentPacketSize1 83 ThirdMomentPacketSize2 84 ThirdMomentPacketSize4 85 ThirdMomentPacketSize8 86 ThirdMomentPacketSize16 87 ThirdMomentPacketSize32 88 ThirdMomentPacketSize60 
+
+custom: 0.1466560491982476   [0.0 0.0 0.18019536292445035 0.5530848830667876 0.0 ]
+f1: 0.12043746230801142   [0.0 0.0 0.061342241117522005 0.5408450704225352 0.0 ]
+88 ThirdMomentPacketSize60 47 TCPCount32 87 ThirdMomentPacketSize32 33 ECHOCount32 25 ECHOBoolean16 32 ECHOCount16 31 ECHOCount8 83 ThirdMomentPacketSize2 43 TCPCount2 85 ThirdMomentPacketSize8 22 ECHOBoolean2 28 ECHOCount1 29 ECHOCount2 30 ECHOCount4 37 UDPCount4 42 TCPCount1 24 ECHOBoolean8 23 ECHOBoolean4 79 ThirdMomentNumberOfPackets16 53 CCodeCount16 52 CCodeCount8 67 FTPandCcodeCount16 66 FTPandCcodeCount8 44 TCPCount4 49 CCodeCount1 50 CCodeCount2 51 CCodeCount4 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 58 EXECodeCount4 59 EXECodeCount8 63 FTPandCcodeCount1 64 FTPandCcodeCount2 65 FTPandCcodeCount4 7 HTTPandMalformedCount1 8 HTTPandMalformedCount2 9 HTTPandMalformedCount4 10 HTTPandMalformedCount8 0 HTTPorFTPandExeCount1 4 HTTPorFTPandExeCount16 1 HTTPorFTPandExeCount2 5 HTTPorFTPandExeCount32 2 HTTPorFTPandExeCount4 3 HTTPorFTPandExeCount8 35 UDPCount1 39 UDPCount16 36 UDPCount2 40 UDPCount32 41 UDPCount60 38 UDPCount8 46 TCPCount16 34 ECHOCount60 77 ThirdMomentNumberOfPackets4 62 EXECodeCount60 6 HTTPorFTPandExeCount60 84 ThirdMomentPacketSize4 80 ThirdMomentNumberOfPackets32 21 ECHOBoolean1 11 HTTPandMalformedCount16 12 HTTPandMalformedCount32 13 HTTPandMalformedCount60 82 ThirdMomentPacketSize1 45 TCPCount8 78 ThirdMomentNumberOfPackets8 81 ThirdMomentNumberOfPackets60 55 CCodeCount60 69 FTPandCcodeCount60 54 CCodeCount32 68 FTPandCcodeCount32 26 ECHOBoolean32 72 TelnetCount4 27 ECHOBoolean60 75 TelnetCount32 73 TelnetCount8 86 ThirdMomentPacketSize16 14 SYNBoolean1 48 TCPCount60 74 TelnetCount16 71 TelnetCount2 
+
+custom: 0.14653346309102605   [0.0 0.0 0.17934450729720824 0.5533228081579219 0.0 ]
+f1: 0.12059344502221545   [0.0 0.0 0.06075334143377886 0.5422138836772984 0.0 ]
+78 ThirdMomentNumberOfPackets8 54 CCodeCount32 77 ThirdMomentNumberOfPackets4 66 FTPandCcodeCount8 0 HTTPorFTPandExeCount1 74 TelnetCount16 57 EXECodeCount2 52 CCodeCount8 49 CCodeCount1 53 CCodeCount16 50 CCodeCount2 51 CCodeCount4 55 CCodeCount60 21 ECHOBoolean1 25 ECHOBoolean16 22 ECHOBoolean2 26 ECHOBoolean32 27 ECHOBoolean60 24 ECHOBoolean8 28 ECHOCount1 32 ECHOCount16 29 ECHOCount2 33 ECHOCount32 30 ECHOCount4 34 ECHOCount60 31 ECHOCount8 56 EXECodeCount1 60 EXECodeCount16 61 EXECodeCount32 58 EXECodeCount4 62 EXECodeCount60 59 EXECodeCount8 65 FTPandCcodeCount4 7 HTTPandMalformedCount1 11 HTTPandMalformedCount16 12 HTTPandMalformedCount32 13 HTTPandMalformedCount60 10 HTTPandMalformedCount8 4 HTTPorFTPandExeCount16 5 HTTPorFTPandExeCount32 2 HTTPorFTPandExeCount4 6 HTTPorFTPandExeCount60 3 HTTPorFTPandExeCount8 14 SYNBoolean1 42 TCPCount1 46 TCPCount16 43 TCPCount2 47 TCPCount32 44 TCPCount4 48 TCPCount60 45 TCPCount8 81 ThirdMomentNumberOfPackets60 82 ThirdMomentPacketSize1 86 ThirdMomentPacketSize16 83 ThirdMomentPacketSize2 87 ThirdMomentPacketSize32 84 ThirdMomentPacketSize4 88 ThirdMomentPacketSize60 85 ThirdMomentPacketSize8 35 UDPCount1 39 UDPCount16 36 UDPCount2 40 UDPCount32 37 UDPCount4 41 UDPCount60 38 UDPCount8 9 HTTPandMalformedCount4 1 HTTPorFTPandExeCount2 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 71 TelnetCount2 73 TelnetCount8 
+
+custom: 0.14636150229723718   [0.0 0.0 0.17848470332826402 0.5533228081579219 0.0 ]
+f1: 0.120475593508477   [0.0 0.0 0.06016408386508661 0.5422138836772984 0.0 ]
+43 TCPCount2 14 SYNBoolean1 48 TCPCount60 45 TCPCount8 54 CCodeCount32 53 CCodeCount16 55 CCodeCount60 21 ECHOBoolean1 25 ECHOBoolean16 22 ECHOBoolean2 26 ECHOBoolean32 27 ECHOBoolean60 24 ECHOBoolean8 28 ECHOCount1 32 ECHOCount16 29 ECHOCount2 33 ECHOCount32 30 ECHOCount4 34 ECHOCount60 31 ECHOCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 58 EXECodeCount4 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 65 FTPandCcodeCount4 66 FTPandCcodeCount8 7 HTTPandMalformedCount1 11 HTTPandMalformedCount16 9 HTTPandMalformedCount4 13 HTTPandMalformedCount60 10 HTTPandMalformedCount8 4 HTTPorFTPandExeCount16 5 HTTPorFTPandExeCount32 6 HTTPorFTPandExeCount60 3 HTTPorFTPandExeCount8 42 TCPCount1 35 UDPCount1 39 UDPCount16 36 UDPCount2 40 UDPCount32 37 UDPCount4 41 UDPCount60 38 UDPCount8 71 TelnetCount2 46 TCPCount16 51 CCodeCount4 52 CCodeCount8 0 HTTPorFTPandExeCount1 74 TelnetCount16 73 TelnetCount8 77 ThirdMomentNumberOfPackets4 81 ThirdMomentNumberOfPackets60 78 ThirdMomentNumberOfPackets8 82 ThirdMomentPacketSize1 86 ThirdMomentPacketSize16 83 ThirdMomentPacketSize2 87 ThirdMomentPacketSize32 84 ThirdMomentPacketSize4 88 ThirdMomentPacketSize60 85 ThirdMomentPacketSize8 
+
+custom: 0.1462419946649472   [0.0 0.0 0.17848470332826402 0.552725269996472 0.0 ]
+f1: 0.11979022156850391   [0.0 0.0 0.06016408386508661 0.5387870239774329 0.0 ]
+57 EXECodeCount2 53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 21 ECHOBoolean1 25 ECHOBoolean16 22 ECHOBoolean2 26 ECHOBoolean32 27 ECHOBoolean60 24 ECHOBoolean8 28 ECHOCount1 32 ECHOCount16 33 ECHOCount32 30 ECHOCount4 34 ECHOCount60 31 ECHOCount8 60 EXECodeCount16 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 67 FTPandCcodeCount16 68 FTPandCcodeCount32 66 FTPandCcodeCount8 7 HTTPandMalformedCount1 11 HTTPandMalformedCount16 9 HTTPandMalformedCount4 13 HTTPandMalformedCount60 10 HTTPandMalformedCount8 5 HTTPorFTPandExeCount32 14 SYNBoolean1 42 TCPCount1 46 TCPCount16 43 TCPCount2 48 TCPCount60 45 TCPCount8 74 TelnetCount16 71 TelnetCount2 73 TelnetCount8 77 ThirdMomentNumberOfPackets4 81 ThirdMomentNumberOfPackets60 78 ThirdMomentNumberOfPackets8 82 ThirdMomentPacketSize1 86 ThirdMomentPacketSize16 83 ThirdMomentPacketSize2 87 ThirdMomentPacketSize32 84 ThirdMomentPacketSize4 88 ThirdMomentPacketSize60 85 ThirdMomentPacketSize8 35 UDPCount1 39 UDPCount16 36 UDPCount2 40 UDPCount32 37 UDPCount4 38 UDPCount8 63 FTPandCcodeCount1 65 FTPandCcodeCount4 0 HTTPorFTPandExeCount1 56 EXECodeCount1 
+
+custom: 0.14584843826578756   [0.0 0.0 0.17761580910851976 0.5516263822204179 0.0 ]
+f1: 0.11843047435356517   [0.0 0.0 0.05957446808510638 0.5325779036827195 0.0 ]
+35 UDPCount1 40 UDPCount32 7 HTTPandMalformedCount1 54 CCodeCount32 51 CCodeCount4 52 CCodeCount8 24 ECHOBoolean8 59 EXECodeCount8 13 HTTPandMalformedCount60 5 HTTPorFTPandExeCount32 33 ECHOCount32 30 ECHOCount4 14 SYNBoolean1 46 TCPCount16 48 TCPCount60 31 ECHOCount8 53 CCodeCount16 55 CCodeCount60 21 ECHOBoolean1 25 ECHOBoolean16 26 ECHOBoolean32 27 ECHOBoolean60 28 ECHOCount1 56 EXECodeCount1 0 HTTPorFTPandExeCount1 45 TCPCount8 22 ECHOBoolean2 57 EXECodeCount2 42 TCPCount1 34 ECHOCount60 43 TCPCount2 37 UDPCount4 38 UDPCount8 60 EXECodeCount16 61 EXECodeCount32 62 EXECodeCount60 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 65 FTPandCcodeCount4 66 FTPandCcodeCount8 9 HTTPandMalformedCount4 10 HTTPandMalformedCount8 74 TelnetCount16 71 TelnetCount2 73 TelnetCount8 77 ThirdMomentNumberOfPackets4 81 ThirdMomentNumberOfPackets60 78 ThirdMomentNumberOfPackets8 82 ThirdMomentPacketSize1 86 ThirdMomentPacketSize16 83 ThirdMomentPacketSize2 87 ThirdMomentPacketSize32 84 ThirdMomentPacketSize4 
+
+custom: 0.14542034368359333   [0.0 0.0 0.17584847094072753 0.5512532474772391 0.0 ]
+f1: 0.11777102330293818   [0.0 0.0 0.05835866261398176 0.5304964539007092 0.0 ]
+14 SYNBoolean1 53 CCodeCount16 51 CCodeCount4 52 CCodeCount8 21 ECHOBoolean1 22 ECHOBoolean2 26 ECHOBoolean32 27 ECHOBoolean60 24 ECHOBoolean8 33 ECHOCount32 34 ECHOCount60 31 ECHOCount8 7 HTTPandMalformedCount1 9 HTTPandMalformedCount4 10 HTTPandMalformedCount8 0 HTTPorFTPandExeCount1 5 HTTPorFTPandExeCount32 42 TCPCount1 35 UDPCount1 40 UDPCount32 37 UDPCount4 54 CCodeCount32 55 CCodeCount60 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 65 FTPandCcodeCount4 66 FTPandCcodeCount8 43 TCPCount2 74 TelnetCount16 71 TelnetCount2 73 TelnetCount8 77 ThirdMomentNumberOfPackets4 81 ThirdMomentNumberOfPackets60 78 ThirdMomentNumberOfPackets8 82 ThirdMomentPacketSize1 86 ThirdMomentPacketSize16 83 ThirdMomentPacketSize2 87 ThirdMomentPacketSize32 84 ThirdMomentPacketSize4 46 TCPCount16 45 TCPCount8 48 TCPCount60 
+
+custom: 0.144959000971179   [0.0 0.0 0.17404472269035734 0.5507502821655377 0.0 ]
+f1: 0.11697792008261672   [0.0 0.0 0.05717761557177616 0.5277119848413074 0.0 ]
+48 TCPCount60 9 HTTPandMalformedCount4 10 HTTPandMalformedCount8 5 HTTPorFTPandExeCount32 0 HTTPorFTPandExeCount1 43 TCPCount2 26 ECHOBoolean32 27 ECHOBoolean60 24 ECHOBoolean8 14 SYNBoolean1 53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 33 ECHOCount32 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 65 FTPandCcodeCount4 66 FTPandCcodeCount8 45 TCPCount8 74 TelnetCount16 71 TelnetCount2 73 TelnetCount8 77 ThirdMomentNumberOfPackets4 81 ThirdMomentNumberOfPackets60 78 ThirdMomentNumberOfPackets8 82 ThirdMomentPacketSize1 86 ThirdMomentPacketSize16 83 ThirdMomentPacketSize2 87 ThirdMomentPacketSize32 84 ThirdMomentPacketSize4 35 UDPCount1 42 TCPCount1 40 UDPCount32 46 TCPCount16 22 ECHOBoolean2 37 UDPCount4 
+
+custom: 0.14599724389400376   [0.0 0.0 0.1784838296701324 0.5515023897998864 0.0 ]
+f1: 0.11840611011593356   [0.0 0.0 0.06014580801944107 0.5318847425602268 0.0 ]
+0 HTTPorFTPandExeCount1 43 TCPCount2 26 ECHOBoolean32 14 SYNBoolean1 9 HTTPandMalformedCount4 10 HTTPandMalformedCount8 22 ECHOBoolean2 35 UDPCount1 24 ECHOBoolean8 37 UDPCount4 33 ECHOCount32 53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 65 FTPandCcodeCount4 66 FTPandCcodeCount8 46 TCPCount16 48 TCPCount60 45 TCPCount8 74 TelnetCount16 71 TelnetCount2 73 TelnetCount8 77 ThirdMomentNumberOfPackets4 81 ThirdMomentNumberOfPackets60 78 ThirdMomentNumberOfPackets8 82 ThirdMomentPacketSize1 86 ThirdMomentPacketSize16 83 ThirdMomentPacketSize2 87 ThirdMomentPacketSize32 84 ThirdMomentPacketSize4 
+
+custom: 0.14541599812820077   [0.0 0.0 0.1758501671166282 0.5512298235243758 0.0 ]
+f1: 0.11762784061537188   [0.0 0.0 0.058394160583941604 0.5297450424929178 0.0 ]
+37 UDPCount4 26 ECHOBoolean32 10 HTTPandMalformedCount8 0 HTTPorFTPandExeCount1 22 ECHOBoolean2 9 HTTPandMalformedCount4 24 ECHOBoolean8 14 SYNBoolean1 35 UDPCount1 53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 65 FTPandCcodeCount4 66 FTPandCcodeCount8 46 TCPCount16 43 TCPCount2 48 TCPCount60 45 TCPCount8 74 TelnetCount16 71 TelnetCount2 73 TelnetCount8 77 ThirdMomentNumberOfPackets4 81 ThirdMomentNumberOfPackets60 78 ThirdMomentNumberOfPackets8 82 ThirdMomentPacketSize1 86 ThirdMomentPacketSize16 
+
+custom: 0.14830166535513617   [0.015544017365262616 0.0 0.17495395948434625 0.551010349926072 0.0 ]
+f1: 0.11796592790766088   [0.002652519893899204 0.0 0.05782105903834449 0.5293560606060607 0.0 ]
+24 ECHOBoolean8 35 UDPCount1 22 ECHOBoolean2 9 HTTPandMalformedCount4 10 HTTPandMalformedCount8 14 SYNBoolean1 0 HTTPorFTPandExeCount1 53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 65 FTPandCcodeCount4 66 FTPandCcodeCount8 46 TCPCount16 43 TCPCount2 48 TCPCount60 45 TCPCount8 74 TelnetCount16 71 TelnetCount2 73 TelnetCount8 77 ThirdMomentNumberOfPackets4 81 ThirdMomentNumberOfPackets60 78 ThirdMomentNumberOfPackets8 82 ThirdMomentPacketSize1 
+
+custom: 0.14840310619148628   [0.015544017365262616 0.0 0.17673853628909808 0.5497329773030708 0.0 ]
+f1: 0.11680292209060013   [0.002652519893899204 0.0 0.05900243309002433 0.5223596574690771 0.0 ]
+22 ECHOBoolean2 9 HTTPandMalformedCount4 14 SYNBoolean1 10 HTTPandMalformedCount8 53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 65 FTPandCcodeCount4 66 FTPandCcodeCount8 46 TCPCount16 43 TCPCount2 48 TCPCount60 45 TCPCount8 74 TelnetCount16 71 TelnetCount2 73 TelnetCount8 77 ThirdMomentNumberOfPackets4 81 ThirdMomentNumberOfPackets60 78 ThirdMomentNumberOfPackets8 82 ThirdMomentPacketSize1 
+
+custom: 0.14875138758810574   [0.015543999296448263 0.0 0.1810374091805638 0.5471755294635166 0.0 ]
+f1: 0.11459321530799702   [0.002642007926023778 0.0 0.061930783242258654 0.5083932853717027 0.0 ]
+10 HTTPandMalformedCount8 9 HTTPandMalformedCount4 14 SYNBoolean1 53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 65 FTPandCcodeCount4 66 FTPandCcodeCount8 46 TCPCount16 43 TCPCount2 48 TCPCount60 45 TCPCount8 74 TelnetCount16 71 TelnetCount2 73 TelnetCount8 77 ThirdMomentNumberOfPackets4 81 ThirdMomentNumberOfPackets60 
+
+custom: 0.14476168408833207   [0.0 0.0 0.17934538932894933 0.5444630311127111 0.0 ]
+f1: 0.111041636622552   [0.0 0.0 0.06077180188392586 0.4944363812288341 0.0 ]
+9 HTTPandMalformedCount4 10 HTTPandMalformedCount8 14 SYNBoolean1 53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 65 FTPandCcodeCount4 66 FTPandCcodeCount8 46 TCPCount16 43 TCPCount2 48 TCPCount60 45 TCPCount8 74 TelnetCount16 71 TelnetCount2 73 TelnetCount8 
+
+custom: 0.1450189491157731   [0.0 0.0 0.17934450729720824 0.5457502382816571 0.0 ]
+f1: 0.11224691467751613   [0.0 0.0 0.06075334143377886 0.5004812319538018 0.0 ]
+9 HTTPandMalformedCount4 10 HTTPandMalformedCount8 14 SYNBoolean1 53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 65 FTPandCcodeCount4 66 FTPandCcodeCount8 46 TCPCount16 43 TCPCount2 48 TCPCount60 45 TCPCount8 74 TelnetCount16 
+
+custom: 0.14700307044468452   [0.0 0.0 0.18351296242353626 0.5515023897998864 0.0 ]
+f1: 0.11911966695864731   [0.0 0.0 0.06371359223300971 0.5318847425602268 0.0 ]
+9 HTTPandMalformedCount4 14 SYNBoolean1 10 HTTPandMalformedCount8 53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 65 FTPandCcodeCount4 66 FTPandCcodeCount8 46 TCPCount16 43 TCPCount2 48 TCPCount60 
+
+custom: 0.14675874794057683   [0.0 0.0 0.18432111288219097 0.5494726268206932 0.0 ]
+f1: 0.11705065210797694   [0.0 0.0 0.06430087958750379 0.520952380952381 0.0 ]
+9 HTTPandMalformedCount4 10 HTTPandMalformedCount8 14 SYNBoolean1 53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 65 FTPandCcodeCount4 66 FTPandCcodeCount8 46 TCPCount16 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+9 HTTPandMalformedCount4 10 HTTPandMalformedCount8 14 SYNBoolean1 53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 65 FTPandCcodeCount4 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 65 FTPandCcodeCount4 9 HTTPandMalformedCount4 10 HTTPandMalformedCount8 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 65 FTPandCcodeCount4 9 HTTPandMalformedCount4 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 65 FTPandCcodeCount4 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 68 FTPandCcodeCount32 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 67 FTPandCcodeCount16 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 63 FTPandCcodeCount1 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 59 EXECodeCount8 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 62 EXECodeCount60 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 61 EXECodeCount32 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 57 EXECodeCount2 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 60 EXECodeCount16 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 56 EXECodeCount1 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 52 CCodeCount8 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 55 CCodeCount60 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+53 CCodeCount16 54 CCodeCount32 51 CCodeCount4 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+53 CCodeCount16 54 CCodeCount32 
+
+custom: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+f1: 0.0   [0.0 0.0 0.0 0.0 0.0 ]
+53 CCodeCount16 
+
