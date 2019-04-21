@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 
 def getFeatures():
-    featureVals = pd.read_csv('feats13bestcustomchosen.csv',
+    featureVals = pd.read_csv('feats9bestf1chosen.csv',
                             sep=',',
                             header=0)
     
@@ -35,7 +35,7 @@ def getFeatures():
 #print(featureNames)
     
 def getNames():
-    featureVals = pd.read_csv('feats13bestcustomchosen.csv',
+    featureVals = pd.read_csv('feats9bestf1chosen.csv',
                             sep=',',
                             header=0)
     
