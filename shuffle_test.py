@@ -34,13 +34,14 @@ def getShuffleArray(length):#returns shuffled indices of given length for client
     np.random.shuffle(shuffleArray)
     
     return shuffleArray
-'''
-def main():
+
+'''def main():
     feats = np.random.rand(25,4)
     print(feats)
     labels = np.array([0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,1])
     
     print(labels)
+    print(len(labels))
     
     shuffled = getShuffleArray(len(labels))
     labels = np.reshape(labels,(25,1))

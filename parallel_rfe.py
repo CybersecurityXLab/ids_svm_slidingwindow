@@ -110,7 +110,7 @@ def recordRun(i,featureIndices,labels,X,names):#not used in RFE, only used to re
     print(f1Scores)
     print(f1ScoresAvg)
 
-    f = open('f19feats_f1optimalwindows.txt','a')
+    f = open('testtesttest.txt','a')
     f.write('custom: ')
     f.write(str(customScoresAvg))
     writeArrayElements(customMetricScores,f)
@@ -256,7 +256,7 @@ def oneRound(startingFeatureIndeces,idx,y,X,names):
     #print('\n\n')
 
 #put the traffic type as a parameter evenutally
-def main(attack):
+def main(attack,shuffle):
     print('using custom metric')
     X,y = clean()
     names = getNames()
@@ -264,7 +264,9 @@ def main(attack):
     
     ####IMPORTANT THE NAMES ARE ONLY CORRECT IF ALL OF THE COLUMN INDICES ARE USED
     
-    #shuffledArray = getShuffledArray()
+    shuffledArray = getShuffleArray(len(X))
+    
+
    # X, y, featureNames = getFeatures()
     
     #here remove all -1s and corresp labels
@@ -280,18 +282,20 @@ def main(attack):
     
     print(y)
     
+    if shuffle:
+        print(len(X))
+        print(len(shuffledArray))
+        print(X)
+       # print(y)
+       #return shuffled variant
+        X, y = doShuffle(X,y, shuffledArray)
 
     
     start = time.time()
     
-    #temporary
-  #  sixteenSecWindows = [4,11,18,25,32,39,46,53,60,67]
-  #  X = np.take(X,sixteenSecWindows)
-    #X = X[:,0:4]
-    
     startingFeatures = X
 
-    print(X)
+   # print(X)
    # print(featureNames)
     
     
@@ -393,5 +397,5 @@ def main(attack):
     #eventually, at the end run a cross-val with 20 rounds for robustness and lessen poor scores.
     #if f1 performs better, it is likely because of PATPR, which may need to have its weight lessened
     #not using 'all' because PATPR doesn't calculate correctly for this scenario.
-main('dos')#BEFORE FINAL RUN, MAKE SURE ALL CORRECTLY SEPARATES ATTACKS FOR PATPR
+main('dos',True)#BEFORE FINAL RUN, MAKE SURE ALL CORRECTLY SEPARATES ATTACKS FOR PATPR
 #if the best feature set is all features, choose a local minimum under a reasonable threshold of features
