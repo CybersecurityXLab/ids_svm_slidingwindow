@@ -142,7 +142,7 @@ def getCustomMetric(actualY,predictedY):
     #true negatives is the actual length of the vector minus the number of true positives
     totalNegatives = len(actualY) - totalPositives
     
-    print(attackIndexList)
+    #print(attackIndexList)
     
     if totalPositives == len(actualY):
         val = allPositive(actualY,predictedY,attackIndexList,totalPositives)
@@ -153,9 +153,9 @@ def getCustomMetric(actualY,predictedY):
         val = posAndNegValues(actualY,predictedY,attackIndexList,totalPositives,totalNegatives)
         
     #val contains f(tpr), f(tnr), and per attack tpr in that order.
-    print(val)
-    print('\n\nweighted tpr:', val[0], "\nweighted tnr:",val[1],'\nperAttackTPR:',val[2],'\n')#,'\n\nCustom Metric Score:', customMetric)
-    print('old metric', val[0]*val[1]*val[2])
+#    print(val)
+#    print('\n\nweighted tpr:', val[0], "\nweighted tnr:",val[1],'\nperAttackTPR:',val[2],'\n')#,'\n\nCustom Metric Score:', customMetric)
+#    print('old metric', val[0]*val[1]*val[2])
 
     harmonicMean = calcHarmonicMean(val[0],val[1],val[2])
 
@@ -184,31 +184,31 @@ def calcPerAttackTPR(predictedY, attackIndexList):
                 break
                 
                 
-    print('total attacks',totalAttacksCounted)
+#    print('total attacks',totalAttacksCounted)
     
     perAttackTPR = totalAttacksCounted / len(attackIndexList)
     return perAttackTPR
 
 def posAndNegValues(actualY,predictedY,attackIndexList,totalPositives,totalNegatives):
     tn, falsePositives, fn, truePositives = confusion_matrix(actualY,predictedY).ravel()
-    print(truePositives, falsePositives)
+#    print(truePositives, falsePositives)
 
     perAttackTPR = calcPerAttackTPR(predictedY,attackIndexList)
-    print(perAttackTPR)
+#    print(perAttackTPR)
 
         
      #the true positive rate is the total number of true positives predicted as such divided by the total number of true positives (i.e. the sum of the second column in the attackIndexList)
     tpr = truePositives/totalPositives
     fpr = falsePositives/totalNegatives
-    print('fpr',fpr)
+#    print('fpr',fpr)
     fOfTnr = 1 - fOfFPR(fpr)
     fOfTpr = fOfTPR(tpr)
        
     
     #we want to use the TPR, but we only want to give it 1/4 weight. Getting every second classified in a window is not as important as classifying some of the correct seconds or reducing false positive rates
     # f(tpr) gives the value only 1/4 weight, but still keeps the final score between 0 (worst) and 1 (best)
-    print('tpr',tpr)
-    print('weighted tpr', fOfTpr)
+#    print('tpr',tpr)
+#    print('weighted tpr', fOfTpr)
 
     
     return fOfTpr, fOfTnr, perAttackTPR

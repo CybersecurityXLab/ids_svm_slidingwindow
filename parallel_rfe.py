@@ -27,6 +27,7 @@ import math
 from custom_metric import getCustomMetric
 from clean_data import clean, getFeatureSubset, getFeatureStack
 from shuffle_test import getShuffleArray, doShuffle, doUnshuffle
+from oneVAll import oneVAll
 
 def attackVsR(attack,table):#regular vs generic attack traffic
     print('here with ',all)
@@ -39,22 +40,6 @@ def attackVsR(attack,table):#regular vs generic attack traffic
             
     return tempTable
 
-def oneVAll(attack, table):
-    print('here withh ', attack)
-    if(attack=='all'):
-        return attackVsR(attack,table)
-    tempTable = np.array(table)
-  #  print('r2l'==attack)
-    for idx,el in enumerate(tempTable):
-        if el != attack:
-         #   print(el)
-            tempTable[idx] = 0
-        else:
-            tempTable[idx]=1
-           # if attack == 'r2l':
-              #  print(idx)
-            
-    return tempTable
 
 def recordRun(i,featureIndices,labels,X,names):#not used in RFE, only used to record current scorestartingFeatureIndeces.append(-1)#on negative one, run all features for recording purposes
  #reshape into a vector
@@ -110,7 +95,7 @@ def recordRun(i,featureIndices,labels,X,names):#not used in RFE, only used to re
     print(f1Scores)
     print(f1ScoresAvg)
 
-    f = open('testtesttest.txt','a')
+    f = open('testtesttest2.txt','a')
     f.write('custom: ')
     f.write(str(customScoresAvg))
     writeArrayElements(customMetricScores,f)
@@ -160,10 +145,12 @@ def parallelRFE(i,featureIndices,labels,X,names):
     
     kf = KFold(len(labels),5)
     nonFeatures = names[i]
-    print('current feature: ',str(i), nonFeatures)
+    
+    if not i == -1:#the sentinel value is collecting the scores of all features, if -1 is used, here, it will print the last feature name
+        print('current feature: ',str(i), nonFeatures)
     #if either all y_train or y_test are 0, skip the iteration
     for train_index, test_index in kf:
-        print("TRAIN:", train_index, "TEST:", test_index)
+ #       print("TRAIN:", train_index, "TEST:", test_index)
         X_train, X_test = featureVals[train_index], featureVals[test_index]
         y_train, y_test = labels[train_index], labels[test_index]
 
@@ -201,11 +188,11 @@ def parallelRFE(i,featureIndices,labels,X,names):
             #we need a measure which gives all attacks weight, gives longer attacks more weight (time relevant), and penalizes false positives
             #in the future, experimentation can be done to consider the optimal weights given to each of these
             
-            
- #           print('accuracy minus feature',str(i), nonFeatures,accuracy_score(y_test,predicted))
-            print('custom score minus feature',str(i), nonFeatures,getCustomMetric(y_test,predicted))
-            print('f1 minus feature',str(i), nonFeatures,f1_score(y_test,predicted))
-            
+            if not i == -1:#the sentinel value is collecting the scores of all features, if -1 is used, here, it will print the last feature name
+     #           print('accuracy minus feature',str(i), nonFeatures,accuracy_score(y_test,predicted))
+                print('\ncustom score minus feature',str(i), nonFeatures,getCustomMetric(y_test,predicted))
+                print('f1 minus feature',str(i), nonFeatures,f1_score(y_test,predicted))
+                
     
             customMetricScores.append(getCustomMetric(y_test,predicted))
  #           accuracyScores.append(accuracy_score(y_test,predicted))
@@ -228,14 +215,15 @@ def parallelRFE(i,featureIndices,labels,X,names):
 
     rankingScoresVerbose.append([f1ScoresAvg,nonFeatures,i])
 
-    print(rankingScoresVerbose)
-    return rankingScoresVerbose
+    if not i == -1:
+        print(rankingScoresVerbose)
+        return rankingScoresVerbose
 
     
 
 def oneRound(startingFeatureIndeces,idx,y,X,names):
     popList = startingFeatureIndeces#so that operations can be performed without changing global list
-    popList.pop(0)#remove -1 sentinel for actual run
+ #   popList.pop(0)#remove -1 sentinel for actual run
     if(idx == -1):
         print('running all features to record score')
         return recordRun(idx,popList,y.astype('int'),X,names)
@@ -290,7 +278,8 @@ def main(attack,shuffle):
        #return shuffled variant
         X, y = doShuffle(X,y, shuffledArray)
 
-    
+    X = X[40000:60000,:]
+    y = y[40000:60000]
     start = time.time()
     
     startingFeatures = X
@@ -300,10 +289,9 @@ def main(attack,shuffle):
     
     
     startingFeatureIndeces = [] #get indeces of features for next round
-    startingFeatureIndeces.append(-1)#on negative one, run all features for recording purposes
+   # startingFeatureIndeces.append(-1)#on negative one, run all features for recording purposes
     for i in range(len(startingFeatures[0])):
         startingFeatureIndeces.append(i)
-    
     
     for round in range(len(X[0])):#total rounds to run.
         #print('feature scores for current round')
@@ -320,9 +308,9 @@ def main(attack,shuffle):
             num_cores = multiprocessing.cpu_count()
             print("the number of cores is", str(num_cores))
     
-            retVal = Parallel(n_jobs=num_cores-2)(delayed(oneRound)(startingFeatureIndeces,idx, y,X,names) for idx in startingFeatureIndeces)
-            print('retval',retVal)
-            print(retVal.remove(None))
+            retVal = Parallel(n_jobs=num_cores-2)(delayed(oneRound)(startingFeatureIndeces,idx,y,X,names) for idx in startingFeatureIndeces)
+           # print('retval',retVal)
+          #  print(retVal.remove(None))
             print('retval after nonetype removed', retVal)
             featureScores.append(retVal)
             print('the feature scores',featureScores)
@@ -337,7 +325,7 @@ def main(attack,shuffle):
             print(len(sortedList)*.1)
             print(math.floor(len(sortedList)*.1))
             
-            toElim = math.floor(len(sortedList)*0.1)#eliminates 10% of each round's features
+            toElim = math.floor(len(sortedList)*0.01)#eliminates 10% of each round's features
             
             if(toElim == 0):#1 feature is less than threshold
                 toElim = 1
@@ -355,7 +343,7 @@ def main(attack,shuffle):
                 sortedList = sortedList[:-1]
             
             startingFeatureIndeces = []
-            startingFeatureIndeces.append(-1)#append sentinel
+           # startingFeatureIndeces.append(-1)#append sentinel
             for el in sortedList:
                 startingFeatureIndeces.append(el[0][2])
             
