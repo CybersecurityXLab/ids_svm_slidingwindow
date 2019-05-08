@@ -9,6 +9,11 @@ from clean_data import clean, getFeatureSubset, getFeatureStack
 from read_featureval_csv import getFeatures,chooseFeatures, getNames
 from shuffle_test import getShuffleArray, doShuffle, doUnshuffle
 from oneVAll import oneVAll
+from itertools import chain
+from sklearn.model_selection import cross_val_predict
+from sklearn import svm
+from sklearn.metrics import f1_score
+import numpy as np
 
 #modularizes the naming
 def nameManager(indices,names):
@@ -18,14 +23,34 @@ def nameManager(indices,names):
         
     return orderedNames
 
-def rfe(X,y,name):
+def run(name,feats,y):
+    myModel = svm.SVC(gamma='auto',kernel='rbf')
+    predicted = cross_val_predict(myModel,feats,y,cv=5)
+    f1 = f1_score(y,predicted)
+    print(f1)
     pass
+###WRONG
+def rfeRound(X,y,indices,orderedNames):
+    roundScores = []
+    for i,idx in enumerate(indices):
+        print()
+        name = orderedNames[i]#the current name
+        print("Score without ",name, ":")
+        tempIndices = [indices[0:i]]#creates a list of indices to use for current round
+        tempIndices.append(indices[i+1:])
+        tempIndices = list(chain.from_iterable(tempIndices))
+
+        tempFeatures = np.zeros([len(y),len(X[0])])
+        for j,jdx in enumerate(tempIndices):#creates the actual feature list for current run
+            tempFeatures[:,j] = X[:,jdx]
+        
+       # roundScores.append[run(name,tempFeatures,X,y)]
+        run(name,tempFeatures,y)
 
 def main(attack, shuffle):
 #get data
     X,y = clean()
     startingNames = getNames()
-    
     
     y = oneVAll(attack,y).reshape(len(y),)
     
@@ -48,16 +73,13 @@ def main(attack, shuffle):
         print('startingFeatures is',indices)
         
         orderedNames = nameManager(indices,startingNames)
-        print(orderedNames)
+        #print(orderedNames)
 
         
         if len(indices)>2:
-            for i,idx in enumerate(indices):
-                name = orderedNames[i]#the current name
+            rfeRound(X,y,indices,orderedNames)
+
                 
-                
-               # startingFeatureIndeces,idx,y,X,names
-                rfe(X,y,name,idx)
 
 
         indices = indices[:-1]  
