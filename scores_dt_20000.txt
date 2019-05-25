@@ -1,0 +1,27 @@
+F1 score: 0.6267326732673267  TCPCount SYNBool DNSCount SSHCount TELNETCount ICMPCount FTPandC UniqSrcIPs HTTPCount UniqDestIPs RSTCount SYNCount HTTPandMalformed CVPacketSize UniqProtcols MeanNumberOfPackets HTTPorFTPandEXE ThirdMNumberPackets FTPCount NumberOfPackets ThirdMPacketSize CorJSCount ARPCount MeanPacketSize CCodeCount EXECodeCount 
+F1 score: 0.6301096709870389  SYNBool TCPCount DNSCount SSHCount RSTCount HTTPCount ARPCount NumberOfPackets EXECodeCount ICMPCount MeanPacketSize TELNETCount UniqDestIPs UniqSrcIPs HTTPandMalformed MeanNumberOfPackets SYNCount FTPandC CorJSCount HTTPorFTPandEXE FTPCount CCodeCount UniqProtcols ThirdMPacketSize ThirdMNumberPackets 
+F1 score: 0.6318407960199005  SYNBool TCPCount UniqSrcIPs FTPCount SSHCount DNSCount RSTCount TELNETCount ARPCount ThirdMNumberPackets MeanNumberOfPackets FTPandC CorJSCount HTTPandMalformed UniqDestIPs HTTPCount SYNCount MeanPacketSize ICMPCount CCodeCount EXECodeCount NumberOfPackets HTTPorFTPandEXE UniqProtcols 
+F1 score: 0.6441015430562469  SYNBool TCPCount DNSCount ThirdMNumberPackets SSHCount MeanPacketSize RSTCount HTTPCount FTPCount TELNETCount MeanNumberOfPackets CorJSCount HTTPorFTPandEXE FTPandC UniqSrcIPs ICMPCount NumberOfPackets EXECodeCount ARPCount UniqProtcols CCodeCount HTTPandMalformed SYNCount 
+F1 score: 0.6444780635400909  SYNBool DNSCount TCPCount MeanPacketSize FTPCount ThirdMNumberPackets RSTCount CorJSCount ICMPCount HTTPCount FTPandC ARPCount HTTPandMalformed SYNCount UniqProtcols NumberOfPackets SSHCount TELNETCount UniqSrcIPs CCodeCount MeanNumberOfPackets EXECodeCount 
+F1 score: 0.6414719045251119  SYNBool DNSCount TCPCount FTPCount MeanPacketSize ThirdMNumberPackets SYNCount SSHCount HTTPCount RSTCount MeanNumberOfPackets ICMPCount CorJSCount UniqProtcols CCodeCount EXECodeCount UniqSrcIPs HTTPandMalformed TELNETCount NumberOfPackets FTPandC 
+F1 score: 0.6408060453400504  SYNBool DNSCount TCPCount MeanPacketSize RSTCount HTTPCount FTPCount UniqProtcols CorJSCount ThirdMNumberPackets NumberOfPackets SSHCount TELNETCount ICMPCount HTTPandMalformed CCodeCount FTPandC EXECodeCount SYNCount MeanNumberOfPackets 
+F1 score: 0.6419629444166249  SYNBool DNSCount ThirdMNumberPackets TCPCount TELNETCount ICMPCount RSTCount HTTPCount FTPCount SSHCount MeanNumberOfPackets SYNCount CorJSCount FTPandC MeanPacketSize HTTPandMalformed CCodeCount UniqProtcols EXECodeCount 
+F1 score: 0.6372303060712494  SYNBool DNSCount ThirdMNumberPackets RSTCount TCPCount MeanNumberOfPackets TELNETCount HTTPCount ICMPCount FTPandC SYNCount FTPCount MeanPacketSize SSHCount UniqProtcols CCodeCount CorJSCount EXECodeCount 
+F1 score: 0.6408839779005525  SYNBool DNSCount ThirdMNumberPackets TCPCount FTPCount RSTCount TELNETCount SYNCount HTTPCount MeanNumberOfPackets MeanPacketSize EXECodeCount CCodeCount ICMPCount SSHCount UniqProtcols CorJSCount 
+F1 score: 0.6381679389312976  SYNBool DNSCount TCPCount ThirdMNumberPackets TELNETCount HTTPCount MeanNumberOfPackets RSTCount FTPCount ICMPCount UniqProtcols SSHCount CorJSCount CCodeCount EXECodeCount MeanPacketSize 
+F1 score: 0.6340232205956586  SYNBool DNSCount TCPCount HTTPCount FTPCount ThirdMNumberPackets TELNETCount MeanPacketSize RSTCount ICMPCount CCodeCount SSHCount CorJSCount MeanNumberOfPackets EXECodeCount 
+F1 score: 0.6328986960882648  SYNBool DNSCount TCPCount HTTPCount FTPCount ThirdMNumberPackets RSTCount SSHCount TELNETCount CCodeCount MeanNumberOfPackets EXECodeCount ICMPCount CorJSCount 
+F1 score: 0.6290890790135883  SYNBool MeanNumberOfPackets DNSCount CorJSCount TCPCount RSTCount HTTPCount SSHCount FTPCount CCodeCount ICMPCount TELNETCount EXECodeCount 
+F1 score: 0.6235588972431078  SYNBool MeanNumberOfPackets TCPCount CorJSCount DNSCount HTTPCount ICMPCount RSTCount TELNETCount FTPCount CCodeCount SSHCount 
+F1 score: 0.626008064516129  SYNBool MeanNumberOfPackets TCPCount DNSCount CorJSCount RSTCount TELNETCount HTTPCount SSHCount ICMPCount CCodeCount 
+F1 score: 0.620412267471091  SYNBool MeanNumberOfPackets DNSCount TCPCount CorJSCount TELNETCount RSTCount ICMPCount SSHCount HTTPCount 
+F1 score: 0.6213399503722083  SYNBool MeanNumberOfPackets TCPCount DNSCount SSHCount RSTCount CorJSCount HTTPCount ICMPCount 
+F1 score: 0.6232098765432098  SYNBool MeanNumberOfPackets TCPCount DNSCount HTTPCount SSHCount RSTCount CorJSCount 
+F1 score: 0.6148548942449582  SYNBool MeanNumberOfPackets TCPCount DNSCount HTTPCount SSHCount CorJSCount 
+F1 score: 0.6231811339688912  SYNBool MeanNumberOfPackets TCPCount DNSCount HTTPCount SSHCount 
+F1 score: 0.598903836571998  SYNBool MeanNumberOfPackets TCPCount DNSCount HTTPCount 
+F1 score: 0.5871193210184723  SYNBool MeanNumberOfPackets DNSCount TCPCount 
+F1 score: 0.5476190476190476  SYNBool MeanNumberOfPackets DNSCount 
+F1 score: 0.46500304321363356  SYNBool MeanNumberOfPackets 
+F1 score: 0.2915642915642916  SYNBool 
+239.38832259178162
