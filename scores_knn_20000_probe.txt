@@ -1,0 +1,27 @@
+F1 score: 0.2849968612680477  ARPCount SYNBool UniqDestIPs CVPacketSize DNSCount SSHCount MeanPacketSize UDPCount TELNETCount UniqSrcIPs MeanNumberOfPackets NumberOfPackets ThirdMPacketSize SYNCount TCPCount ThirdMNumberPackets FTPCount CCodeCount HTTPandMalformed RSTCount CorJSCount EXECodeCount FTPandC HTTPorFTPandEXE HTTPCount ICMPCount 
+F1 score: 0.28930028239723876  ARPCount SYNBool SSHCount CVPacketSize DNSCount UDPCount UniqSrcIPs TELNETCount MeanNumberOfPackets NumberOfPackets UniqDestIPs HTTPCount RSTCount FTPCount SYNCount TCPCount ThirdMNumberPackets CCodeCount HTTPandMalformed EXECodeCount HTTPorFTPandEXE ICMPCount FTPandC MeanPacketSize CorJSCount 
+F1 score: 0.28983688833124216  ARPCount SYNBool SSHCount DNSCount CVPacketSize TELNETCount UDPCount MeanNumberOfPackets NumberOfPackets UniqSrcIPs HTTPCount UniqDestIPs MeanPacketSize FTPCount CCodeCount SYNCount TCPCount RSTCount ThirdMNumberPackets HTTPandMalformed CorJSCount FTPandC ICMPCount EXECodeCount 
+F1 score: 0.290282131661442  ARPCount SYNBool SSHCount DNSCount CVPacketSize TELNETCount UDPCount MeanNumberOfPackets NumberOfPackets UniqSrcIPs EXECodeCount HTTPCount UniqDestIPs MeanPacketSize FTPCount CCodeCount SYNCount TCPCount RSTCount ThirdMNumberPackets HTTPandMalformed CorJSCount FTPandC 
+F1 score: 0.29072681704260656  ARPCount SYNBool SSHCount DNSCount CVPacketSize UDPCount TELNETCount UniqDestIPs MeanNumberOfPackets NumberOfPackets UniqSrcIPs EXECodeCount HTTPCount MeanPacketSize SYNCount RSTCount FTPCount CCodeCount TCPCount ThirdMNumberPackets HTTPandMalformed CorJSCount 
+F1 score: 0.2908977166093213  ARPCount SYNBool SSHCount DNSCount CVPacketSize UDPCount TELNETCount UniqDestIPs MeanNumberOfPackets NumberOfPackets UniqSrcIPs EXECodeCount HTTPCount MeanPacketSize CCodeCount SYNCount RSTCount TCPCount FTPCount ThirdMNumberPackets HTTPandMalformed 
+F1 score: 0.2908977166093213  ARPCount SYNBool SSHCount DNSCount CVPacketSize UDPCount TELNETCount UniqDestIPs HTTPCount UniqSrcIPs MeanNumberOfPackets NumberOfPackets EXECodeCount MeanPacketSize RSTCount SYNCount CCodeCount TCPCount FTPCount ThirdMNumberPackets 
+F1 score: 0.290625  ARPCount SYNBool SSHCount DNSCount CVPacketSize UDPCount TELNETCount UniqDestIPs HTTPCount UniqSrcIPs MeanNumberOfPackets NumberOfPackets EXECodeCount MeanPacketSize RSTCount SYNCount CCodeCount TCPCount FTPCount 
+F1 score: 0.29009065332916534  ARPCount SYNBool SSHCount CVPacketSize DNSCount UDPCount TELNETCount UniqDestIPs HTTPCount UniqSrcIPs MeanNumberOfPackets NumberOfPackets EXECodeCount MeanPacketSize SYNCount RSTCount CCodeCount TCPCount 
+F1 score: 0.2897371714643304  ARPCount SYNBool SSHCount CVPacketSize DNSCount UDPCount TELNETCount UniqSrcIPs MeanNumberOfPackets NumberOfPackets UniqDestIPs EXECodeCount MeanPacketSize HTTPCount SYNCount RSTCount CCodeCount 
+F1 score: 0.28875665518321325  ARPCount SYNBool SSHCount CVPacketSize DNSCount UDPCount HTTPCount UniqSrcIPs UniqDestIPs MeanNumberOfPackets NumberOfPackets EXECodeCount MeanPacketSize TELNETCount RSTCount CCodeCount 
+F1 score: 0.28777429467084636  ARPCount SYNBool SSHCount CVPacketSize DNSCount UDPCount UniqSrcIPs HTTPCount EXECodeCount UniqDestIPs MeanNumberOfPackets NumberOfPackets MeanPacketSize RSTCount TELNETCount 
+F1 score: 0.28643058602319027  ARPCount SYNBool SSHCount CVPacketSize DNSCount UDPCount UniqSrcIPs MeanPacketSize HTTPCount EXECodeCount MeanNumberOfPackets NumberOfPackets UniqDestIPs TELNETCount 
+F1 score: 0.2867877269881027  ARPCount SYNBool SSHCount DNSCount CVPacketSize UDPCount UniqSrcIPs MeanPacketSize EXECodeCount HTTPCount MeanNumberOfPackets NumberOfPackets TELNETCount 
+F1 score: 0.2917189460476788  ARPCount SYNBool UniqSrcIPs SSHCount CVPacketSize UDPCount TELNETCount EXECodeCount HTTPCount MeanNumberOfPackets NumberOfPackets MeanPacketSize 
+F1 score: 0.2910003135779241  ARPCount SYNBool CVPacketSize TELNETCount SSHCount UniqSrcIPs UDPCount MeanPacketSize HTTPCount EXECodeCount MeanNumberOfPackets 
+F1 score: 0.29010989010989013  ARPCount SYNBool MeanNumberOfPackets UniqSrcIPs CVPacketSize TELNETCount SSHCount MeanPacketSize UDPCount HTTPCount 
+F1 score: 0.2868878357030016  ARPCount SYNBool MeanNumberOfPackets UniqSrcIPs CVPacketSize TELNETCount SSHCount MeanPacketSize UDPCount 
+F1 score: 0.2825467215711119  ARPCount SYNBool MeanNumberOfPackets UniqSrcIPs SSHCount CVPacketSize TELNETCount MeanPacketSize 
+F1 score: 0.270595690747782  ARPCount MeanNumberOfPackets SYNBool UniqSrcIPs CVPacketSize SSHCount MeanPacketSize 
+F1 score: 0.26801517067003794  ARPCount MeanNumberOfPackets SYNBool MeanPacketSize SSHCount UniqSrcIPs 
+F1 score: 0.26059456040480705  ARPCount MeanPacketSize MeanNumberOfPackets SYNBool UniqSrcIPs 
+F1 score: 0.25000000000000006  ARPCount MeanPacketSize MeanNumberOfPackets SYNBool 
+F1 score: 0.22992227979274613  ARPCount MeanNumberOfPackets MeanPacketSize 
+F1 score: 0.2062269835955808  ARPCount MeanPacketSize 
+F1 score: 0.20261888352860094  ARPCount 
+4430.0065767765045
