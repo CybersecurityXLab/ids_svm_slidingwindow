@@ -15,3 +15,13 @@ F1 score: 0.7173803526448362  SYNBool DNSCount MeanPacketSize FTPCount HTTPCount
 F1 score: 0.7165000000000001  SYNBool DNSCount MeanPacketSize FTPCount UniqSrcIPs HTTPCount TCPCount TELNETCount MeanNumberOfPackets NumberOfPackets CorJSCount SYNCount 
 F1 score: 0.7163209197700575  SYNBool DNSCount MeanPacketSize HTTPCount FTPCount TCPCount UniqSrcIPs TELNETCount SYNCount MeanNumberOfPackets NumberOfPackets 
 F1 score: 0.7151424287856073  SYNBool DNSCount HTTPCount MeanPacketSize FTPCount TCPCount UniqSrcIPs TELNETCount MeanNumberOfPackets NumberOfPackets 
+F1 score: 0.7109218436873748  SYNBool HTTPCount DNSCount MeanPacketSize FTPCount TCPCount UniqSrcIPs TELNETCount MeanNumberOfPackets 
+F1 score: 0.7089814350225789  SYNBool HTTPCount DNSCount TCPCount MeanPacketSize FTPCount MeanNumberOfPackets UniqSrcIPs 
+F1 score: 0.7074388417373938  SYNBool TCPCount HTTPCount DNSCount MeanNumberOfPackets FTPCount UniqSrcIPs 
+F1 score: 0.7008247938015496  SYNBool MeanNumberOfPackets DNSCount TCPCount HTTPCount UniqSrcIPs 
+F1 score: 0.6835252879318978  SYNBool MeanNumberOfPackets DNSCount TCPCount HTTPCount 
+F1 score: 0.6606060606060606  MeanNumberOfPackets SYNBool DNSCount TCPCount 
+F1 score: 0.597872340425532  SYNBool MeanNumberOfPackets DNSCount 
+F1 score: 0.4480463096960927  SYNBool MeanNumberOfPackets 
+F1 score: 0.27303523035230354  MeanNumberOfPackets 
+17460.407957315445
