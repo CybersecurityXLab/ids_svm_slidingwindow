@@ -18,3 +18,10 @@ F1 score: 0.002203856749311295  ARPCount CCodeCount TELNETCount MeanNumberOfPack
 F1 score: 0.002203856749311295  ARPCount CCodeCount TELNETCount MeanNumberOfPackets FTPCount HTTPCount UniqDestIPs CVPacketSize CorJSCount 
 F1 score: 0.002203856749311295  ARPCount CCodeCount TELNETCount MeanNumberOfPackets FTPCount HTTPCount UniqDestIPs CVPacketSize 
 F1 score: 0.002203856749311295  ARPCount CCodeCount TELNETCount MeanNumberOfPackets FTPCount HTTPCount UniqDestIPs 
+F1 score: 0.0011025358324145535  ARPCount CCodeCount TELNETCount MeanNumberOfPackets FTPCount HTTPCount 
+F1 score: 0.0011025358324145535  CCodeCount TELNETCount ARPCount MeanNumberOfPackets FTPCount 
+F1 score: 0.0011025358324145535  CCodeCount TELNETCount ARPCount FTPCount 
+F1 score: 0.0011025358324145535  ARPCount CCodeCount TELNETCount 
+F1 score: 0.0  ARPCount CCodeCount 
+F1 score: 0.0  ARPCount 
+12682.650161504745

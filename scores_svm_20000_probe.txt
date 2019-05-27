@@ -9,3 +9,19 @@ F1 score: 0.03088803088803089  DNSCount UniqDestIPs UDPCount CVPacketSize TELNET
 F1 score: 0.03088803088803089  DNSCount UniqDestIPs UDPCount TELNETCount ARPCount CVPacketSize UniqSrcIPs MeanNumberOfPackets NumberOfPackets CCodeCount CorJSCount EXECodeCount FTPCount FTPandC HTTPandMalformed HTTPorFTPandEXE ICMPCount MeanPacketSize 
 F1 score: 0.03088803088803089  DNSCount UniqDestIPs UDPCount TELNETCount ARPCount CVPacketSize UniqSrcIPs MeanNumberOfPackets NumberOfPackets CCodeCount CorJSCount EXECodeCount FTPCount FTPandC HTTPandMalformed HTTPorFTPandEXE ICMPCount 
 F1 score: 0.03088803088803089  DNSCount UniqDestIPs UDPCount TELNETCount ARPCount CVPacketSize UniqSrcIPs CCodeCount CorJSCount EXECodeCount FTPCount FTPandC HTTPandMalformed HTTPorFTPandEXE ICMPCount MeanNumberOfPackets 
+F1 score: 0.03088803088803089  DNSCount UniqDestIPs UDPCount TELNETCount ARPCount CVPacketSize UniqSrcIPs CCodeCount CorJSCount EXECodeCount FTPCount FTPandC HTTPandMalformed HTTPorFTPandEXE ICMPCount 
+F1 score: 0.03088803088803089  DNSCount UniqDestIPs UDPCount TELNETCount ARPCount CVPacketSize UniqSrcIPs CCodeCount CorJSCount EXECodeCount FTPCount FTPandC HTTPandMalformed HTTPorFTPandEXE 
+F1 score: 0.03088803088803089  DNSCount UniqDestIPs UDPCount TELNETCount ARPCount CVPacketSize UniqSrcIPs CCodeCount CorJSCount EXECodeCount FTPCount FTPandC HTTPandMalformed 
+F1 score: 0.03088803088803089  DNSCount UniqDestIPs UDPCount EXECodeCount TELNETCount ARPCount CVPacketSize UniqSrcIPs CCodeCount CorJSCount FTPCount FTPandC 
+F1 score: 0.03088803088803089  DNSCount UniqDestIPs UDPCount EXECodeCount TELNETCount ARPCount CVPacketSize UniqSrcIPs CCodeCount CorJSCount FTPCount 
+F1 score: 0.03088803088803089  DNSCount UniqDestIPs UDPCount EXECodeCount TELNETCount ARPCount CVPacketSize UniqSrcIPs CCodeCount CorJSCount 
+F1 score: 0.03088803088803089  DNSCount UniqDestIPs UDPCount EXECodeCount TELNETCount ARPCount CVPacketSize UniqSrcIPs CCodeCount 
+F1 score: 0.03088803088803089  DNSCount UniqDestIPs UDPCount EXECodeCount TELNETCount ARPCount CVPacketSize UniqSrcIPs 
+F1 score: 0.030150753768844223  DNSCount UniqDestIPs UDPCount EXECodeCount ARPCount CVPacketSize UniqSrcIPs 
+F1 score: 0.028637770897832815  DNSCount UniqDestIPs UDPCount EXECodeCount CVPacketSize ARPCount 
+F1 score: 0.0285935085007728  DNSCount UniqDestIPs UDPCount EXECodeCount CVPacketSize 
+F1 score: 0.027079303675048353  DNSCount UniqDestIPs UDPCount EXECodeCount 
+F1 score: 0.02098717450446949  DNSCount UniqDestIPs UDPCount 
+F1 score: 0.011714174150722375  UniqDestIPs DNSCount 
+F1 score: 0.0  DNSCount 
+17064.734360694885
