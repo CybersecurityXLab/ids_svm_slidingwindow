@@ -1,0 +1,27 @@
+F1 score: 0.42217625577772666  DNSCount SYNBool ARPCount HTTPCount SSHCount CVPacketSize UniqDestIPs TELNETCount ThirdMPacketSize MeanPacketSize ThirdMNumberPackets FTPCount MeanNumberOfPackets NumberOfPackets UniqSrcIPs RSTCount TCPCount CorJSCount HTTPandMalformed CCodeCount ICMPCount SYNCount UDPCount EXECodeCount HTTPorFTPandEXE FTPandC 
+F1 score: 0.44833818656491614  DNSCount SSHCount HTTPCount ARPCount CVPacketSize MeanPacketSize TELNETCount ThirdMPacketSize SYNBool FTPCount UniqSrcIPs RSTCount ThirdMNumberPackets MeanNumberOfPackets NumberOfPackets CorJSCount TCPCount HTTPandMalformed CCodeCount ICMPCount SYNCount FTPandC EXECodeCount HTTPorFTPandEXE UDPCount 
+F1 score: 0.4557184898256911  DNSCount SSHCount UniqSrcIPs HTTPCount ARPCount ThirdMPacketSize CVPacketSize FTPCount RSTCount ThirdMNumberPackets CorJSCount MeanPacketSize MeanNumberOfPackets NumberOfPackets ICMPCount TELNETCount TCPCount CCodeCount SYNCount HTTPandMalformed FTPandC EXECodeCount HTTPorFTPandEXE UDPCount 
+F1 score: 0.45701516521040475  SSHCount DNSCount HTTPCount UniqSrcIPs ARPCount CVPacketSize ThirdMPacketSize FTPCount RSTCount CorJSCount ThirdMNumberPackets MeanNumberOfPackets NumberOfPackets ICMPCount TCPCount CCodeCount HTTPandMalformed MeanPacketSize EXECodeCount HTTPorFTPandEXE SYNCount FTPandC UDPCount 
+F1 score: 0.4573479941758296  SSHCount DNSCount HTTPCount UniqSrcIPs CVPacketSize FTPCount CorJSCount ARPCount ThirdMNumberPackets RSTCount ThirdMPacketSize SYNCount TCPCount ICMPCount CCodeCount HTTPandMalformed MeanNumberOfPackets NumberOfPackets UDPCount EXECodeCount HTTPorFTPandEXE FTPandC 
+F1 score: 0.45760667437302105  SSHCount DNSCount ThirdMPacketSize HTTPCount CVPacketSize FTPCount ThirdMNumberPackets CorJSCount RSTCount SYNCount UniqSrcIPs TCPCount ICMPCount CCodeCount HTTPandMalformed MeanNumberOfPackets NumberOfPackets UDPCount FTPandC EXECodeCount HTTPorFTPandEXE 
+F1 score: 0.45760667437302105  ThirdMPacketSize HTTPCount SSHCount DNSCount CVPacketSize FTPCount CorJSCount RSTCount TCPCount ThirdMNumberPackets SYNCount ICMPCount UniqSrcIPs CCodeCount MeanNumberOfPackets NumberOfPackets UDPCount HTTPandMalformed FTPandC EXECodeCount 
+F1 score: 0.45756791395471563  ThirdMPacketSize HTTPCount SSHCount DNSCount CVPacketSize FTPCount CorJSCount RSTCount TCPCount ThirdMNumberPackets EXECodeCount SYNCount ICMPCount UniqSrcIPs CCodeCount MeanNumberOfPackets NumberOfPackets UDPCount HTTPandMalformed 
+F1 score: 0.4572419687295762  ThirdMPacketSize HTTPCount SSHCount DNSCount CVPacketSize FTPCount CorJSCount RSTCount TCPCount ThirdMNumberPackets EXECodeCount SYNCount ICMPCount UniqSrcIPs CCodeCount MeanNumberOfPackets NumberOfPackets UDPCount 
+F1 score: 0.45680783070380715  ThirdMPacketSize HTTPCount SSHCount DNSCount CVPacketSize FTPCount CorJSCount RSTCount TCPCount ThirdMNumberPackets EXECodeCount SYNCount ICMPCount UniqSrcIPs CCodeCount MeanNumberOfPackets NumberOfPackets 
+F1 score: 0.45624276583966594  ThirdMPacketSize HTTPCount SSHCount DNSCount CVPacketSize FTPCount RSTCount CorJSCount TCPCount EXECodeCount ThirdMNumberPackets SYNCount ICMPCount CCodeCount UniqSrcIPs MeanNumberOfPackets 
+F1 score: 0.45656959871910335  HTTPCount ThirdMPacketSize SSHCount DNSCount CVPacketSize MeanNumberOfPackets FTPCount RSTCount CorJSCount TCPCount ThirdMNumberPackets EXECodeCount SYNCount CCodeCount ICMPCount 
+F1 score: 0.4552190237797247  SSHCount HTTPCount ThirdMPacketSize DNSCount CVPacketSize MeanNumberOfPackets CorJSCount ThirdMNumberPackets TCPCount RSTCount FTPCount SYNCount ICMPCount EXECodeCount 
+F1 score: 0.45240183426466524  SSHCount HTTPCount ThirdMPacketSize DNSCount CVPacketSize MeanNumberOfPackets CorJSCount ThirdMNumberPackets TCPCount FTPCount RSTCount SYNCount ICMPCount 
+F1 score: 0.44951597532226517  SSHCount HTTPCount ThirdMPacketSize DNSCount CVPacketSize MeanNumberOfPackets ThirdMNumberPackets CorJSCount TCPCount RSTCount FTPCount SYNCount 
+F1 score: 0.44390808065570464  HTTPCount SSHCount ThirdMPacketSize DNSCount CVPacketSize MeanNumberOfPackets CorJSCount ThirdMNumberPackets TCPCount FTPCount RSTCount 
+F1 score: 0.4380548829701373  HTTPCount SSHCount ThirdMPacketSize DNSCount CVPacketSize MeanNumberOfPackets CorJSCount ThirdMNumberPackets FTPCount TCPCount 
+F1 score: 0.4299425156372661  HTTPCount ThirdMPacketSize SSHCount DNSCount CVPacketSize MeanNumberOfPackets CorJSCount FTPCount ThirdMNumberPackets 
+F1 score: 0.42124271943434144  HTTPCount MeanNumberOfPackets ThirdMPacketSize SSHCount DNSCount CVPacketSize CorJSCount ThirdMNumberPackets 
+F1 score: 0.4129108041163403  HTTPCount MeanNumberOfPackets ThirdMPacketSize SSHCount DNSCount CVPacketSize CorJSCount 
+F1 score: 0.40130547631896796  HTTPCount MeanNumberOfPackets ThirdMPacketSize SSHCount DNSCount CVPacketSize 
+F1 score: 0.36776041666666665  HTTPCount ThirdMPacketSize MeanNumberOfPackets DNSCount SSHCount 
+F1 score: 0.3283838113106405  ThirdMPacketSize HTTPCount MeanNumberOfPackets DNSCount 
+F1 score: 0.25054809151722973  ThirdMPacketSize MeanNumberOfPackets HTTPCount 
+F1 score: 0.1524432312445631  ThirdMPacketSize MeanNumberOfPackets 
+F1 score: 0.10377387889931129  ThirdMPacketSize 
+151719.0357196331

@@ -134,7 +134,7 @@ def runMLAlg(X,y,mlAlg,startingNames,fileName):
 
                 
             indexToRemove = scores[-1][2][0]  
-            print("Remove el at index",indexToRemove, ', ', startingNames[indexToRemove])
+            print("Remove el at index",indexToRemove, ', ', startingNames[indices[indexToRemove][1]])
             print(indices)
             del indices[indexToRemove]
             f = open(fileName,"a")
@@ -161,7 +161,7 @@ def runMLAlg(X,y,mlAlg,startingNames,fileName):
 def main(attack, shuffle):
 #get data
     print(attack)
-    X,y = clean()
+    X,y = clean()#returns data from specified file minus the -1 values and then returns zscore of each sample
     startingNames = getNames()
     
     y = oneVAll(attack,y).reshape(len(y),)
@@ -171,14 +171,15 @@ def main(attack, shuffle):
         X, y = doShuffle(X,y, shuffledArray)
         
         
-    X = X[40000:60000,:]
-    y = y[40000:60000]
+    X = X[50000:60000,:]
+    y = y[50000:60000]
     
     #get the list of indices to show where we are
-    runMLAlg(X,y,'dt',startingNames,"scores_dt_20000_r2l.txt")
-    runMLAlg(X,y,'km',startingNames,"scores_km_20000_r2l.txt")
-    runMLAlg(X,y,'knn',startingNames,"scores_knn_20000_r2l.txt")
-    runMLAlg(X,y,'svm',startingNames,"scores_svm_20000_r2l.txt")
+    
+   # runMLAlg(X,y,'knn',startingNames,"scores_knn_test_dos.txt")
+    runMLAlg(X,y,'dt',startingNames,"scores_dt_test_dos.txt")
+   # runMLAlg(X,y,'km',startingNames,"scores_km_20000_r2l.txt")
+   # runMLAlg(X,y,'svm',startingNames,"scores_svm_20000_r2l.txt")
     #runMLAlg(X,y,'mnb',startingNames,"scores_mnb_20000.txt")#dataset doesn't work. says something about x being non-negative
 
 #do crossval
@@ -191,7 +192,7 @@ def main(attack, shuffle):
 
 #make it non parallel first. add parallel in and try to recreate result.
     
-main('r2l',True)
+main('dos',True)
 #ranking of classifiers for DOS. SVM is particularly bad at predicting the non DoS attacks, but other classifiers are better.
 #many perform better for non Dos
 
