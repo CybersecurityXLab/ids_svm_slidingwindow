@@ -20,7 +20,7 @@ labelsToSave = [labels1.AllLabels.HLClass;labels2.AllLabels.HLClass;labels3.AllL
 
 
 featsToSave = array2table(featsToSave);
-writetable(featsToSave,"featureVals.csv");
+%writetable(featsToSave,"featureVals.csv");
 
 labelsToSave = array2table(labelsToSave);
-writetable(labelsToSave,"labels.csv");
+%writetable(labelsToSave,"labels.csv");
