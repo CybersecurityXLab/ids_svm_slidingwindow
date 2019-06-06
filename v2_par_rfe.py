@@ -90,7 +90,7 @@ def run(name,feats,y,MLalg):
     print(accuracy)
     
     return f1
-###WRONG
+
 def rfeRound(X,y,indices,orderedNames,mlAlg):
     roundScores = []
     for i,idx in enumerate(indices):
@@ -159,9 +159,9 @@ def runMLAlg(X,y,mlAlg,startingNames,fileName):
     f.close()
 
 def main(attack, shuffle):
-#get data
+    featureFile = 'featureVals_windows_u2r_top_6.csv'
     print(attack)
-    X,y = clean()#returns data from specified file minus the -1 values and then returns zscore of each sample
+    X,y = clean(featureFile)#returns data from specified file minus the -1 values and then returns zscore of each sample
     startingNames = getNames()
     
     y = oneVAll(attack,y).reshape(len(y),)
@@ -177,7 +177,7 @@ def main(attack, shuffle):
     #get the list of indices to show where we are
     
    # runMLAlg(X,y,'knn',startingNames,"scores_knn_test_dos.txt")
-    runMLAlg(X,y,'svm',startingNames,"scores_svm_u2r_optimaltimewindows.txt")
+    runMLAlg(X,y,'dt',startingNames,"scores_dttestdeletefile_u2r_optimaltimewindows.txt")
    # runMLAlg(X,y,'km',startingNames,"scores_km_20000_r2l.txt")
    # runMLAlg(X,y,'svm',startingNames,"scores_svm_20000_r2l.txt")
     #runMLAlg(X,y,'mnb',startingNames,"scores_mnb_20000.txt")#dataset doesn't work. says something about x being non-negative

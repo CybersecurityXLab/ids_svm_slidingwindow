@@ -8,8 +8,8 @@ Created on Thu Dec 13 19:30:51 2018
 import pandas as pd
 import numpy as np
 
-def getFeatures():
-    featureVals = pd.read_csv('featureVals_windows_u2r_top_6.csv',
+def getFeatures(featureFile):
+    featureVals = pd.read_csv(featureFile,
                             sep=',',
                             header=0)
     
