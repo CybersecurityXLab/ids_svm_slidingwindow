@@ -35,8 +35,8 @@ def getFeatures(featureFile):
 #print(labels)
 #print(featureNames)
     
-def getNames():
-    featureVals = pd.read_csv('featureVals_windows_r2l_3_windows.csv',
+def getNames(featureFile):
+    featureVals = pd.read_csv(featureFile,
                             sep=',',
                             header=0)
     

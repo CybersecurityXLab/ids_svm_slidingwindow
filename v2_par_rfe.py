@@ -19,6 +19,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import f1_score,accuracy_score
 import numpy as np
 import time
+import math
 
 #modularizes the naming
 def nameManager(indices,names):
@@ -28,7 +29,17 @@ def nameManager(indices,names):
         
     return orderedNames
 
-def run(name,feats,y,MLalg):
+def runTest(X_train, X_test, y_train, y_test,mlAlg):
+    if mlAlg == 'dt':
+        decision_tree = tree.DecisionTreeClassifier()
+        decision_tree = decision_tree.fit(X_train,y_train)
+        predicted = decision_tree.predict(X_test)
+        f1 = f1_score(y_test,predicted)
+        print(f1)
+
+#do crossval on training set
+#eventually make it not cross_val_predict because it isn't supposed to return guesses
+def run(feats,y,MLalg):
  #   start = time.time()
     #neural network
    # clf = MLPClassifier(solver='lbfgs',alpha=1e-5,hidden_layer_sizes=(1000,2),random_state = 1)
@@ -105,7 +116,7 @@ def rfeRound(X,y,indices,orderedNames,mlAlg):
             tempFeatures[:,j] = X[:,jdx[1]]
         
        # roundScores.append[run(name,tempFeatures,X,y)]
-        f1 = run(name,tempFeatures,y,mlAlg)
+        f1 = run(tempFeatures,y,mlAlg)
         roundScores.append([f1,name,idx])
         
     
@@ -158,10 +169,10 @@ def runMLAlg(X,y,mlAlg,startingNames,fileName):
     print(totalTime)
     f.close()
 
-def main(attack, shuffle,mlCode, featureFile):
+def main(attack, shuffle,mlCode, featureFile,train):
     print(attack)
     X,y = clean(featureFile)#returns data from specified file minus the -1 values and then returns zscore of each sample
-    startingNames = getNames()
+    startingNames = getNames(featureFile)
     
     y = oneVAll(attack,y).reshape(len(y),)
     
@@ -170,18 +181,22 @@ def main(attack, shuffle,mlCode, featureFile):
         X, y = doShuffle(X,y, shuffledArray)
         
 
-    print(np.shape(X))
-
+    print(np.shape(X))#gives (samples,features)
+    trainTestSplitIdx = math.floor( np.shape(X)[0] * 0.8)#gives index at 80% of dataset
+    print(trainTestSplitIdx)
+    training_X = X[:trainTestSplitIdx,:]
+    training_y = y[:trainTestSplitIdx]
+    test_X = X[trainTestSplitIdx:,:]
+    test_y = y[trainTestSplitIdx:]
         
-    X = X[59500:60000,:]
-    y = y[59500:60000]
+ #   training_X = training_X[55500:60000,:]
+ #   training_y = training_y[55500:60000]
     
-    #get the list of indices to show where we are
-    
-   # runMLAlg(X,y,'knn',startingNames,"scores_knn_test_dos.txt")
-
-    runMLAlg(X,y,mlCode,startingNames,"scores_" + mlCode + "testdeletefile_" + attack + "_optimaltimewindows.txt")
-
+    #for this to work, the random shuffling must be seeded to ensure that the test set does not contain some training data.
+    if train:
+        runMLAlg(training_X,training_y,mlCode,startingNames,"scores_" + mlCode + "testdeletefile_" + attack + "_optimaltimewindows.txt")
+    else:#test set
+        runTest(training_X,test_X,training_y,test_y,mlCode)
    # runMLAlg(X,y,'km',startingNames,"scores_km_20000_r2l.txt")
    # runMLAlg(X,y,'svm',startingNames,"scores_svm_20000_r2l.txt")
     #runMLAlg(X,y,'mnb',startingNames,"scores_mnb_20000.txt")#dataset doesn't work. says something about x being non-negative
@@ -196,8 +211,8 @@ def main(attack, shuffle,mlCode, featureFile):
 
 #make it non parallel first. add parallel in and try to recreate result.
     
-
-main('dos',True, 'knn', 'featureVals_windows_u2r_top_6.csv')
+#params(attack, shuffle, mlalg, featurefile, train)
+main('dos',True, 'dt', 'featureVals_windows_dos.csv',True)
 #ranking of classifiers for DOS. SVM is particularly bad at predicting the non DoS attacks, but other classifiers are better.
 #many perform better for non Dos
 
