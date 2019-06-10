@@ -50,8 +50,8 @@ def getFeatureStack(indices,features):#returns all features requested in the ind
     return retFeats
     
 
-def clean():#should return two arrays, a feature array, and a label array, that the caller stores locally
-    X, y, names = getFeatures()
+def clean(featureFile):#should return two arrays, a feature array, and a label array, that the caller stores locally
+    X, y, names = getFeatures(featureFile)
 
 #    X = [0]
     
@@ -126,7 +126,7 @@ def clean():#should return two arrays, a feature array, and a label array, that 
     return stats.zscore(cleanedFeatVals),cleanedLabels
 
     
-def main():
-    clean()
+#def main():
+#    clean()
 
-main()
+#main()
