@@ -170,14 +170,14 @@ def main(attack, shuffle):
         shuffledArray = getShuffleArray(len(X))
         X, y = doShuffle(X,y, shuffledArray)
         
-        
+    print(np.shape(X))
   #  X = X[59000:60000,:]
  #   y = y[59000:60000]
     
     #get the list of indices to show where we are
     
    # runMLAlg(X,y,'knn',startingNames,"scores_knn_test_dos.txt")
-    runMLAlg(X,y,'svm',startingNames,"scores_svm_u2r_optimaltimewindows.txt")
+    runMLAlg(X,y,'svm',startingNames,"scores_svm_r2l_optimaltimewindows_3window.txt")
    # runMLAlg(X,y,'km',startingNames,"scores_km_20000_r2l.txt")
    # runMLAlg(X,y,'svm',startingNames,"scores_svm_20000_r2l.txt")
     #runMLAlg(X,y,'mnb',startingNames,"scores_mnb_20000.txt")#dataset doesn't work. says something about x being non-negative
@@ -192,7 +192,7 @@ def main(attack, shuffle):
 
 #make it non parallel first. add parallel in and try to recreate result.
     
-main('u2r',True)
+main('r2l',True)
 #ranking of classifiers for DOS. SVM is particularly bad at predicting the non DoS attacks, but other classifiers are better.
 #many perform better for non Dos
 
