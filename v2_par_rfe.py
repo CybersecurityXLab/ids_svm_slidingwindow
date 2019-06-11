@@ -34,8 +34,26 @@ def runTest(X_train, X_test, y_train, y_test,mlAlg):
         decision_tree = tree.DecisionTreeClassifier()
         decision_tree = decision_tree.fit(X_train,y_train)
         predicted = decision_tree.predict(X_test)
-        f1 = f1_score(y_test,predicted)
+        predicted = np.array([int(x) for x in predicted])
+      #  print(y_test)
+        print(predicted)
+        print()
+       # for el in predicted:
+      #      el = int(el)
+            
+            
+        for idx, el in enumerate(predicted):
+            if el != 0:
+          #      print(idx,el)
+                if el != 1:
+                    print(idx, el)
+                    return
+                
+            
+        f1 = f1_score(y_test.tolist(),predicted)
+        accuracy = accuracy_score(y_test.tolist(),predicted)
         print(f1)
+        print(accuracy)
 
 #do crossval on training set
 #eventually make it not cross_val_predict because it isn't supposed to return guesses
@@ -173,12 +191,13 @@ def main(attack, shuffle,mlCode, featureFile,train):
     print(attack)
     X,y = clean(featureFile)#returns data from specified file minus the -1 values and then returns zscore of each sample
     startingNames = getNames(featureFile)
-    
     y = oneVAll(attack,y).reshape(len(y),)
     
+    #shuffle before split
     if shuffle:
         shuffledArray = getShuffleArray(len(X))
         X, y = doShuffle(X,y, shuffledArray)
+
         
 
     print(np.shape(X))#gives (samples,features)
@@ -186,16 +205,29 @@ def main(attack, shuffle,mlCode, featureFile,train):
     print(trainTestSplitIdx)
     training_X = X[:trainTestSplitIdx,:]
     training_y = y[:trainTestSplitIdx]
+    
+    #shuffle after split
+  #  if shuffle:
+  #      shuffledArray = getShuffleArray(len(training_X))
+  #      training_X, training_y = doShuffle(training_X,training_y, shuffledArray)
+    
     test_X = X[trainTestSplitIdx:,:]
     test_y = y[trainTestSplitIdx:]
+   
+    print(test_y.shape)
+  #  for i in test_y:
+ #       if i != 0:
+ #           if i != 1:
+ #               print(i)
+ #   return
         
- #   training_X = training_X[55500:60000,:]
+#    training_X = training_X[55500:60000,:]
  #   training_y = training_y[55500:60000]
     
     #for this to work, the random shuffling must be seeded to ensure that the test set does not contain some training data.
-    if train:
+    if train == 'train':
         runMLAlg(training_X,training_y,mlCode,startingNames,"scores_" + mlCode + "testdeletefile_" + attack + "_optimaltimewindows.txt")
-    else:#test set
+    elif train == 'test':#test set
         runTest(training_X,test_X,training_y,test_y,mlCode)
    # runMLAlg(X,y,'km',startingNames,"scores_km_20000_r2l.txt")
    # runMLAlg(X,y,'svm',startingNames,"scores_svm_20000_r2l.txt")
@@ -212,7 +244,7 @@ def main(attack, shuffle,mlCode, featureFile,train):
 #make it non parallel first. add parallel in and try to recreate result.
     
 #params(attack, shuffle, mlalg, featurefile, train)
-main('dos',True, 'dt', 'featureVals_windows_dos.csv',True)
+main('dos',True, 'dt', 'featureVals_windows_dos_test_delete2.csv','test')
 #ranking of classifiers for DOS. SVM is particularly bad at predicting the non DoS attacks, but other classifiers are better.
 #many perform better for non Dos
 
