@@ -1,0 +1,27 @@
+F1 score: 0.1090520313613685  CVPacketSize HTTPandMalformed RSTCount DNSCount EXECodeCount HTTPorFTPandEXE UDPCount UniqProtcols FTPCount SYNCount SYNBool TCPCount MeanNumberOfPackets NumberOfPackets FTPandC CorJSCount UniqSrcIPs ICMPCount CCodeCount SSHCount ThirdMNumberPackets UniqDestIPs ARPCount TELNETCount HTTPCount MeanPacketSize 
+F1 score: 0.1271891418563923  MeanPacketSize FTPandC FTPCount EXECodeCount HTTPorFTPandEXE SSHCount CorJSCount RSTCount TELNETCount SYNCount MeanNumberOfPackets NumberOfPackets SYNBool UniqDestIPs TCPCount UniqSrcIPs UDPCount DNSCount ThirdMNumberPackets UniqProtcols CCodeCount ARPCount HTTPandMalformed ICMPCount HTTPCount 
+F1 score: 0.1754700089525515  UniqDestIPs ARPCount EXECodeCount HTTPorFTPandEXE MeanNumberOfPackets NumberOfPackets RSTCount ICMPCount SYNCount HTTPandMalformed TCPCount CCodeCount ThirdMNumberPackets SSHCount FTPandC UDPCount FTPCount DNSCount CorJSCount UniqSrcIPs MeanPacketSize HTTPCount TELNETCount UniqProtcols 
+F1 score: 0.1754700089525515  ARPCount FTPCount MeanNumberOfPackets NumberOfPackets SYNCount TCPCount CorJSCount UDPCount CCodeCount DNSCount EXECodeCount FTPandC HTTPCount HTTPorFTPandEXE MeanPacketSize RSTCount SSHCount TELNETCount UniqDestIPs UniqProtcols HTTPandMalformed ThirdMNumberPackets ICMPCount 
+F1 score: 0.1754700089525515  HTTPCount ThirdMNumberPackets UniqProtcols MeanNumberOfPackets NumberOfPackets TCPCount CorJSCount RSTCount ICMPCount ARPCount DNSCount FTPandC HTTPandMalformed SSHCount SYNCount TELNETCount UDPCount UniqDestIPs EXECodeCount HTTPorFTPandEXE FTPCount MeanPacketSize 
+F1 score: 0.1756272401433692  CorJSCount MeanNumberOfPackets NumberOfPackets TCPCount EXECodeCount HTTPorFTPandEXE DNSCount ICMPCount MeanPacketSize RSTCount SSHCount UniqDestIPs FTPCount UDPCount SYNCount FTPandC HTTPandMalformed TELNETCount UniqProtcols HTTPCount ARPCount 
+F1 score: 0.17769718948322757  UniqDestIPs TCPCount ARPCount RSTCount TELNETCount MeanNumberOfPackets NumberOfPackets HTTPCount CorJSCount DNSCount EXECodeCount FTPandC HTTPorFTPandEXE ICMPCount SSHCount SYNCount UDPCount FTPCount MeanPacketSize HTTPandMalformed 
+F1 score: 0.17769718948322757  MeanNumberOfPackets NumberOfPackets TCPCount RSTCount EXECodeCount HTTPorFTPandEXE DNSCount HTTPandMalformed MeanPacketSize SYNCount UDPCount FTPCount CorJSCount ICMPCount ARPCount HTTPCount SSHCount TELNETCount UniqDestIPs 
+F1 score: 0.1756272401433692  MeanNumberOfPackets NumberOfPackets TCPCount ARPCount DNSCount HTTPandMalformed ICMPCount MeanPacketSize RSTCount SSHCount SYNCount UDPCount UniqDestIPs TELNETCount FTPCount CorJSCount HTTPCount EXECodeCount 
+F1 score: 0.17518248175182483  HTTPandMalformed TCPCount SSHCount MeanNumberOfPackets NumberOfPackets ARPCount EXECodeCount HTTPCount RSTCount SYNCount UDPCount CorJSCount ICMPCount DNSCount MeanPacketSize TELNETCount UniqDestIPs 
+F1 score: 0.178343949044586  HTTPCount TCPCount RSTCount SSHCount UDPCount SYNCount MeanPacketSize DNSCount CorJSCount EXECodeCount ICMPCount MeanNumberOfPackets NumberOfPackets ARPCount HTTPandMalformed TELNETCount 
+F1 score: 0.178343949044586  TCPCount MeanNumberOfPackets NumberOfPackets DNSCount HTTPCount MeanPacketSize RSTCount TELNETCount ARPCount HTTPandMalformed CorJSCount EXECodeCount ICMPCount UDPCount SSHCount 
+F1 score: 0.178343949044586  MeanNumberOfPackets NumberOfPackets TCPCount TELNETCount SSHCount RSTCount CorJSCount HTTPCount ICMPCount ARPCount HTTPandMalformed DNSCount EXECodeCount MeanPacketSize 
+F1 score: 0.1515711645101664  MeanNumberOfPackets NumberOfPackets TCPCount ARPCount RSTCount TELNETCount CorJSCount DNSCount HTTPCount HTTPandMalformed ICMPCount MeanPacketSize SSHCount 
+F1 score: 0.1766848816029144  MeanNumberOfPackets NumberOfPackets TCPCount RSTCount HTTPCount MeanPacketSize SSHCount DNSCount HTTPandMalformed ARPCount TELNETCount CorJSCount 
+F1 score: 0.17518248175182483  MeanNumberOfPackets NumberOfPackets TCPCount RSTCount ARPCount CorJSCount DNSCount HTTPCount HTTPandMalformed MeanPacketSize SSHCount 
+F1 score: 0.1766848816029144  TCPCount CorJSCount RSTCount ARPCount DNSCount HTTPandMalformed MeanPacketSize SSHCount MeanNumberOfPackets NumberOfPackets 
+F1 score: 0.17679558011049723  TCPCount RSTCount ARPCount CorJSCount DNSCount HTTPandMalformed MeanPacketSize SSHCount MeanNumberOfPackets 
+F1 score: 0.17814508723599634  ARPCount DNSCount MeanNumberOfPackets TCPCount RSTCount HTTPandMalformed SSHCount CorJSCount 
+F1 score: 0.17814508723599634  MeanNumberOfPackets TCPCount RSTCount CorJSCount HTTPandMalformed ARPCount DNSCount 
+F1 score: 0.17679558011049723  MeanNumberOfPackets TCPCount HTTPandMalformed CorJSCount RSTCount ARPCount 
+F1 score: 0.17679558011049723  CorJSCount HTTPandMalformed MeanNumberOfPackets TCPCount RSTCount 
+F1 score: 0.17663293468261268  HTTPandMalformed MeanNumberOfPackets TCPCount RSTCount 
+F1 score: 0.17679558011049723  MeanNumberOfPackets TCPCount RSTCount 
+F1 score: 0.14365671641791045  MeanNumberOfPackets TCPCount 
+F1 score: 0.14602587800369687  MeanNumberOfPackets 
+113.9535973072052

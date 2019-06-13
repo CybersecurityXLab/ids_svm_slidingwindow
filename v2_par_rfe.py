@@ -201,15 +201,20 @@ def main(attack, shuffle,mlCode, featureFile,train):
         
 
     print(np.shape(X))#gives (samples,features)
-    trainTestSplitIdx = math.floor( np.shape(X)[0] * 0.8)#gives index at 80% of dataset
+    #trainTestSplitIdx = math.floor( np.shape(X)[0] * 0.5)#gives index at 50% of dataset
+    
+    #split by number of attacks for each attack type
+    if attack == 'dos':
+        trainTestSplitIdx = 71347
+    
     print(trainTestSplitIdx)
     training_X = X[:trainTestSplitIdx,:]
     training_y = y[:trainTestSplitIdx]
     
     #shuffle after split
-  #  if shuffle:
-  #      shuffledArray = getShuffleArray(len(training_X))
-  #      training_X, training_y = doShuffle(training_X,training_y, shuffledArray)
+    if shuffle:
+        shuffledArray = getShuffleArray(len(training_X))
+        training_X, training_y = doShuffle(training_X,training_y, shuffledArray)
     
     test_X = X[trainTestSplitIdx:,:]
     test_y = y[trainTestSplitIdx:]
@@ -220,9 +225,9 @@ def main(attack, shuffle,mlCode, featureFile,train):
  #           if i != 1:
  #               print(i)
  #   return
-        
-#    training_X = training_X[55500:60000,:]
- #   training_y = training_y[55500:60000]
+    if train == 'train':
+        training_X = training_X[55500:60000,:]
+        training_y = training_y[55500:60000]
     
     #for this to work, the random shuffling must be seeded to ensure that the test set does not contain some training data.
     if train == 'train':
@@ -244,7 +249,8 @@ def main(attack, shuffle,mlCode, featureFile,train):
 #make it non parallel first. add parallel in and try to recreate result.
     
 #params(attack, shuffle, mlalg, featurefile, train)
-main('dos',True, 'dt', 'featureVals_windows_dos_test_delete2.csv','test')
+
+main('dos',True, 'dt', 'featureValswnames_doswindows_deletetest_optimalwindows.csv','test')
 #ranking of classifiers for DOS. SVM is particularly bad at predicting the non DoS attacks, but other classifiers are better.
 #many perform better for non Dos
 

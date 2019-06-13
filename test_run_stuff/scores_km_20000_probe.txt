@@ -1,0 +1,27 @@
+F1 score: 0.238651102464332  UniqDestIPs SYNBool TELNETCount ICMPCount ThirdMNumberPackets CorJSCount SSHCount MeanNumberOfPackets NumberOfPackets MeanPacketSize FTPandC CCodeCount UniqSrcIPs ARPCount ThirdMPacketSize TCPCount HTTPCount CVPacketSize SYNCount UniqProtcols FTPCount RSTCount HTTPandMalformed DNSCount EXECodeCount HTTPorFTPandEXE 
+F1 score: 0.24073921293622635  UniqProtcols UniqDestIPs TELNETCount ThirdMNumberPackets HTTPandMalformed FTPCount SSHCount EXECodeCount HTTPorFTPandEXE MeanPacketSize FTPandC CCodeCount ThirdMPacketSize TCPCount SYNBool ARPCount SYNCount CVPacketSize UniqSrcIPs MeanNumberOfPackets NumberOfPackets RSTCount CorJSCount ICMPCount DNSCount 
+F1 score: 0.24847600240405254  CVPacketSize UniqProtcols ThirdMPacketSize UniqDestIPs CCodeCount EXECodeCount HTTPorFTPandEXE FTPandC SSHCount SYNCount UniqSrcIPs TELNETCount SYNBool MeanNumberOfPackets NumberOfPackets HTTPandMalformed ICMPCount ThirdMNumberPackets DNSCount RSTCount CorJSCount FTPCount ARPCount TCPCount 
+F1 score: 0.24874328306465593  ThirdMPacketSize DNSCount CorJSCount RSTCount CCodeCount ThirdMNumberPackets ICMPCount ARPCount FTPandC UniqSrcIPs TCPCount SYNBool TELNETCount UniqDestIPs CVPacketSize UniqProtcols SSHCount SYNCount EXECodeCount HTTPorFTPandEXE HTTPandMalformed FTPCount MeanNumberOfPackets 
+F1 score: 0.24882873503383657  ThirdMPacketSize ThirdMNumberPackets RSTCount FTPCount UniqProtcols EXECodeCount HTTPorFTPandEXE SSHCount TCPCount MeanNumberOfPackets TELNETCount UniqDestIPs CVPacketSize SYNBool UniqSrcIPs ARPCount SYNCount FTPandC CorJSCount HTTPandMalformed ICMPCount DNSCount 
+F1 score: 0.24878472222222223  ThirdMPacketSize CVPacketSize UniqProtcols EXECodeCount HTTPorFTPandEXE DNSCount ICMPCount CorJSCount HTTPandMalformed SYNCount FTPandC SSHCount MeanNumberOfPackets ARPCount UniqSrcIPs SYNBool UniqDestIPs TELNETCount FTPCount ThirdMNumberPackets TCPCount 
+F1 score: 0.24865428025698907  ThirdMPacketSize UniqProtcols FTPandC EXECodeCount HTTPorFTPandEXE SYNCount SSHCount TCPCount UniqSrcIPs UniqDestIPs TELNETCount SYNBool CVPacketSize ARPCount CorJSCount MeanNumberOfPackets FTPCount HTTPandMalformed ICMPCount ThirdMNumberPackets 
+F1 score: 0.24865428025698907  CVPacketSize ThirdMPacketSize UniqProtcols CorJSCount ICMPCount EXECodeCount HTTPorFTPandEXE FTPandC SSHCount ARPCount UniqSrcIPs SYNBool UniqDestIPs TELNETCount MeanNumberOfPackets FTPCount ThirdMNumberPackets SYNCount TCPCount 
+F1 score: 0.24867587045237471  CVPacketSize ThirdMPacketSize CorJSCount FTPandC ThirdMNumberPackets SSHCount ARPCount TCPCount MeanNumberOfPackets UniqSrcIPs UniqDestIPs SYNBool TELNETCount UniqProtcols FTPCount EXECodeCount HTTPorFTPandEXE SYNCount 
+F1 score: 0.24867587045237471  CVPacketSize ThirdMPacketSize EXECodeCount HTTPorFTPandEXE TCPCount MeanNumberOfPackets SYNBool UniqDestIPs TELNETCount UniqProtcols UniqSrcIPs SSHCount ARPCount ThirdMNumberPackets FTPCount FTPandC SYNCount 
+F1 score: 0.24834897462634686  CVPacketSize ThirdMPacketSize ThirdMNumberPackets SYNCount ARPCount SSHCount TCPCount SYNBool UniqDestIPs TELNETCount UniqProtcols UniqSrcIPs EXECodeCount HTTPorFTPandEXE FTPCount MeanNumberOfPackets 
+F1 score: 0.24916652044218285  CVPacketSize ThirdMPacketSize ThirdMNumberPackets EXECodeCount HTTPorFTPandEXE ARPCount MeanNumberOfPackets TELNETCount UniqDestIPs SYNBool UniqProtcols UniqSrcIPs FTPCount SSHCount SYNCount 
+F1 score: 0.2507992327365729  UniqProtcols SYNCount SSHCount FTPCount UniqSrcIPs TELNETCount SYNBool UniqDestIPs MeanNumberOfPackets ARPCount CVPacketSize ThirdMNumberPackets EXECodeCount HTTPorFTPandEXE 
+F1 score: 0.25204682837248454  CVPacketSize SSHCount SYNCount EXECodeCount HTTPorFTPandEXE SYNBool UniqSrcIPs MeanNumberOfPackets TELNETCount UniqDestIPs ARPCount FTPCount ThirdMNumberPackets 
+F1 score: 0.2535323700806258  CVPacketSize SYNBool SSHCount ARPCount FTPCount SYNCount UniqSrcIPs UniqDestIPs TELNETCount ThirdMNumberPackets EXECodeCount HTTPorFTPandEXE 
+F1 score: 0.2535953978906999  CVPacketSize SYNBool EXECodeCount HTTPorFTPandEXE FTPCount ThirdMNumberPackets UniqSrcIPs TELNETCount UniqDestIPs SYNCount SSHCount 
+F1 score: 0.2540467267363049  SYNBool UniqDestIPs SSHCount EXECodeCount HTTPorFTPandEXE FTPCount SYNCount TELNETCount UniqSrcIPs CVPacketSize 
+F1 score: 0.2536849653414071  SYNBool UniqDestIPs CVPacketSize SYNCount FTPCount UniqSrcIPs TELNETCount EXECodeCount HTTPorFTPandEXE 
+F1 score: 0.25415070242656446  SYNBool UniqDestIPs EXECodeCount HTTPorFTPandEXE SYNCount UniqSrcIPs TELNETCount CVPacketSize 
+F1 score: 0.25418435172579484  CVPacketSize SYNBool UniqDestIPs SYNCount TELNETCount UniqSrcIPs EXECodeCount 
+F1 score: 0.25380960183516305  CVPacketSize SYNBool EXECodeCount SYNCount TELNETCount UniqDestIPs 
+F1 score: 0.254259501965924  CVPacketSize SYNBool EXECodeCount UniqDestIPs TELNETCount 
+F1 score: 0.24802485574789168  CVPacketSize SYNBool EXECodeCount UniqDestIPs 
+F1 score: 0.2388468205455707  CVPacketSize EXECodeCount SYNBool 
+F1 score: 0.23889040970891506  CVPacketSize SYNBool 
+F1 score: 0.23226035923884047  CVPacketSize 
+193.6260368824005
