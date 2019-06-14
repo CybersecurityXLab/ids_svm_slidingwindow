@@ -1,0 +1,27 @@
+F1 score: 0.12068647351909947  RSTCount TCPCount SSHCount UniqDestIPs FTPCount CVPacketSize UniqSrcIPs EXECodeCount ThirdMNumberPackets TELNETCount SYNCount DNSCount CorJSCount UDPCount UniqProtcols ARPCount CCodeCount HTTPandMalformed HTTPorFTPandEXE ICMPCount MeanNumberOfPackets NumberOfPackets MeanPacketSize FTPandC ThirdMPacketSize SYNBool 
+F1 score: 0.1252295262578039  RSTCount SYNCount CVPacketSize ICMPCount UniqSrcIPs UniqDestIPs MeanPacketSize DNSCount FTPCount SSHCount TCPCount CorJSCount ThirdMPacketSize HTTPorFTPandEXE ARPCount ThirdMNumberPackets EXECodeCount SYNBool MeanNumberOfPackets NumberOfPackets TELNETCount UDPCount UniqProtcols HTTPandMalformed FTPandC 
+F1 score: 0.12373783734165598  RSTCount SYNCount TCPCount ARPCount UniqProtcols FTPCount MeanPacketSize UniqSrcIPs ThirdMPacketSize CorJSCount CVPacketSize ICMPCount HTTPorFTPandEXE SSHCount DNSCount UniqDestIPs MeanNumberOfPackets UDPCount TELNETCount NumberOfPackets ThirdMNumberPackets FTPandC HTTPandMalformed EXECodeCount 
+F1 score: 0.12219311377245509  RSTCount SYNCount TCPCount MeanPacketSize DNSCount UniqDestIPs CorJSCount CVPacketSize NumberOfPackets UniqSrcIPs UniqProtcols ICMPCount SSHCount ARPCount HTTPandMalformed ThirdMNumberPackets FTPandC ThirdMPacketSize TELNETCount EXECodeCount UDPCount HTTPorFTPandEXE MeanNumberOfPackets 
+F1 score: 0.13155111068371958  RSTCount SYNCount CVPacketSize HTTPorFTPandEXE UniqDestIPs ARPCount UDPCount NumberOfPackets SSHCount EXECodeCount ThirdMNumberPackets MeanNumberOfPackets CorJSCount UniqSrcIPs HTTPandMalformed FTPandC TELNETCount UniqProtcols MeanPacketSize ICMPCount DNSCount ThirdMPacketSize 
+F1 score: 0.1205301802231334  RSTCount CVPacketSize FTPandC SSHCount ThirdMPacketSize ThirdMNumberPackets UniqSrcIPs DNSCount ARPCount SYNCount MeanNumberOfPackets HTTPorFTPandEXE HTTPandMalformed ICMPCount TELNETCount NumberOfPackets CorJSCount EXECodeCount UniqDestIPs MeanPacketSize UniqProtcols 
+F1 score: 0.11691845735197523  RSTCount SYNCount UniqProtcols EXECodeCount HTTPandMalformed UniqSrcIPs MeanNumberOfPackets ARPCount HTTPorFTPandEXE ICMPCount NumberOfPackets MeanPacketSize ThirdMPacketSize ThirdMNumberPackets UniqDestIPs SSHCount TELNETCount CVPacketSize CorJSCount DNSCount 
+F1 score: 0.12121212121212122  RSTCount ThirdMNumberPackets HTTPorFTPandEXE CVPacketSize HTTPandMalformed SYNCount SSHCount UniqSrcIPs ThirdMPacketSize UniqDestIPs ICMPCount EXECodeCount DNSCount MeanPacketSize UniqProtcols CorJSCount ARPCount MeanNumberOfPackets NumberOfPackets 
+F1 score: 0.12972176156255757  RSTCount CVPacketSize EXECodeCount NumberOfPackets HTTPandMalformed SYNCount UniqSrcIPs CorJSCount HTTPorFTPandEXE DNSCount ThirdMPacketSize UniqDestIPs MeanNumberOfPackets MeanPacketSize SSHCount ARPCount UniqProtcols ICMPCount 
+F1 score: 0.13364794714487965  RSTCount DNSCount CVPacketSize UniqSrcIPs MeanPacketSize CorJSCount MeanNumberOfPackets HTTPandMalformed ARPCount SSHCount UniqProtcols ThirdMPacketSize EXECodeCount SYNCount ICMPCount NumberOfPackets HTTPorFTPandEXE 
+F1 score: 0.1358858858858859  RSTCount UniqSrcIPs ThirdMPacketSize DNSCount UniqProtcols MeanPacketSize SSHCount ARPCount CorJSCount CVPacketSize SYNCount EXECodeCount NumberOfPackets ICMPCount MeanNumberOfPackets HTTPandMalformed 
+F1 score: 0.13450127154563438  RSTCount UniqSrcIPs DNSCount CVPacketSize SSHCount ThirdMPacketSize UniqProtcols MeanPacketSize SYNCount ARPCount CorJSCount EXECodeCount NumberOfPackets ICMPCount HTTPandMalformed 
+F1 score: 0.13141297185352538  RSTCount UniqSrcIPs ThirdMPacketSize MeanPacketSize DNSCount NumberOfPackets UniqProtcols SYNCount SSHCount CorJSCount CVPacketSize ICMPCount EXECodeCount ARPCount 
+F1 score: 0.1353369246763066  RSTCount UniqSrcIPs DNSCount ThirdMPacketSize NumberOfPackets CorJSCount MeanPacketSize SSHCount UniqProtcols SYNCount CVPacketSize ARPCount ICMPCount 
+F1 score: 0.13641969452613606  RSTCount SYNCount NumberOfPackets UniqSrcIPs DNSCount SSHCount ThirdMPacketSize UniqProtcols MeanPacketSize CVPacketSize CorJSCount ARPCount 
+F1 score: 0.1374798520906419  RSTCount UniqSrcIPs SYNCount DNSCount SSHCount MeanPacketSize NumberOfPackets UniqProtcols ThirdMPacketSize CVPacketSize CorJSCount 
+F1 score: 0.13551130871834524  RSTCount UniqSrcIPs SYNCount DNSCount UniqProtcols SSHCount MeanPacketSize NumberOfPackets CVPacketSize ThirdMPacketSize 
+F1 score: 0.13001620436564673  RSTCount UniqSrcIPs SYNCount MeanPacketSize DNSCount UniqProtcols SSHCount NumberOfPackets ThirdMPacketSize 
+F1 score: 0.13030998851894374  RSTCount UniqSrcIPs DNSCount SSHCount NumberOfPackets MeanPacketSize UniqProtcols SYNCount 
+F1 score: 0.1398561151079137  RSTCount UniqSrcIPs DNSCount SSHCount SYNCount UniqProtcols NumberOfPackets 
+F1 score: 0.14222571456634908  RSTCount UniqSrcIPs DNSCount SYNCount SSHCount NumberOfPackets 
+F1 score: 0.14296407185628743  RSTCount DNSCount SYNCount SSHCount UniqSrcIPs 
+F1 score: 0.15409746800980123  RSTCount DNSCount UniqSrcIPs SYNCount 
+F1 score: 0.13716337522441652  RSTCount UniqSrcIPs SYNCount 
+F1 score: 0.07455113192818112  RSTCount SYNCount 
+F1 score: 0.023860747115196555  RSTCount 
+2513.8604805469513

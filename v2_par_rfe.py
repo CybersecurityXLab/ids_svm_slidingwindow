@@ -198,8 +198,14 @@ def runMLAlg(X,y,mlAlg,startingNames,fileName):
 def getTrainingAndTest(X,y,attack,featureFile,train,number):
     
     #split by number of attacks for each attack type
-    if attack == 'dos' or attack == 'probe':
+    if attack == 'dos':
         trainTestSplitIdx = 71347
+    elif attack == 'probe':
+        trainTestSplitIdx = 74537
+    elif attack == 'u2r':
+        trainTestSplitIdx = 93867
+    elif attack == 'r2l':
+        trainTestSplitIdx = 55286
         
     print(trainTestSplitIdx)
     
@@ -243,14 +249,14 @@ def main(attack, shuffle,mlCode, featureFile,train):
     
     if train == 'train':
         training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,1)
-        training_X = training_X[50000:60000,:]
-        training_y = training_y[50000:60000]
-        runMLAlg(training_X,training_y,mlCode,startingNames,"scores_" + mlCode + "testtestdeletefile_" + attack + "_optimaltimewindows1.txt")
+      #  training_X = training_X[50000:60000,:]
+       # training_y = training_y[50000:60000]
+        runMLAlg(training_X,training_y,mlCode,startingNames,"scores_" + mlCode + "_" + attack + "_8sectimewindows1.txt")
        
         training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,2)
-        training_X = training_X[50000:60000,:]
-        training_y = training_y[50000:60000]
-        runMLAlg(training_X,training_y,mlCode,startingNames,"scores_" + mlCode + "testtestdeletefile_" + attack + "_optimaltimewindows2.txt")
+      #  training_X = training_X[50000:60000,:]
+      #  training_y = training_y[50000:60000]
+        runMLAlg(training_X,training_y,mlCode,startingNames,"scores_" + mlCode + "_" + attack + "_8sectimewindows2.txt")
     
     elif train == 'test':#test set
         
@@ -263,7 +269,7 @@ def main(attack, shuffle,mlCode, featureFile,train):
     
 #params(attack, shuffle, mlalg, featurefile, train)
 
-main('dos',True, 'dt', 'featureVals_8sec.csv','train')
+main('r2l',True, 'knn', 'featureVals_8sec.csv','train')
 #ranking of classifiers for DOS. SVM is particularly bad at predicting the non DoS attacks, but other classifiers are better.
 #many perform better for non Dos
 

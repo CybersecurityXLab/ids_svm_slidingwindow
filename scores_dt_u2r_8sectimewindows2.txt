@@ -1,0 +1,27 @@
+F1 score: 0.22488588452559324  SSHCount ThirdMPacketSize SYNBool RSTCount TELNETCount UniqSrcIPs ThirdMNumberPackets UniqProtcols MeanNumberOfPackets TCPCount ICMPCount HTTPorFTPandEXE CVPacketSize EXECodeCount MeanPacketSize UDPCount FTPandC HTTPCount HTTPandMalformed CCodeCount ARPCount NumberOfPackets FTPCount UniqDestIPs CorJSCount SYNCount 
+F1 score: 0.23707167283132108  ThirdMPacketSize HTTPandMalformed RSTCount CorJSCount CVPacketSize EXECodeCount NumberOfPackets UniqProtcols ICMPCount ARPCount HTTPorFTPandEXE ThirdMNumberPackets SYNBool TCPCount FTPandC UDPCount UniqDestIPs MeanNumberOfPackets SYNCount SSHCount FTPCount CCodeCount TELNETCount HTTPCount UniqSrcIPs 
+F1 score: 0.24184074241423653  ThirdMPacketSize ThirdMNumberPackets CVPacketSize TELNETCount SSHCount UniqProtcols CorJSCount SYNCount UniqDestIPs TCPCount UDPCount HTTPorFTPandEXE NumberOfPackets FTPCount HTTPandMalformed EXECodeCount CCodeCount MeanNumberOfPackets FTPandC RSTCount ICMPCount SYNBool ARPCount UniqSrcIPs 
+F1 score: 0.2436039275342276  ThirdMPacketSize SSHCount TELNETCount RSTCount UniqProtcols TCPCount CCodeCount CVPacketSize HTTPorFTPandEXE CorJSCount MeanNumberOfPackets UniqDestIPs ARPCount ICMPCount EXECodeCount NumberOfPackets FTPCount ThirdMNumberPackets FTPandC HTTPandMalformed SYNBool SYNCount UDPCount 
+F1 score: 0.24776139964182398  SSHCount CVPacketSize ThirdMPacketSize ThirdMNumberPackets TELNETCount RSTCount UniqDestIPs CorJSCount UniqProtcols TCPCount SYNCount ARPCount HTTPandMalformed FTPCount MeanNumberOfPackets SYNBool EXECodeCount HTTPorFTPandEXE ICMPCount CCodeCount UDPCount FTPandC 
+F1 score: 0.24891311848733697  CVPacketSize SSHCount ThirdMPacketSize ThirdMNumberPackets TELNETCount RSTCount TCPCount CorJSCount SYNCount SYNBool UniqProtcols UniqDestIPs ICMPCount EXECodeCount FTPCount FTPandC CCodeCount ARPCount UDPCount HTTPandMalformed MeanNumberOfPackets 
+F1 score: 0.24936914514846692  CVPacketSize SSHCount TELNETCount ThirdMPacketSize ThirdMNumberPackets RSTCount SYNCount TCPCount UniqProtcols SYNBool FTPCount CorJSCount CCodeCount UniqDestIPs EXECodeCount FTPandC UDPCount HTTPandMalformed ARPCount MeanNumberOfPackets 
+F1 score: 0.2530840468285864  SSHCount CVPacketSize TELNETCount ThirdMPacketSize ThirdMNumberPackets CorJSCount TCPCount RSTCount SYNCount UniqProtcols UniqDestIPs SYNBool FTPCount EXECodeCount FTPandC HTTPandMalformed UDPCount ARPCount CCodeCount 
+F1 score: 0.26238884045335653  ThirdMNumberPackets SSHCount RSTCount SYNCount ThirdMPacketSize SYNBool TCPCount UniqProtcols FTPCount TELNETCount ARPCount EXECodeCount HTTPandMalformed UDPCount CCodeCount CorJSCount CVPacketSize FTPandC 
+F1 score: 0.2627351511308392  ThirdMNumberPackets SSHCount SYNCount ThirdMPacketSize SYNBool FTPCount TELNETCount RSTCount HTTPandMalformed TCPCount UniqProtcols ARPCount EXECodeCount CorJSCount UDPCount CCodeCount FTPandC 
+F1 score: 0.2704539763173899  RSTCount SYNBool SSHCount UniqProtcols FTPandC FTPCount EXECodeCount CCodeCount TELNETCount ARPCount HTTPandMalformed UDPCount TCPCount ThirdMNumberPackets CorJSCount SYNCount 
+F1 score: 0.27933000712758377  EXECodeCount ARPCount SSHCount FTPandC TCPCount HTTPandMalformed UDPCount CorJSCount RSTCount CCodeCount SYNBool UniqProtcols ThirdMNumberPackets TELNETCount FTPCount 
+F1 score: 0.2896849684968497  SSHCount ARPCount CorJSCount ThirdMNumberPackets TCPCount UniqProtcols RSTCount EXECodeCount SYNBool HTTPandMalformed UDPCount FTPandC CCodeCount FTPCount 
+F1 score: 0.29050037825570085  ThirdMNumberPackets TCPCount SYNBool SSHCount RSTCount FTPCount ARPCount CorJSCount UDPCount FTPandC CCodeCount UniqProtcols EXECodeCount 
+F1 score: 0.29710014732832657  ThirdMNumberPackets SYNBool SSHCount TCPCount FTPCount RSTCount CorJSCount FTPandC UDPCount EXECodeCount ARPCount CCodeCount 
+F1 score: 0.29438444924406043  ThirdMNumberPackets TCPCount RSTCount SYNBool CorJSCount SSHCount ARPCount UDPCount CCodeCount FTPCount EXECodeCount 
+F1 score: 0.2939336630782659  ThirdMNumberPackets TCPCount SYNBool SSHCount CorJSCount RSTCount UDPCount FTPCount CCodeCount EXECodeCount 
+F1 score: 0.29630977509280154  ThirdMNumberPackets RSTCount TCPCount CorJSCount SYNBool SSHCount FTPCount UDPCount CCodeCount 
+F1 score: 0.2922044775030992  ThirdMNumberPackets TCPCount CorJSCount RSTCount SSHCount SYNBool CCodeCount UDPCount 
+F1 score: 0.29319943237637813  ThirdMNumberPackets CorJSCount SSHCount TCPCount RSTCount SYNBool CCodeCount 
+F1 score: 0.29232900685430946  ThirdMNumberPackets TCPCount SSHCount CorJSCount SYNBool RSTCount 
+F1 score: 0.2884713052310818  ThirdMNumberPackets SSHCount TCPCount CorJSCount RSTCount 
+F1 score: 0.2868270665744549  ThirdMNumberPackets TCPCount RSTCount CorJSCount 
+F1 score: 0.28161993769470406  ThirdMNumberPackets TCPCount CorJSCount 
+F1 score: 0.278780747876604  ThirdMNumberPackets TCPCount 
+F1 score: 0.25988183406840315  ThirdMNumberPackets 
+1188.9257640838623
