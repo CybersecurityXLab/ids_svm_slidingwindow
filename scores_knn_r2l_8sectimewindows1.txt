@@ -11,3 +11,5 @@ F1 score: 0.12739747388117886  DNSCount CVPacketSize HTTPCount RSTCount UniqSrcI
 F1 score: 0.13005137642818804  DNSCount UniqSrcIPs CVPacketSize HTTPCount FTPCount CorJSCount RSTCount ThirdMNumberPackets ICMPCount MeanNumberOfPackets NumberOfPackets UDPCount EXECodeCount HTTPorFTPandEXE HTTPandMalformed SYNCount 
 F1 score: 0.13451327433628318  DNSCount UniqSrcIPs CVPacketSize HTTPCount FTPCount RSTCount ICMPCount CorJSCount SYNCount ThirdMNumberPackets UDPCount EXECodeCount HTTPorFTPandEXE HTTPandMalformed MeanNumberOfPackets 
 F1 score: 0.13453397983529594  DNSCount UniqSrcIPs CVPacketSize MeanNumberOfPackets FTPCount HTTPCount RSTCount CorJSCount ThirdMNumberPackets SYNCount ICMPCount UDPCount EXECodeCount HTTPorFTPandEXE 
+F1 score: 0.1345236262890565  DNSCount UniqSrcIPs CVPacketSize MeanNumberOfPackets FTPCount HTTPCount RSTCount CorJSCount ThirdMNumberPackets SYNCount ICMPCount UDPCount EXECodeCount 
+F1 score: 0.13442143352067132  DNSCount UniqSrcIPs CVPacketSize MeanNumberOfPackets FTPCount HTTPCount RSTCount CorJSCount ThirdMNumberPackets SYNCount EXECodeCount ICMPCount 

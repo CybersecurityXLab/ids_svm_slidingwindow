@@ -251,17 +251,17 @@ def main(attack, shuffle,mlCode, featureFile,train):
         training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,1)
       #  training_X = training_X[50000:60000,:]
        # training_y = training_y[50000:60000]
-        runMLAlg(training_X,training_y,mlCode,startingNames,"scores_" + mlCode + "_" + attack + "_8sectimewindows1.txt")
+        runMLAlg(training_X,training_y,mlCode,startingNames,"scores_" + mlCode + "_" + attack + "_6feattimewindows1_1.txt")
        
         training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,2)
       #  training_X = training_X[50000:60000,:]
       #  training_y = training_y[50000:60000]
-        runMLAlg(training_X,training_y,mlCode,startingNames,"scores_" + mlCode + "_" + attack + "_8sectimewindows2.txt")
+        runMLAlg(training_X,training_y,mlCode,startingNames,"scores_" + mlCode + "_" + attack + "_6feattimewindows1_2.txt")
     
     elif train == 'test':#test set
         
         #before running, make sure the last number is set correctly. It should match the cv number of the file
-        training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,1)
+        training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train)
         runTest(training_X,test_X,training_y,test_y,mlCode)
 
 
@@ -269,7 +269,7 @@ def main(attack, shuffle,mlCode, featureFile,train):
     
 #params(attack, shuffle, mlalg, featurefile, train)
 
-main('r2l',True, 'knn', 'featureVals_8sec.csv','train')
+main('probe',True, 'dt', 'featureValswnames_finalRunDOS2_1.csv','test')
 #ranking of classifiers for DOS. SVM is particularly bad at predicting the non DoS attacks, but other classifiers are better.
 #many perform better for non Dos
 
