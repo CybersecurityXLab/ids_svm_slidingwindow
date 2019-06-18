@@ -1,0 +1,207 @@
+final time window features decided by maximum f1 score of 10 or less features (highest f1 of feature window set with cardinality <= 10 and >=1)
+
+To calculate the f1 score without interference of RFE in the crossval process, each dataset was manually split into two datasets for a variation of crossval. The
+samples were left in the same order from feature and label creation. For each attack type (dos, probe, u2r, r2l) I recorded the number of attacks in the dataset and recorded the
+start and finish index of each attack. The "crossval rounds" were created by me manually picking an index that had a good number of attacks and time window second samples in each 
+dataset. This is all recorded in the "attackindices.txt" file in this directory. This is opposed to the normal crossval method, which would have taken the middle index and separated 
+the training and test sets based on this (for 2 CV rounds). Some attack types had far more instances of their attack on one side of the halfway mark vs the other side. 
+
+Using this approach means that one of the two separated sets always had more training samples than the other, and each the small and large sets were used as both training and test
+once, leaving 8 final results recorded here.
+
+For training, to avoid biasing the test results with the feature selection process, only one of the two separated datasets was used for the feature selection process. For both
+the 8 second window RFE and the optimal window feature RFE runs, the machine learning algorithm used was decision tree, the ranking score was f1, and the dataset used was evaluated
+using 5 traditional crossval rounds. In other words, the current "training half" of the dataset for the given attack performed feature selection by getting the f1 from crossval rounds on 
+itself only; the current "test half" was ignored until getting the final score at the end of all runs. This process was repeated in reverse for the other section of the dataset in
+a completely different feature selection process.
+
+There were two RFE rounds to get each final feature set. One RFE started with all 8 second time windows and selected the top 6. The second RFE round selected the maximum f1 of 10
+or less features, meaning the final optimal time window feature set could be anywhere from 1-10 features in size. Once the highest f1 score was taken from this feature set, it was
+evaulated by running a single ML alg run, where the algorithm was trained on the same dataset that was used to select the current set of features (i.e. the 'training set'). The 
+scores recorded here are the scores of the trained classifier on the test set which was never seen during the selection process of the windows/features used.
+
+Four machine learning algorithms were compared for their final test score results (decision tree, knn, svm, and neural network). These each use the same specified features for each
+section.
+
+dos
+
+6 optimal features selected by first "crossval round", optimal windows decided by first "crossval round"
+f1 of optimal feature window set with cardinality >= 10: 0.7347957168104793  
+MeanPacketSize16 SYNBoolean60 TCPCount60 SYNBoolean32 DNSCount16 TCPCount16 DNSCount8 ICMPCount60 TCPCount2 SYNCount16 
+test scores using second "crossval round" as test set:
+dt
+f1: 0.2370023419203747
+accuracy: 0.9507624416267436
+knn: 
+f1: 0.35485714285714287
+accuracy: 0.9658752588069942
+svm
+f1: 0.0032441200324412004
+accuracy: 0.9628526953709441
+nn
+f1: 0.3348464619492657
+accuracy: 0.9623539724039958
+
+6 optimal features selected by second "crossval round", optimal windows decided by second "crossval round"
+f1 of optimal feature window set with cardinality >= 10: F1 score: 0.5707559508239602  
+SYNBoolean60 ThirdMomentPacketSize60 TelnetCount60 TCPCount60 DNSCount8 TCPCount16 DNSCount32 ThirdMomentNumberOfPackets60 TCPCount8 TelnetCount4 
+test scores using first "crossval round": as test set
+dt
+f1: 0.2099801905480615
+accuracy: 0.8826159474119445
+knn: 
+f1: 0.05192479856759176
+accuracy: 0.8812563948028649
+svm
+f1: 0.1051768884032236
+accuracy: 0.9081811428651521
+nn
+f1: 0.036181791439917635
+accuracy: 0.9081531108525936
+
+
+
+probe
+
+6 optimal features selected by first "crossval round", optimal windows decided by first "crossval round"
+f1 of optimal feature window set with cardinality >= 10: F1 score: 0.49297431992801266 
+ARPCount8 UDPCount60 ARPCount16 ARPCount60
+test scores using second "crossval round" as test set:
+dt
+f1: 0.1188177928152055
+accuracy: 0.8593975769701011
+knn: 
+f1: 0.1416546212056798
+accuracy: 0.8397084742533225
+svm
+f1: 0.023642943305186973
+accuracy: 0.8714809698470919
+nn
+f1: 0.08968113374667848
+accuracy: 0.8694485463408438
+
+6 optimal features selected by second "crossval round", optimal windows decided by second "crossval round"
+f1 of optimal feature window set with cardinality >= 10: F1 score: 0.19034907597535933 
+DNSCount60 ThirdMomentNumberOfPackets32 MeanPacketSize60 MeanPacketSize32 RSTCount60 TelnetCount32 UniqSrcIps32 ThirdMomentNumberOfPackets60 UniqSrcIps60 MeanPacketSize16 
+test scores using first "crossval round" as test set:
+dt
+f1: 0.12117879920826918
+accuracy: 0.7855561667359835
+knn: 
+f1: 0.07555183731256837
+accuracy: 0.8072769228705207
+svm
+0.011558503079109425
+accuracy: 0.8600292472195017
+nn
+f1: 0.0 (all predicted negative)
+accuracy: 0.8622831613829374 (all predicted negative)
+
+
+
+r2l
+
+6 optimal features selected by first "crossval round", optimal windows decided by first "crossval round"
+f1 of optimal feature window set with cardinality >= 10: 0.19840213049267644 
+CVPacketSize60 UniqSrcIps32 RSTCount6
+test scores using second "crossval round" as test set:
+dt
+f1: 0.1394622554042844
+accuracy: 0.7855405569743402
+knn: 
+f1: 0.13353338334583645
+accuracy: 0.8314483765049252
+svm
+f1: 0.0028478437754271765
+accuracy: 0.9403867201751186
+nn
+f1: 0.24308032968384796
+accuracy: 0.9251732944180956
+
+
+6 optimal features selected by second "crossval round", optimal windows decided by second "crossval round"
+f1 of optimal feature window set with cardinality >= 10: 0.28374436488994964
+DNSCount60 SSHCount60 SYNCount60 UniqSrcIps60 RSTCount60 RSTCount32 NumberOfPackets1 
+test scores using first "crossval round" as test set:
+dt
+f1: 0.12529406639365687
+accuracy: 0.8184169590854827
+knn
+f1: 0.04928398735354288
+accuracy: 0.8150707231487175
+svm
+f1: 0.0027441686416365225
+accuracy: 0.855388344246283
+nn
+f1: 0.0
+accuracy: 0.8553340809608219
+
+
+
+
+u2r
+
+6 optimal features selected by first "crossval round", optimal windows decided by first "crossval round"
+f1 of optimal feature window set with cardinality >= 10: 0.1841976001684092
+ThirdMomentPacketSize60
+test scores using second "crossval round" as test set:
+dt
+f1: 0.25455541855048636
+accuracy: 0.6260395427157552
+knn
+f1: 0.19345044458902624
+accuracy: 0.6591903594584069
+svm
+f1: 0.0
+accuracy: 0.7158468693440858
+nn
+f1: 0.0
+accuracy: 0.7158468693440858
+
+6 optimal features selected by second "crossval round", optimal windows decided by second "crossval round"
+f1 of optimal feature window set with cardinality >= 10: 0.34980453479280693  
+SSHCount60 CorJavaScriptCount60 RSTCount60 ThirdMomentNumberOfPackets60 TCPCount60 CorJavaScriptCount32 ThirdMomentNumberOfPackets16 SSHCount32 TCPCount1 TCPCount8 
+test scores using first "crossval round" as test set:
+dt
+f1: 0.20394581861012956
+accuracy: 0.7119967613751371
+knn
+f1: 0.1657593074764143
+accuracy: 0.7371706776609458
+svm
+f1: 0.0004215851602023609
+accuracy: 0.8484451404647001
+nn
+f1: 0.13619077446199276
+accuracy: 0.7943153610960189
+
+
+
+Reminders/thoughts while seeing results:
+
+
+As it stands using this method of using time windows exclusively as the features for classification are not very useful. But some useful information is provided about the time window features themselves, which using different methods could generalize to better attack classification.
+
+There are 6 categories of feature window types. These would be categorized as Counting (ex SYNCount), Boolean (ex SYNBool), UniqCounting (ex. uniqSrcIPs), Mean, CV,and TM each as their own category. Each category has a similar feature creation formula to other features in their own category. There may be useful connections between different feature windows in the same category (maybe Boolean types have lower information entropy than Counting types which have lower entropy than ThirdMoment types, just as an example). Types can be compared. This may also simplify formula writing for features since only 6 formulas would need to be written.
+
+There are some good observations; some of the selected features the time windows are far apart for the same feature. This suggests different time windows are useful in combination. Use mutual information to test similarity between different time windows of the same feature.
+
+In contrast, some windows are close together. This suggests that certain lengths of time my be of exclusive usefulness for attacks, or that some features are only useful over longer periods of time, like SYNBool. This makes sense because the amount of information (bits) SYNBool contains is linear with the length of the time window. This is obvious to see (an 8 second bool window can only have values in the range 0 to 8). Given this, it may make sense that longer windows of this feature are more useful, they simply contain more information (an 8 second window has 9 potential values, a 60 second window was 61 potential values). It can probably be shown mathematically that the maximum entropy of SYNBool is the length of the time window. This could also be graphed for intuitive explanation. Similar arguments may possibly be made about windows that are based on mean (such as mean, CV, and TM).
+Supporting this idea, even though SYNBool is ranked as the most important feature overall for DOS, there are only ever 0 or 1 SYNBool windows in the final feature sets, and they are the longest windows (32 or 60). The low number of SYNBool's selected in the final set may be a result of higher mutual information between SYNBool windows compared to other features, and the higher SYNBool windows being selected may be a result of low information entropy of this feature for small windows (since the number of bits are linear to time window length). 
+
+Compare mutual information of SYNBool's windows with themselves vs. SYNCount's mutual information with themselves. Similarly, compare the mutual information of SYNBool to the labels and repeat with SYNCount.
+
+Describe RFE, how it is greedy, and does not find the globally best feature set, but can still be a good indicator, and how it can provide insights about the features themselves (like how synbool1 may not be very useful) or that maybe longer windows can provide more information.
+
+For dos, syn bool and features derived from packet size are present and highly ranked in both feature sets. In both, the most useful windows are also in the larger half of time windows (16,32,60), which matches intuition for dos.
+
+The ECHO features (ECHOCount, ECHOBool) are not in the 8 sec window file. If we want to add them, we must rerun it all.
+
+Count the number of final time windows selected overall (ex. maybe 20 60 sec, 4 32 sec, 8 16 sec, so on). Depending on the results a longer max time window may be preferable.
+
+TCPCount seems to pick highly varied time windows all over the place in multiple feature sets.
+
+The larger time window values for third moment are somewhat unintuitive because the values for the third moment is extremely high, but this may be expected when for example, 57 out of 60 seconds have 0, 1, or 2 packets, but 3 out of 60 have perhaps 30 or more. This would give a small mean with some huge values. Another observation is for num of packets, the 1 and 2 second windows for TM are all 0s (or -1 sentinels).
+The scores presented are from the first run of the ML alg. Since some are randomly weighted, the scores can change.
+
+It appears at first glance that this method was slightly better at detecting dos and u2r than the other two. Looking at the start and stop indices on "attackindices.txt" that both dos and u2r attacks last longer on average than the other two. We should take the mean attack length in each second for each attack type and if dos and u2r have a longer mean attack length, this matches the intuition that features based on lengths of time were more useful for these attack types.

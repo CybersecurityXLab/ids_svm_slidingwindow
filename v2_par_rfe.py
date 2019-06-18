@@ -239,6 +239,7 @@ def getTrainingAndTest(X,y,attack,featureFile,train,number):
 
 def main(attack, shuffle,mlCode, featureFile,train):
     print(attack)
+    print(mlCode)
     X,y = clean(featureFile)#returns data from specified file minus the -1 values and then returns zscore of each sample
     startingNames = getNames(featureFile)
     y = oneVAll(attack,y).reshape(len(y),)
@@ -261,7 +262,7 @@ def main(attack, shuffle,mlCode, featureFile,train):
     elif train == 'test':#test set
         
         #before running, make sure the last number is set correctly. It should match the cv number of the file
-        training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train)
+        training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,2)
         runTest(training_X,test_X,training_y,test_y,mlCode)
 
 
@@ -269,7 +270,7 @@ def main(attack, shuffle,mlCode, featureFile,train):
     
 #params(attack, shuffle, mlalg, featurefile, train)
 
-main('probe',True, 'dt', 'featureValswnames_finalRunDOS2_1.csv','test')
+main('u2r',True, 'nn', 'featureValswnames_u2rCV2_finalrun.csv','test')
 #ranking of classifiers for DOS. SVM is particularly bad at predicting the non DoS attacks, but other classifiers are better.
 #many perform better for non Dos
 

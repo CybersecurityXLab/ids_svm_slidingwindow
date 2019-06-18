@@ -1,1 +1,0 @@
-F1 score: 0.11234301412872841  MeanPacketSize HTTPCount CVPacketSize ARPCount UniqDestIPs FTPCount FTPandC EXECodeCount HTTPorFTPandEXE SYNCount HTTPandMalformed UDPCount CCodeCount ThirdMNumberPackets ThirdMPacketSize TCPCount MeanNumberOfPackets NumberOfPackets SYNBool CorJSCount RSTCount UniqProtcols UniqSrcIPs SSHCount ICMPCount DNSCount 

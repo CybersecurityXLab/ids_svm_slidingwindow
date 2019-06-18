@@ -15,7 +15,9 @@ index	start	stop
 12	69079	69180
 13	69821	70721
 14	71235	71276
-split
+
+split at index 71347
+
 15	71494	71614
 16	73578	74103
 17	74916	75009
@@ -51,7 +53,7 @@ probe
 15	70861	71092
 16	72016	72240
 
-split
+split at index 74537
 
 17	78721	79371
 18	81631	82214
@@ -80,7 +82,7 @@ u2r
 6	88438	89657
 7	91573	93406
 
-split
+split at index 93867
 
 8	94391	95658
 9	101022	101344
@@ -126,7 +128,7 @@ r2l  attacks are significantly shorter. this may explain less usefulness for tim
 25	39003	39091
 26	39349	39602
 
-split
+split at index 55286
 
 27	56158	56216
 28	65638	66633
