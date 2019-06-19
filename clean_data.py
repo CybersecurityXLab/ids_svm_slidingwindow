@@ -123,8 +123,8 @@ def clean(featureFile):#should return two arrays, a feature array, and a label a
   #  return getFeatureStack([0,4,7,9,19,20,21,22,23,24,25,26],stats.zscore(cleanedFeatVals))[:40000,:],cleanedLabels[:40000,:] 
 
    # return stats.zscore(cleanedFeatVals)[20000:40000,:],cleanedLabels[20000:40000,:]
-    return stats.zscore(cleanedFeatVals),cleanedLabels
-
+   # return stats.zscore(cleanedFeatVals),cleanedLabels
+    return cleanedFeatVals,cleanedLabels
     
 #def main():
 #    clean()
