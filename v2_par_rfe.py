@@ -30,6 +30,8 @@ def nameManager(indices,names):
     return orderedNames
 
 def runTest(X_train, X_test, y_train, y_test,mlAlg):
+    start = time.time()
+    
     if mlAlg == 'dt':
         decision_tree = tree.DecisionTreeClassifier()
         decision_tree = decision_tree.fit(X_train,y_train)
@@ -61,10 +63,13 @@ def runTest(X_train, X_test, y_train, y_test,mlAlg):
     accuracy = accuracy_score(y_test.tolist(),predicted)
     print(f1)
     print(accuracy)
+    
+    print('time: ', str(time.time() - start))
 
 #do crossval on training set
 #eventually make it not cross_val_predict because it isn't supposed to return guesses
 def run(feats,y,MLalg):
+    
  #   start = time.time()
     #neural network
    # clf = MLPClassifier(solver='lbfgs',alpha=1e-5,hidden_layer_sizes=(1000,2),random_state = 1)
@@ -124,6 +129,8 @@ def run(feats,y,MLalg):
     print(f1)
     accuracy = accuracy_score(y,predicted)
     print(accuracy)
+    
+    
     
     return f1
 
@@ -254,15 +261,17 @@ def main(attack, shuffle,mlCode, featureFile,train):
        # training_y = training_y[50000:60000]
         runMLAlg(training_X,training_y,mlCode,startingNames,"scores_" + mlCode + "_" + attack + "_6feattimewindows1_1.txt")
        
-        training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,2)
+#        training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,2)
       #  training_X = training_X[50000:60000,:]
       #  training_y = training_y[50000:60000]
-        runMLAlg(training_X,training_y,mlCode,startingNames,"scores_" + mlCode + "_" + attack + "_6feattimewindows1_2.txt")
+#        runMLAlg(training_X,training_y,mlCode,startingNames,"scores_" + mlCode + "_" + attack + "_6feattimewindows1_2.txt")
     
     elif train == 'test':#test set
         
         #before running, make sure the last number is set correctly. It should match the cv number of the file
-        training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,2)
+        training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,1)
+   #     training_X = training_X[40400:40900,:]
+    #    training_y = training_y[40400:40900]
         runTest(training_X,test_X,training_y,test_y,mlCode)
 
 
@@ -270,7 +279,7 @@ def main(attack, shuffle,mlCode, featureFile,train):
     
 #params(attack, shuffle, mlalg, featurefile, train)
 
-main('u2r',True, 'dt', 'featureVals_8sec_u2rtestCV2.csv','test')
+main('dos',True, 'dt', 'featureVals_8sec.csv','test')
 #ranking of classifiers for DOS. SVM is particularly bad at predicting the non DoS attacks, but other classifiers are better.
 #many perform better for non Dos
 
