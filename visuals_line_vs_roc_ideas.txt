@@ -8,6 +8,7 @@ Have an ROC where the x is in the same increments and have the y be the percenta
 repeat this for each attack type, and do one final with all.
 
 Find the pearson correlation coeff of the x axis length of attack and y axis percentage increase (or regular percent) for each attack. This will show how much time lengths of attacks matters. Doing correlation coeff will require that duplicate lengths (i.e. 1 second) are each plotted so that each point has an equal weight.
+The positive correlation of Attack length and TPR provides a mathematical rationale that the time window features are better at predicting longer DOS attacks.
 
 Perhaps the line graph should be the relative percentage and the pearson correlation coef should be the actual percentage (or both)
 
