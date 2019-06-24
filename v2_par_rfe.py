@@ -291,7 +291,7 @@ def main(attack, shuffle,mlCode, featureFile,train):
     
 #params(attack, shuffle, mlalg, featurefile, train)
 
-main('dos',True, 'dt', 'featureValswnames_dosCV1_finalrun.csv','test')
+main('u2r',True, 'dt', 'featureValswnames_u2rCV1_finalrun.csv','test')
 #ranking of classifiers for DOS. SVM is particularly bad at predicting the non DoS attacks, but other classifiers are better.
 #many perform better for non Dos
 

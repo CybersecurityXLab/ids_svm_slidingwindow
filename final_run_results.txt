@@ -146,8 +146,8 @@ f1 of optimal feature window set with cardinality >= 10: 0.1841976001684092
 ThirdMomentPacketSize60
 test scores using second "crossval round" as test set:
 dt
-f1: 0.25455541855048636
-accuracy: 0.6260395427157552
+f1: 0.2542713567839196
+accuracy: 0.6260166326834521
 knn
 f1: 0.19345044458902624
 accuracy: 0.6591903594584069
