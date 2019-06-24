@@ -1,8 +1,17 @@
 29946
 30447
 
-Line graph of length of attack vs percentage of that attack increased relative to baseline
+Line graph of length of attack vs percentage of that attack increased relative to baseline (if the basline is 7 percent and the predicted is 14 percent, then the score will be double or 2, and the max of the y axis is infinite). You could also just take the percentage itself and the max of the y axis is 1.
 specifically the length of the attack vs percentage will have an X axis that will not be exactly incremental. For repeats in length of attack, take the average (eg. multiple 1s).
 
 Have an ROC where the x is in the same increments and have the y be the percentage of attacks that have a higher score than the baseline.
 repeat this for each attack type, and do one final with all.
+
+Find the pearson correlation coeff of the x axis length of attack and y axis percentage increase (or regular percent) for each attack. This will show how much time lengths of attacks matters. Doing correlation coeff will require that duplicate lengths (i.e. 1 second) are each plotted so that each point has an equal weight.
+
+Perhaps the line graph should be the relative percentage and the pearson correlation coef should be the actual percentage (or both)
+
+By calculating all of the attacks with a percentage of 0 divided by the total number of attacks, you will get the percentage of attacks that were correctly predicted as such.
+
+
+Argue that F1 was used as the feature selection method, but it is not necessarily the best evaluation method.
