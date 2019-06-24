@@ -1,0 +1,8 @@
+29946
+30447
+
+Line graph of length of attack vs percentage of that attack increased relative to baseline
+specifically the length of the attack vs percentage will have an X axis that will not be exactly incremental. For repeats in length of attack, take the average (eg. multiple 1s).
+
+Have an ROC where the x is in the same increments and have the y be the percentage of attacks that have a higher score than the baseline.
+repeat this for each attack type, and do one final with all.

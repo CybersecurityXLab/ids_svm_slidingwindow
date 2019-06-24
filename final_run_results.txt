@@ -30,8 +30,8 @@ f1 of optimal feature window set with cardinality >= 10: 0.7347957168104793
 MeanPacketSize16 SYNBoolean60 TCPCount60 SYNBoolean32 DNSCount16 TCPCount16 DNSCount8 ICMPCount60 TCPCount2 SYNCount16 
 test scores using second "crossval round" as test set:
 dt
-f1: 0.2370023419203747
-accuracy: 0.9507624416267436
+f1: 0.2757999098693106
+accuracy: 0.9514274055826747
 knn: 
 f1: 0.35485714285714287
 accuracy: 0.9658752588069942
@@ -47,8 +47,8 @@ f1 of optimal feature window set with cardinality >= 10: F1 score: 0.57075595082
 SYNBoolean60 ThirdMomentPacketSize60 TelnetCount60 TCPCount60 DNSCount8 TCPCount16 DNSCount32 ThirdMomentNumberOfPackets60 TCPCount8 TelnetCount4 
 test scores using first "crossval round": as test set
 dt
-f1: 0.2099801905480615
-accuracy: 0.8826159474119445
+f1: 0.21095178519872967
+accuracy: 0.8850827645170785
 knn: 
 f1: 0.05192479856759176
 accuracy: 0.8812563948028649
