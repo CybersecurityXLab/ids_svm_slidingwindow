@@ -16,3 +16,5 @@ By calculating all of the attacks with a percentage of 0 divided by the total nu
 
 
 Argue that F1 was used as the feature selection method, but it is not necessarily the best evaluation method.
+
+If the longest attacks don't do as well as the medium, a possible cause is that longer attacks may need longer time windows than 60 seconds to be effective. This is supported by many attack types choosing essentially the largest time window features.
