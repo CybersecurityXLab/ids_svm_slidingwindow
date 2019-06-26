@@ -1,0 +1,26 @@
+intro
+maybe remove the feature selection part or reword in the intro. Several points are wrong or strangely
+worded or unjustified, and it may not be the main point.
+
+
+
+Hypothesis 1- The time window feature method will generally be more useful for classifying longer 
+attacks. Relatedly, 
+
+Hypothesis 1.1 - Assuming 1 is correct, longer time windows will generally be more useful because 
+shorter attacks will often have less network traffic samples, therefore will be naturally less useful
+in situations where time window features are calculated over windows of smaller size containing less sample
+, thing ping of death. Therefore the longer time windows will generally be 
+selected as more important.
+Reword above, thats terrible
+
+Bad transition with "In addition, the size of the attack may affect the optimal time window for feature calculation. 
+In this paper, we explore these widely unanswered questions." Remove or reword.
+
+A graph that counts the occurences of different optimally selected time windows to see which are most
+important. 
+
+To address the question of 
+"Will optimal time window feature sets contain multiple time windows of a single feature, 
+using versions based on both short and long term history?" find at least one example where the f1 score
+decreases from one round to the next at the elimination of a "redundant" feature.

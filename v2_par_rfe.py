@@ -10,7 +10,7 @@ from read_featureval_csv import getFeatures,chooseFeatures, getNames
 from shuffle_test import getShuffleArray, doShuffle, doUnshuffle
 from oneVAll import oneVAll
 from itertools import chain
-from sklearn.model_selection import cross_val_predict
+from sklearn.model_selection import cross_val_predict, cross_val_score
 from sklearn import svm, tree
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.cluster import KMeans, SpectralClustering
@@ -91,6 +91,8 @@ def run(feats,y,MLalg):
     if MLalg == 'dt':
         clf = tree.DecisionTreeClassifier()
         predicted = cross_val_predict(clf,feats,y,cv=5)
+        scores = cross_val_score(clf,feats,y,cv=5,scoring = "f1")
+        print(scores)
         
     elif MLalg == 'mnb':
     #Multinomial Naive Bayes. NO RESULTS
@@ -219,6 +221,7 @@ def getTrainingAndTest(X,y,attack,featureFile,train,number):
     #split by number of attacks for each attack type
     if attack == 'dos':
         trainTestSplitIdx = 71347
+     #   trainTestSplitIdx = 140000
     elif attack == 'probe':
         trainTestSplitIdx = 74537
     elif attack == 'u2r':
@@ -268,10 +271,10 @@ def main(attack, shuffle,mlCode, featureFile,train):
     #trainTestSplitIdx = math.floor( np.shape(X)[0] * 0.5)#gives index at 50% of dataset
     
     if train == 'train':
-        training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,2)
+        training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,1)
       #  training_X = training_X[50000:60000,:]
        # training_y = training_y[50000:60000]
-        runMLAlg(training_X,training_y,mlCode,startingNames,"scores_" + mlCode + "_" + attack + "_6feattimewindows1_1.txt")
+        runMLAlg(training_X,training_y,mlCode,startingNames,"scores_delete_" + mlCode + "_" + attack + "_6feattimewindows1_1.txt")
        
 #        training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,2)
       #  training_X = training_X[50000:60000,:]
@@ -291,7 +294,7 @@ def main(attack, shuffle,mlCode, featureFile,train):
     
 #params(attack, shuffle, mlalg, featurefile, train)
 
-main('r2l',True, 'dt', 'featureValswnames_r2lCV1_finalrun.csv','test')
+main('dos',True, 'dt', 'featureVals_8sec.csv','train')
 #ranking of classifiers for DOS. SVM is particularly bad at predicting the non DoS attacks, but other classifiers are better.
 #many perform better for non Dos
 
