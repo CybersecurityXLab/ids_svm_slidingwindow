@@ -33,7 +33,7 @@ def runTest(X_train, X_test, y_train, y_test,mlAlg):
     start = time.time()
     
     if mlAlg == 'dt':
-        decision_tree = tree.DecisionTreeClassifier()
+        decision_tree = tree.DecisionTreeClassifier(max_depth=2)
         decision_tree = decision_tree.fit(X_train,y_train)
         predicted = decision_tree.predict(X_test)
         predicted = np.array([int(x) for x in predicted])
@@ -268,10 +268,10 @@ def main(attack, shuffle,mlCode, featureFile,train):
     #trainTestSplitIdx = math.floor( np.shape(X)[0] * 0.5)#gives index at 50% of dataset
     
     if train == 'train':
-        training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,2)
+        training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,1)
       #  training_X = training_X[50000:60000,:]
        # training_y = training_y[50000:60000]
-        runMLAlg(training_X,training_y,mlCode,startingNames,"scores_" + mlCode + "_" + attack + "_6feattimewindows1_1.txt")
+        runMLAlg(training_X,training_y,mlCode,startingNames,"scores_delete_" + mlCode + "_" + attack + "_6feattimewindows1_1.txt")
        
 #        training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,2)
       #  training_X = training_X[50000:60000,:]
@@ -291,7 +291,7 @@ def main(attack, shuffle,mlCode, featureFile,train):
     
 #params(attack, shuffle, mlalg, featurefile, train)
 
-main('r2l',True, 'dt', 'featureValswnames_r2lCV1_finalrun.csv','test')
+main('dos',True, 'dt', 'featureValswnames_dosCV1.csv','train')
 #ranking of classifiers for DOS. SVM is particularly bad at predicting the non DoS attacks, but other classifiers are better.
 #many perform better for non Dos
 
