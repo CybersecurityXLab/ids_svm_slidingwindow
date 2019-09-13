@@ -32,6 +32,7 @@ test scores using second "crossval round" as test set:
 dt
 f1: 0.2757999098693106
 accuracy: 0.9514274055826747
+FPR: 0.02343395103306756
 knn: 
 f1: 0.35485714285714287
 accuracy: 0.9658752588069942
@@ -49,6 +50,7 @@ test scores using first "crossval round": as test set
 dt
 f1: 0.21095178519872967
 accuracy: 0.8850827645170785
+FPR: 0.05660205245153934
 knn: 
 f1: 0.05192479856759176
 accuracy: 0.8812563948028649
@@ -70,6 +72,7 @@ test scores using second "crossval round" as test set:
 dt
 f1: 0.119066613482
 accuracy: 0.859731021452
+FPR: 0.11930528601032861
 knn: 
 f1: 0.1416546212056798
 accuracy: 0.8397084742533225
@@ -87,6 +90,7 @@ test scores using first "crossval round" as test set:
 dt
 f1: 0.115596024652
 accuracy: 0.786294055301
+FPR: 0.13910556811546465
 knn: 
 f1: 0.07555183731256837
 accuracy: 0.8072769228705207
@@ -108,6 +112,7 @@ test scores using second "crossval round" as test set:
 dt
 f1: 0.139741400342
 accuracy: 0.785589201022
+FPR: 0.049362290939718445
 knn: 
 f1: 0.13353338334583645
 accuracy: 0.8314483765049252
@@ -126,6 +131,7 @@ test scores using first "crossval round" as test set:
 dt
 f1: 0.123564218587
 accuracy: 0.817820062945
+FPR: 0.14045680774721248
 knn
 f1: 0.04928398735354288
 accuracy: 0.8150707231487175
@@ -148,6 +154,7 @@ test scores using second "crossval round" as test set:
 dt
 f1: 0.2542713567839196
 accuracy: 0.6260166326834521
+FPR: 0.2815994379720157
 knn
 f1: 0.19345044458902624
 accuracy: 0.6591903594584069
@@ -165,6 +172,7 @@ test scores using first "crossval round" as test set:
 dt
 f1: 0.204395862717
 accuracy: 0.711549319782
+FPR: 0.14490471795428633
 knn
 f1: 0.1657593074764143
 accuracy: 0.7371706776609458

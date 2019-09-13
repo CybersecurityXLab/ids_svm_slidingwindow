@@ -274,6 +274,7 @@ def main(attack, shuffle,mlCode, featureFile,train):
         training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,1)
       #  training_X = training_X[50000:60000,:]
        # training_y = training_y[50000:60000]
+        return
         runMLAlg(training_X,training_y,mlCode,startingNames,"scores_delete_" + mlCode + "_" + attack + "_6feattimewindows1_1.txt")
        
 #        training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,2)
@@ -284,9 +285,13 @@ def main(attack, shuffle,mlCode, featureFile,train):
     elif train == 'test':#test set
         
         #before running, make sure the last number is set correctly. It should match the cv number of the file
-        training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,1)
+        training_X,training_y,test_X,test_y = getTrainingAndTest(X,y,attack,featureFile,train,2)
    #     training_X = training_X[40400:40900,:]
     #    training_y = training_y[40400:40900]
+        actualFile = open('actualY_u2rCV2.csv', "w")
+        for el in test_y.tolist():
+            actualFile.write(str(el) + "\n")
+        return
         runTest(training_X,test_X,training_y,test_y,mlCode)
 
 
@@ -295,7 +300,7 @@ def main(attack, shuffle,mlCode, featureFile,train):
 #params(attack, shuffle, mlalg, featurefile, train)
 
 
-main('dos',True, 'dt', 'featureValswnames_dosCV1.csv','train')
+main('u2r',True, 'dt', 'featureValswnames_dosCV1.csv','test')
 
 #ranking of classifiers for DOS. SVM is particularly bad at predicting the non DoS attacks, but other classifiers are better.
 #many perform better for non Dos
